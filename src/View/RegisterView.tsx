@@ -1,12 +1,21 @@
 import React from 'react';
 import '../Css/Login.css';
 
-const Login = () => {
+const Register = () => {
     return (
         <div className="login-container">
             <form className="login-form">
                 <h2>Registro</h2>
-                <h3>Bienvenido a Ferrushop</h3>
+                <h3>Se parte de nuestra comunidad Ferrushop</h3>
+                <div className="form-group">
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name"
+                        placeholder="Nombre"
+                        required 
+                    />
+                </div>
                 <div className="form-group">
                     <input 
                         type="email" 
@@ -25,12 +34,12 @@ const Login = () => {
                         required 
                     />
                 </div>
-                <h3>¿Haz olvidado tu contraseña? Haz clic <a href="hola">aquí</a></h3>
-                <button type="submit" className="login-button">Iniciar Sesión</button>
-                <h3>¿No tienes una cuenta? Haz clic <a href="hola">aquí</a></h3>
+                <h3>¿Olvidaste tu contraseña? Haz clic <a href="hola">aquí</a></h3>
+                <button type="submit" className="login-button">Registrarse</button>
+                <h3>Ya tienes cuenta?  Haz click <a href="hola">aquí</a></h3>
             </form>
         </div>
     );
 };
 
-export default Login;
+export default Register;
