@@ -1,0 +1,45 @@
+.nosotros-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    margin: 0 200px;
+}
+
+.nosotros-img {
+    width: 40%;
+    max-width: 400px;
+    box-shadow: -10px 10px 5px #2B3CAB;
+    border-radius: 10px;
+}
+
+.nosotros-text {
+    text-align: justify;
+    flex: 1;
+    padding: 0 20px;
+}
+
+.nosotros-text h1 {
+    color: #151875;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.nosotros-text p {
+    color: #8A8FB9;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.contact-button {
+    background-color: #FB2E86;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact-button:hover {
+    background-color: #ce1a68;
+}

@@ -1,15 +1,13 @@
 import React from 'react';
 import Login from './View/LoginView';
-import Register from './View/RegisterView';
-import RContrasena from './View/RecuperarContrasenaView';
-import Header from './View/Header';
-import Footer from './View/Footer';
+import Nosotros from './View/NosotrosView'
+
 
 
 const App = () => {
     return (
         <div>
-            <RContrasena/>
+            <Nosotros/>
         </div>
     );
 };
