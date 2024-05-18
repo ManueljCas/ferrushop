@@ -56,6 +56,7 @@
     transition: transform 0.3s ease;
     width: 250px;
     margin: 10px;
+    text-align: center;
 }
 
 .card.selected {
@@ -136,4 +137,37 @@
     margin: 0;
     color: #8A8FB9;
     font-size: 16px;
+}
+
+@media screen and (max-width: 1100px)  {
+    .nosotros-container{
+        margin: 20px;
+    }
+
+    .nosotros-text{
+        margin: 10px;
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .nosotros-container{
+        width: 90%;
+    }
+    .nosotros-container {
+        flex-direction: column;
+        margin: 0;
+        align-items: center; /* Centra el contenido horizontalmente */
+    }
+
+    .contact-button {
+        margin: 0px 0; /* Añade margen vertical para el botón centrado */
+    }
+ 
+    .slider-contenedor{
+        margin: 0;
+    }
+    .nosotros-text{
+        display: contents;
+    }
 }

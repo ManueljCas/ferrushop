@@ -25,7 +25,7 @@ const Nosotros: React.FC = () => {
                     {renderCards()}
                 </div>
             </div>
-            <div className='fondo-testimonios'></div>
+            <div className='fondo-testimonios'>
             <div className='slider-contenedor'>
                 <h1>¡Nuestro cliente dice!</h1>
                 <div className="testimonial-container">
@@ -36,6 +36,7 @@ const Nosotros: React.FC = () => {
                 <h2>{testimonials[currentTestimonial].name}</h2>
                 <p>{testimonials[currentTestimonial].position}</p>
                 <h3>{testimonials[currentTestimonial].text}</h3>
+            </div>
             </div>
             <Footer />
         </div>
