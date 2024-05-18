@@ -49,3 +49,11 @@
   border-top: 1px solid #444;
   margin-top: 20px;
 }
+
+@media screen and (max-width: 768px){
+  .footer-content{
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
