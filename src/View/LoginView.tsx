@@ -30,7 +30,7 @@ const Login = () => {
                         <h3>¿Haz olvidado tu contraseña? Haz clic <a href="/recuperarContrasena">aquí</a></h3>
                         <a href="./inicio">ir a inicio</a>
                         <button type="submit" className="login-button">Iniciar Sesión</button>
-                        <h3>¿No tienes una cuenta? Haz clic <a href="hola">aquí</a></h3>
+                        <h3>¿No tienes una cuenta? Haz clic <a href="/registro">aquí</a></h3>
                     </form>
                 </div>
         </div>
