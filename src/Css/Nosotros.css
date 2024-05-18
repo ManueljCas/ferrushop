@@ -124,9 +124,10 @@
 .slider-contenedor h2{
     color: #151875;
     font-size: 22px;
+    margin: 0;
 }
 .slider-contenedor p{
-    margin: 0;
+    margin: 0px 0px 10px;
     color: #8A8FB9;
     font-size: 10px;
 }
