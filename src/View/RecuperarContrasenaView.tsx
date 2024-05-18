@@ -3,6 +3,7 @@ import '../Css/Login.css';
 
 const RecuperarContrasena = () => {
     return (
+        <div className='bodyy'>
         <div className="login-container">
             <form className="login-form" >
                 <h2>Recuperar Contraseña</h2>
@@ -16,10 +17,11 @@ const RecuperarContrasena = () => {
                         required 
                     />
                 </div>
-                <h3>¿Ya tienes cuenta? Haz clic <a href="hola">aquí</a></h3>
+                <h3>¿Ya tienes cuenta? Haz clic <a href="/">aquí</a></h3>
                 <button type="submit" className="login-button">Recuperar contraseña</button>
-                <h3>¿No tienes una cuenta? Haz clic <a href="hola">aquí</a></h3>
+                <h3>¿No tienes una cuenta? Haz clic <a href="/registro">aquí</a></h3>
             </form>
+        </div>
         </div>
     );
 };
