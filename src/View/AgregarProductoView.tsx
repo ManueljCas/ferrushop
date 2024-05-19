@@ -65,7 +65,7 @@ function AgregarProducto() {
           </div>
           <div className='form-group'>
           <h2>Agregar la cantidad de unidades del producto</h2>
-          <input type="number" placeholder='Agrega la cantidad del producto'/>
+          <input type="number" placeholder='Agrega la cantidad del producto' className='input-two'/>
           </div>
         </div>
 
