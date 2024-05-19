@@ -2,14 +2,19 @@ import React from 'react';
 import Login from './View/LoginView';
 import Nosotros from './View/NosotrosView'
 import Inicio from './View/InicioView';
+import AgregarProducto from './View/AgregarProductoView';
 import RecuperarContrasena from './View/RecuperarContrasenaView';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './View/RegisterView';
+import AppComponent from './Components/AppComponent';
+
 
 
 
 
 function App() {
+    const encodedPath = AppComponent();
+
     return (
     <Router>
         <Routes>
@@ -18,6 +23,8 @@ function App() {
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/recuperarContrasena" element={<RecuperarContrasena />} />
         <Route path="/inicio" element={<Inicio />} />
+        <Route path={`/${encodedPath}`} element={<AgregarProducto />} />
+
 
         </Routes>
     </Router>

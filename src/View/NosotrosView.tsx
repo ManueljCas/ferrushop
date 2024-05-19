@@ -3,10 +3,10 @@ import Header from './HeaderView';
 import Footer from './FooterView';
 import '../Css/Nosotros.css';
 import NosotrosIMG from '../IMG/Nosotros.png';
-import useNosotrosLogic from '../Components/NosotrosComponente';
+import NosotrosComponent from '../Components/NosotrosComponent';
 
 const Nosotros: React.FC = () => {
-    const { renderCards, currentTestimonial, testimonials } = useNosotrosLogic();
+    const { renderCards, currentTestimonial, testimonials } = NosotrosComponent();
 
     return (
         <div>
