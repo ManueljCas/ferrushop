@@ -1,0 +1,160 @@
+/* src/Css/Inicio.css */
+
+/* Estilos para el primer carrusel */
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+    animation: fadeInOut 6s infinite;
+}
+
+.carousel img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-content {
+    width: 400px;
+    position: absolute;
+    top: 45%;
+    left: 38%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    text-align: left;
+}
+
+.carousel-content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.carousel-content p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.buy-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FB2E86;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.buy-button:hover {
+    background-color: #c81261;
+}
+
+.prev-button,
+.next-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.prev-button:hover,
+.next-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.prev-button {
+    left: 10px;
+}
+
+.next-button {
+    right: 10px;
+}
+
+/* Animación para el primer carrusel */
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    25% { opacity: 1; }
+    75% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Estilos para el segundo carrusel */
+.new-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.new-carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    position: relative;
+}
+
+.new-carousel-item {
+    flex: 0 0 25%; /* Mostrar 4 items por pantalla */
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.contenedor-imagenes-carrucel {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F6F7FB;
+}
+
+.new-carousel-content {
+    background-color: white;
+    text-align: center;
+}
+
+.new-carousel-button {
+    position: absolute;
+    bottom: 10px; /* Ajustar la posición desde la parte inferior */
+    width: 50px; /* Ajustar el ancho si es necesario */
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.new-carousel-button.prev {
+    left: 10px; /* Ajustar la posición desde la izquierda */
+}
+
+.new-carousel-button.next {
+    right: 10px; /* Ajustar la posición desde la derecha */
+}
+
+.secciones-productos{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.secciones-productos .titulo-seccion{
+    font-size: 10px;
+    padding: 10px;
+}
+
+.productos-container{
+    display: flex;
+    justify-content: center;
+}
+
+.productos-container .producto{
+    margin: 10px;
+}
