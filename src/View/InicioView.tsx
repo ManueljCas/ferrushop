@@ -3,10 +3,12 @@ import Header from './HeaderView';
 import Footer from './FooterView';
 import '../Css/Inicio.css';
 import useInicioComponent from '../Components/InicioComponent';
+import NosotrosComponent from '../Components/NosotrosComponent';
+import ProductoImage from '../IMG/Perico.png';
 
 const Inicio = () => {
-    const { currentSlide, images, currentGroup, carrucel2, nextGroup, prevGroup, handleChangeTipoProductos, obtenerProductosSegunTipo} = useInicioComponent();
-
+    const { currentSlide, images, currentGroup, carrucel2, nextGroup, prevGroup, handleChangeTipoProductos, obtenerProductosSegunTipo } = useInicioComponent();
+    const { renderCards } = NosotrosComponent();
     return (
         <div>
             <Header />
@@ -81,6 +83,27 @@ const Inicio = () => {
                         </div>
                     </div>
                 ))}
+            </div>
+
+            <div className='contenedor-carrucel'>
+                <h1>¡Lo mejor que tenemos para ofrecerte!</h1>
+                <div className="card-container">
+                    {renderCards()}
+                </div>
+            </div>
+
+            <div className='contenedor-producto'>
+                <img src={ProductoImage} alt="Producto especial" className="producto-imagen" />
+                <div className="producto-contenido">
+                    <h2>Características únicas de los últimos y Productos de tendencia</h2>
+                    <ul>
+                        <li><span style={{color: 'blue'}}>Llave inglesa resistente</span> hecha de aleación de acero al carbono</li>
+                        <li><span style={{color: 'red'}}>Mango antideslizante</span> cubierto con goma para mejor agarre</li>
+                        <li><span style={{color: 'green'}}>Tamaño ajustable</span> para encajar en varias tuercas y tornillos</li>
+                    </ul>
+                    <a href="#" className="buy-button">Comprar Ahora</a>
+                    <p className="price">$19.99</p>
+                </div>
             </div>
 
             <Footer />
