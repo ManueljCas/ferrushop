@@ -216,3 +216,57 @@
     color: #333;
     margin-top: 10px;
 }
+
+/* Estilos para Productos de tendencia */
+.trend-products {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.trend-products-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.trend-product {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    text-align: center;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.trend-product-image-wrapper {
+    background-color: #F5F6F8;
+    padding: 20px;
+}
+
+.trend-product .trend-product-image {
+    width: 150px; /* Ajusta según sea necesario */
+    height: auto;
+}
+
+.trend-product .producto-info {
+    margin-top: 10px;
+}
+
+.trend-product .product-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #151875; /* Ajusta el color según sea necesario */
+    margin: 10px 0;
+}
+
+.trend-product .product-price {
+    font-size: 14px;
+    color: #151875;
+}
+
+.trend-product .product-price .price-old {
+    text-decoration: line-through;
+    color: #999;
+    margin-left: 10px;
+}

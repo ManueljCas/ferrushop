@@ -5,6 +5,7 @@ import '../Css/Inicio.css';
 import useInicioComponent from '../Components/InicioComponent';
 import NosotrosComponent from '../Components/NosotrosComponent';
 import ProductoImage from '../IMG/Perico.png';
+import Serrucho from '../IMG/Serrucho.png'; 
 
 const Inicio = () => {
     const { currentSlide, images, currentGroup, carrucel2, nextGroup, prevGroup, handleChangeTipoProductos, obtenerProductosSegunTipo } = useInicioComponent();
@@ -101,10 +102,32 @@ const Inicio = () => {
                         <li><span style={{color: 'red'}}>Mango antideslizante</span> cubierto con goma para mejor agarre</li>
                         <li><span style={{color: 'green'}}>Tamaño ajustable</span> para encajar en varias tuercas y tornillos</li>
                     </ul>
-                    <a href="#" className="buy-button">Comprar Ahora</a>
+                    <a href="./" className="buy-button">Comprar Ahora</a>
                     <p className="price">$19.99</p>
                 </div>
             </div>
+
+            {/* Sección de Productos de tendencia */}
+            <div className='trend-products'>
+    <h1>Productos de tendencia</h1>
+    <div className='trend-products-container'>
+        {[1, 2, 3, 4].map((item, index) => (
+            <div key={index} className='trend-product'>
+                <div className="trend-product-image-wrapper">
+                    <img src={Serrucho} alt={`Trend Product ${item}`} className="trend-product-image" />
+                </div>
+                <div className="producto-info">
+                    <h2 className="product-name">Cantilever Chair</h2>
+                    <p className="product-price">
+                        $26.00 <span className="price-old">$42.00</span>
+                    </p>
+                </div>
+            </div>
+        ))}
+    </div>
+</div>
+
+
 
             <Footer />
         </div>
