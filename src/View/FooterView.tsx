@@ -22,7 +22,7 @@ function Footer() {
         <div className="footer-section contact">
           <h2>Contacto</h2>
           <p>Email: info@ferrushop.com</p>
-          <p>Teléfono: +123 456 7890</p>
+          <p>Teléfono: +52 999 888 7777</p>
         </div>
       </div>
       <div className="footer-bottom">
