@@ -1,25 +1,51 @@
-import { useState, ChangeEvent } from 'react';
+import React from 'react';
+import useAgregarProductoComponent from '../hooks/useAgregarProductoComponent';
 
-const useAgregarProductoComponent = () => {
-  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+const AgregarProductComponent: React.FC = () => {
+  const {
+    imagePreviews,
+    handleImageChange,
+    handleAddProduct,
+    title,
+    setTitle,
+    description,
+    setDescription,
+    price,
+    setPrice,
+    loading,
+  } = useAgregarProductoComponent();
 
-  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files) {
-      const newPreviews: string[] = [];
-      for (let i = 0; i < files.length; i++) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          const result = reader.result as string;
-          newPreviews.push(result);
-          setImagePreviews([...newPreviews]);
-        };
-        reader.readAsDataURL(files[i]);
-      }
-    }
-  };
-
-  return { imagePreviews, handleImageChange };
+  return (
+    <div className='contenedor-pantalla'>
+      <h2>Add Product</h2>
+      <input
+        type="text"
+        placeholder="Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <textarea
+        placeholder="Description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+      <input
+        type="number"
+        placeholder="Price"
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
+      />
+      <input type="file" multiple onChange={handleImageChange} />
+      <div>
+        {imagePreviews.map((preview, index) => (
+          <img key={index} src={preview} alt={`Preview ${index}`} className="preview-image" style={{ width: 100, height: 100 }} />
+        ))}
+      </div>
+      <button onClick={handleAddProduct} disabled={loading}>
+        {loading ? "Adding..." : "Add Product"}
+      </button>
+    </div>
+  );
 };
 
-export default useAgregarProductoComponent;
+export default AgregarProductComponent;
