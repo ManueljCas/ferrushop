@@ -4,6 +4,7 @@ import Nosotros from './View/NosotrosView'
 import Inicio from './View/InicioView';
 import AgregarProducto from './View/AgregarProductoView';
 import RecuperarContrasena from './View/RecuperarContrasenaView';
+import Producto from './View/ProductoView';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './View/RegisterView';
 import AppComponent from './Components/AppComponent';
@@ -25,6 +26,7 @@ function App() {
         <Route path="/recuperarContrasena" element={<RecuperarContrasena />} />
         <Route path="/inicio" element={<Inicio />} />
         <Route path="/completa" element={<OrdenCompleta />} />
+        <Route path="/producto" element={<Producto />} />
         <Route path={`/${encodedPath}`} element={<AgregarProducto />} />
 
 

@@ -18,9 +18,9 @@ function Header() {
         <nav>
           <ul>
             <li><a href="/inicio">Inicio</a></li>
-            <li><a href="/acerca">Productos</a></li>
+            <li><a href="/producto">Productos</a></li>
             <li><a href="/nosotros">Nosotros</a></li>
-            <li><a href="/productos">FAQ</a></li>
+            <li><a href="/faq">FAQ</a></li>
             <li><a href="/contacto">Contacto</a></li>
           </ul>
         </nav>
