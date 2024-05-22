@@ -13,7 +13,7 @@ function Footer() {
           <h2>Enlaces Útiles</h2>
           <ul>
             <li><a href="/inicio">Inicio</a></li>
-            <li><a href="/acerca">Productos</a></li>
+            <li><a href="/producto">Productos</a></li>
             <li><a href="/nosotros">Nosotros</a></li>
             <li><a href="/productos">FAQ</a></li>
             <li><a href="/contacto">Contacto</a></li>
