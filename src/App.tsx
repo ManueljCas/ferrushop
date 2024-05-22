@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './View/RegisterView';
 import AppComponent from './Components/AppComponent';
 import OrdenCompleta from './Components/OrdenCompleta';
+import Faq from './View/FaqView';
 
 
 
@@ -22,6 +23,7 @@ function App() {
         <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/registro" element={<Register />} />
+        <Route path="/faq" element={<Faq />} />
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/recuperarContrasena" element={<RecuperarContrasena />} />
         <Route path="/inicio" element={<Inicio />} />
