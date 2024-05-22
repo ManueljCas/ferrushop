@@ -5,7 +5,12 @@ import '../Css/Inicio.css';
 import useInicioComponent from '../Components/InicioComponent';
 import NosotrosComponent from '../Components/NosotrosComponent';
 import ProductoImage from '../IMG/Perico.png';
-import Serrucho from '../IMG/Serrucho.png'; 
+import Serrucho from '../IMG/Serrucho.png';
+import Desarmador from '../IMG/Desarmador.png';
+import CintaMetica from '../IMG/Desarmador.png';
+import Pinzas from '../IMG/Pinsas.png';
+import FondoSeguirviendo from '../IMG/FondoSeguirviendo.png';
+import Empresas from '../IMG/Empresas.png'
 
 const Inicio = () => {
     const { currentSlide, images, currentGroup, carrucel2, nextGroup, prevGroup, handleChangeTipoProductos, obtenerProductosSegunTipo } = useInicioComponent();
@@ -109,25 +114,104 @@ const Inicio = () => {
 
             {/* Sección de Productos de tendencia */}
             <div className='trend-products'>
-    <h1>Productos de tendencia</h1>
-    <div className='trend-products-container'>
-        {[1, 2, 3, 4].map((item, index) => (
-            <div key={index} className='trend-product'>
-                <div className="trend-product-image-wrapper">
-                    <img src={Serrucho} alt={`Trend Product ${item}`} className="trend-product-image" />
-                </div>
-                <div className="producto-info">
-                    <h2 className="product-name">Cantilever Chair</h2>
-                    <p className="product-price">
-                        $26.00 <span className="price-old">$42.00</span>
-                    </p>
+                <h1>Productos de tendencia</h1>
+                <div className='trend-products-container'>
+                    {[1, 2, 3, 4].map((item, index) => (
+                        <div key={index} className='trend-product'>
+                            <div className="trend-product-image-wrapper">
+                                <img src={Serrucho} alt={`Trend Product ${item}`} className="trend-product-image" />
+                            </div>
+                            <div className="producto-info">
+                                <h2 className="product-name">Cantilever Chair</h2>
+                                <p className="product-price">
+                                    $26.00 <span className="price-old">$42.00</span>
+                                </p>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
-        ))}
-    </div>
-</div>
 
+            <div className='contenedor-descuento'>
+                <h1>Artículo con descuento</h1>
+                <div className='navegacion-productos'>
+                    <a href='#producto1' className='activo'>Producto 1</a>
+                    <a href='#producto2'>Producto 2</a>
+                    <a href='#producto3'>Producto 3</a>
+                </div>
+                <div className='producto-descuento'>
+                    <div className='info-descuento'>
+                        <h2>20% de descuento en este producto</h2>
+                        <h3>Desarmador</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu eget feugiat habitasse nec, bibendum condimentum.</p>
+                        <ul>
+                            <li>✔ Material expose like metals</li>
+                            <li>✔ Clear lines and geometric figures</li>
+                            <li>✔ Simple neutral colours</li>
+                            <li>✔ Material expose like metals</li>
+                        </ul>
+                        <a href="./" className="buy-button">Comprar Ahora</a>
+                        </div>
+                    <div className='imagen-descuento'>
+                        <img src={Desarmador} alt="Desarmador" />
+                    </div>
+                </div>
+            </div>
 
+            {/* Nueva Sección de Categorías Principales */}
+            <div className='categorias-principales'>
+                <h1>Categorías principales</h1>
+                <div className='categorias-container'>
+                    {[1, 2, 3, 4].map((item, index) => (
+                        <div key={index} className='categoria-item'>
+                            <div className='categoria-imagen-wrapper'>
+                                <img src={CintaMetica} alt={`Categoría ${item}`} className='categoria-imagen' />
+                                <div className="categoria-info">
+                                <h2 className="categoria-nombre">Mini LCW Chair</h2>
+                                <p className="categoria-precio">$56.00</p>
+                            </div>
+                            </div>
+                            
+                        </div>
+                    ))}
+                </div>
+                <div className='categorias-paginacion'>
+                    <span className='paginacion-activa'></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div className='lista-productos'>
+                <h1>Categorías principales</h1>
+                <div className='lista-productos-container'>
+                    {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
+                        <div key={index} className='lista-producto-item'>
+                            <div className="lista-producto-imagen-wrapper">
+                                <img src={Pinzas} alt={`Lista Producto ${item}`} className="lista-producto-imagen" />
+                            </div>
+                            <div className="producto-info">
+                                <h2 className="product-name">Product Name</h2>
+                                <p className="product-price">
+                                    $20.00 <span className="price-old">$30.00</span>
+                                </p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <div className='contenedor-fondo'>
+                <img src={FondoSeguirviendo} alt="FondoSeguirViendo" className="fondo-imagen" />
+                <div className='fondo-texto'>
+                    <h1>¿Aún no te has decidido?</h1>
+                    <button className='fondo-boton'>Seguir viendo</button>
+                </div>
+            </div>
+
+            <div className='Contenedor-empresas'>
+            <img src={Empresas} alt="FondoSeguirViendo" className="Empresa" />
+            </div>
 
             <Footer />
         </div>

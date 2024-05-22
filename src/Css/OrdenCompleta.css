@@ -10,25 +10,6 @@ body {
     min-height: 100vh;
   }
   
- 
-  
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .nav a {
-    margin: 0 15px;
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .header-right a {
-    margin-left: 15px;
-    color: #fff;
-    text-decoration: none;
-  }
-  
   .main-content {
     flex: 1;
     display: flex;
