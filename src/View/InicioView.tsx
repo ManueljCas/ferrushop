@@ -20,21 +20,21 @@ const Inicio = () => {
             <Header />
 
             <div className="carousel">
-                {images.map((image, index) => (
-                    <img
-                        key={index}
-                        src={image.src}
-                        alt={image.title}
-                        className={index === currentSlide ? "active" : ""}
-                    />
-                ))}
-                <div className="carousel-content">
-                    <h2>{images[currentSlide].title}</h2>
-                    <h2>{images[currentSlide].subtitle}</h2>
-                    <p>{images[currentSlide].description}</p>
-                    <a href={images[currentSlide].buyLink} className="buy-button">Comprar Ahora</a>
-                </div>
-            </div>
+        {images.map((image, index) => (
+          <img
+            key={index}
+            src={image.src}
+            alt={image.title}
+            className={index === currentSlide ? "active" : ""}
+          />
+        ))}
+        <div className="carousel-content">
+          <h2>{images[currentSlide].title}</h2>
+          <h2>{images[currentSlide].subtitle}</h2>
+          <p>{images[currentSlide].description}</p>
+          <a href={images[currentSlide].buyLink} className="buy-button">Comprar Ahora</a>
+        </div>
+      </div>
 
             <div className='cards-productos'>
                 <h1>Productos destacados</h1>
