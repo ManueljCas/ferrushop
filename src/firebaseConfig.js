@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { getAuth } from "firebase/auth"; // Importa Firebase Authentication
 import { getAnalytics } from "firebase/analytics";
 
 // Tu configuración de Firebase
@@ -19,5 +20,6 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
+const auth = getAuth(app); // Inicializa Firebase Authentication
 
-export { db, storage };
+export { db, storage, auth };
