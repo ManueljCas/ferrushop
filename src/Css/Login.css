@@ -32,7 +32,9 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 100%; /* Ajusta el ancho al 100% del contenedor Grid */
+    max-width: 400px; /* Establece un ancho máximo para evitar que se estire demasiado */
+    box-sizing: border-box; /* Incluye el relleno y el borde en el ancho total del elemento */
 }
 
 .login-form {
@@ -44,10 +46,12 @@
     text-align: center;
 }
 
-.login-form h2{
+.login-form h2 {
     font-family: "Josefin Sans", sans-serif;
 }
+
 .login-form h3 {
+    margin: 10px;
     font-family: "Lato", sans-serif;
     color: #9096B2;
     font-size: 2vh;

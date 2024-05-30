@@ -1,6 +1,7 @@
 import '../Css/AgregarProducto.css';
 import AgregarProductoComponent from '../Components/AgregarProductoComponent';
 
+
 function AgregarProducto() {
   const { imagePreviews, handleImageChange, handleAddProduct, title, setTitle, description, setDescription, price, setPrice, loading } = AgregarProductoComponent();
 

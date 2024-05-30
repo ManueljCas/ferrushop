@@ -1,5 +1,6 @@
 .header-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
@@ -9,17 +10,19 @@ nav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 nav ul li {
-  display: inline;
-  margin-right: 10px;
   margin: 10px;
 }
 
 .buscador {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .buscador input[type="text"] {
@@ -41,15 +44,19 @@ nav ul li {
   background-color: #7E33E0;
   padding: 10px;
   margin-bottom: 10px;
-  width: auto;
+  width: 100%;
   text-align: right;
 }
 
 .header-one a {
   text-decoration: none;
   margin-left: 10px;
-  margin-right: 10px;
+  margin-right: 20px;
   color: white;
+}
+
+.logo {
+  text-align: center;
 }
 
 .nombre {
@@ -63,33 +70,37 @@ nav ul li a {
   color: #0D0E43;
 }
 
-nav ul li a:hover, 
+nav ul li a:hover,
 nav ul li a:active {
   text-decoration: underline;
   text-decoration-color: #FB2E86;
-  color: #FB2E86; 
+  color: #FB2E86;
 }
 
 @media screen and (max-width: 768px) {
   .header-container {
     flex-direction: column;
+    text-align: center;
   }
 
   .header-one {
-    width: 100%;
     text-align: center;
   }
 
   .buscador {
     width: 100%;
-    text-align: center;
-    justify-content: center; 
+    justify-content: center;
   }
 
   .buscador input[type="text"] {
     width: 40%;
   }
-  nav {
-    margin: 10px;
+
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav ul li {
+    margin: 5px 0;
   }
 }
