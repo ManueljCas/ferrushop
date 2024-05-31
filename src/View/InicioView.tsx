@@ -10,31 +10,45 @@ import Desarmador from '../IMG/Desarmador.png';
 import CintaMetica from '../IMG/Desarmador.png';
 import Pinzas from '../IMG/Pinsas.png';
 import FondoSeguirviendo from '../IMG/FondoSeguirviendo.png';
-import Empresas from '../IMG/Empresas.png'
+import Empresas from '../IMG/Empresas.png';
+import { useAuth } from '../context/AuthContext';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
 
-const Inicio = () => {
+const Inicio: React.FC = () => {
     const { currentSlide, images, currentGroup, carrucel2, nextGroup, prevGroup, handleChangeTipoProductos, obtenerProductosSegunTipo } = useInicioComponent();
     const { renderCards } = NosotrosComponent();
+    const { currentUser } = useAuth();
+
+    const handleSignOut = () => {
+        signOut(auth).then(() => {
+            alert('Sesión cerrada');
+            window.location.href = '/';
+        }).catch((error) => {
+            console.error('Error al cerrar sesión', error);
+        });
+    };
+
     return (
         <div>
             <Header />
 
             <div className="carousel">
-        {images.map((image, index) => (
-          <img
-            key={index}
-            src={image.src}
-            alt={image.title}
-            className={index === currentSlide ? "active" : ""}
-          />
-        ))}
-        <div className="carousel-content">
-          <h2>{images[currentSlide].title}</h2>
-          <h2>{images[currentSlide].subtitle}</h2>
-          <p>{images[currentSlide].description}</p>
-          <a href={images[currentSlide].buyLink} className="buy-button">Comprar Ahora</a>
-        </div>
-      </div>
+                {images.map((image, index) => (
+                    <img
+                        key={index}
+                        src={image.src}
+                        alt={image.title}
+                        className={index === currentSlide ? "active" : ""}
+                    />
+                ))}
+                <div className="carousel-content">
+                    <h2>{images[currentSlide].title}</h2>
+                    <h2>{images[currentSlide].subtitle}</h2>
+                    <p>{images[currentSlide].description}</p>
+                    <a href={images[currentSlide].buyLink} className="buy-button">Comprar Ahora</a>
+                </div>
+            </div>
 
             <div className='cards-productos'>
                 <h1>Productos destacados</h1>
@@ -151,7 +165,7 @@ const Inicio = () => {
                             <li>✔ Material expose like metals</li>
                         </ul>
                         <a href="./" className="buy-button">Comprar Ahora</a>
-                        </div>
+                    </div>
                     <div className='imagen-descuento'>
                         <img src={Desarmador} alt="Desarmador" />
                     </div>
@@ -167,11 +181,10 @@ const Inicio = () => {
                             <div className='categoria-imagen-wrapper'>
                                 <img src={CintaMetica} alt={`Categoría ${item}`} className='categoria-imagen' />
                                 <div className="categoria-info">
-                                <h2 className="categoria-nombre">Mini LCW Chair</h2>
-                                <p className="categoria-precio">$56.00</p>
+                                    <h2 className="categoria-nombre">Mini LCW Chair</h2>
+                                    <p className="categoria-precio">$56.00</p>
+                                </div>
                             </div>
-                            </div>
-                            
                         </div>
                     ))}
                 </div>
@@ -210,8 +223,14 @@ const Inicio = () => {
             </div>
 
             <div className='Contenedor-empresas'>
-            <img src={Empresas} alt="FondoSeguirViendo" className="Empresa" />
+                <img src={Empresas} alt="FondoSeguirViendo" className="Empresa" />
             </div>
+
+            {currentUser && (
+                <div className="logout-section">
+                    <button onClick={handleSignOut}>Cerrar Sesión</button>
+                </div>
+            )}
 
             <Footer />
         </div>

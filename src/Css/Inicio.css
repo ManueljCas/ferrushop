@@ -552,3 +552,30 @@
     justify-content: center;
     margin: 50px 0px;
 }
+
+
+
+
+
+
+
+
+.logout-section {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.logout-section button {
+    padding: 10px 20px;
+    background-color: #f04e4e;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.logout-section button:hover {
+    background-color: #d74343;
+}

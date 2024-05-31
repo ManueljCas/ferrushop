@@ -3,12 +3,20 @@ import '../Css/Header.css';
 import { AiOutlineUser } from "react-icons/ai";
 import { IoCartOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
+import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
-function Header() {
+const Header: React.FC = () => {
+  const { currentUser } = useAuth();
+
   return (
     <header>
       <div className='header-one'>
-        <a href="/">Login <AiOutlineUser /></a>
+        {currentUser ? (
+          <Link to="/perfil">Perfil <AiOutlineUser /></Link>
+        ) : (
+          <Link to="/login">Login <AiOutlineUser /></Link>
+        )}
         <a href="/hola"><IoCartOutline /></a>
       </div>
       <div className='header-container'>
@@ -17,11 +25,11 @@ function Header() {
         </div>
         <nav>
           <ul>
-            <li><a href="/inicio">Inicio</a></li>
-            <li><a href="/producto">Productos</a></li>
-            <li><a href="/nosotros">Nosotros</a></li>
-            <li><a href="/faq">FAQ</a></li>
-            <li><a href="/contacto">Contacto</a></li>
+            <li><Link to="/inicio">Inicio</Link></li>
+            <li><Link to="/producto">Productos</Link></li>
+            <li><Link to="/nosotros">Nosotros</Link></li>
+            <li><Link to="/faq">FAQ</Link></li>
+            <li><Link to="/contacto">Contacto</Link></li>
           </ul>
         </nav>
         <div className='buscador'>
@@ -29,9 +37,8 @@ function Header() {
           <button><CiSearch /></button>
         </div>
       </div>
-    
     </header>
   );
-}
+};
 
 export default Header;

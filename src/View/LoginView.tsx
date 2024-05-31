@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebaseConfig';
 import '../Css/Login.css';
 
-const Login: React.FC = () => {
+const LoginView: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,7 +16,7 @@ const Login: React.FC = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert('Inicio de sesión exitoso');
-      window.location.href = './inicio';
+      navigate('/inicio'); // Redirigir al usuario a la página de inicio
     } catch (error) {
       setError('Error al iniciar sesión: ' + (error as Error).message);
     }
@@ -25,7 +27,7 @@ const Login: React.FC = () => {
     try {
       await signInWithPopup(auth, provider);
       alert('Inicio de sesión con Google exitoso');
-      window.location.href = './inicio';
+      navigate('/inicio'); // Redirigir al usuario a la página de inicio
     } catch (error) {
       setError('Error al iniciar sesión con Google: ' + (error as Error).message);
     }
@@ -60,7 +62,6 @@ const Login: React.FC = () => {
             />
           </div>
           <h3>¿Haz olvidado tu contraseña? Haz clic <a href="/recuperarContrasena">aquí</a></h3>
-          <a href="./inicio">ir a inicio</a>
           <button type="submit" className="login-button">Iniciar Sesión</button>
           <button type="button" className="login-button" onClick={handleGoogleLogin}>Iniciar Sesión con Google</button>
           {error && <p className="error">{error}</p>}
@@ -71,4 +72,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default LoginView;
