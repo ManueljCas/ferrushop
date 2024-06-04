@@ -1,5 +1,5 @@
 import React from 'react';
-import OrdenCompletaView from '../View/OrdenCompletaView';
+import OrdenCompletaView from '../View/OrdenCompletaview';
 import { useNavigate } from 'react-router-dom';
 
 const OrdenCompleta: React.FC = () => {
