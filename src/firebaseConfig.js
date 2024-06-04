@@ -1,22 +1,25 @@
-// src/firebaseConfig.js
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { getAuth } from "firebase/auth";
+import { getAnalytics } from "firebase/analytics";
 
 // Tu configuración de Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyC6IzOAKLQ4sD5_XRlGeOKyGnWoV-EBQS8",
-  authDomain: "ferrushop93.firebaseapp.com",
-  projectId: "ferrushop93",
-  storageBucket: "ferrushop93.appspot.com",
-  messagingSenderId: "33732604555",
-  appId: "1:33732604555:web:8195efa44e688a674cda8e",
-  measurementId: "G-BBR7T78NHP"
+  apiKey: "AIzaSyDA9lONwvsuj8T1ANIlKnF9nRKrfbwv-fw",
+  authDomain: "ferrushop1.firebaseapp.com",
+  projectId: "ferrushop1",
+  storageBucket: "ferrushop1.appspot.com",
+  messagingSenderId: "648488210809",
+  appId: "1:648488210809:web:41f8e3b47a8af796d35fa8",
+  measurementId: "G-Y29CQLXK2L"
 };
 
 // Inicializar Firebase
 const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
+const auth = getAuth(app);
 
-export { db, storage };
+export { db, storage, auth };
