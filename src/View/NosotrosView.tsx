@@ -1,46 +1,49 @@
 import React from 'react';
-import '../Css/OrdenCompleta.css';
-import Footer from './FooterView';
 import Header from './HeaderView';
+import Footer from './FooterView';
+import '../Css/Nosotros.css';
+import NosotrosIMG from '../IMG/Nosotros.png';
+import NosotrosComponent from '../Components/NosotrosComponent';
 import Grid from '@material-ui/core/Grid';
 
-interface OrdenCompletaViewProps {
-  onContinueShopping: () => void;
-}
+const Nosotros = () => {
+  const { renderCards, currentTestimonial, testimonials } = NosotrosComponent();
 
-const OrdenCompletaView: React.FC<OrdenCompletaViewProps> = ({ onContinueShopping }) => {
   return (
-    <div className="order-completed-container">
+    <div>
       <Header />
-
-      <main className="main-content">
-        <Grid container justifyContent="center" alignItems="center" spacing={3}>
-          <Grid item xs={12} md={8} className="order-status">
-            <Grid container justifyContent="center" alignItems="center" spacing={3}>
-              <Grid item xs={12} className="icon-container">
-                <div className="icon">🕒</div>
-              </Grid>
-              <Grid item xs={12}>
-                <h1>Your Order Is Completed!</h1>
-              </Grid>
-              <Grid item xs={12}>
-                <p>
-                  Tu orden ha sido completada, por favor envia tus datos de compra al siguiente correo, 
-                  <div className='correo'><h1>sistemas@ferru.com.mx.</h1></div>
-                  Incluir datos de contacto como numero de telefono, nombre completo y tu ticket de compra.
-                </p>
-              </Grid>
-              <Grid item xs={12}>
-                <button className="continue-shopping-btn" onClick={onContinueShopping}>Continue Shopping</button>
-              </Grid>
-            </Grid>
-          </Grid>
+      <Grid container className="nosotros-container" spacing={4}>
+        <Grid item xs={12} md={6}>
+          <img className="nosotros-img" src={NosotrosIMG} alt="Nosotros" />
         </Grid>
-      </main>
-
+        <Grid item xs={12} md={6} className="nosotros-text">
+          <h1>Descubre nuestra ferretería en línea! Calidad y servicio desde hace décadas.</h1>
+          <p>Construyendo desde el pasado, forjando el futuro. Nuestra ferretería es un símbolo de calidad y confianza. Explora nuestro comercio electrónico para descubrir herramientas que impulsan tu creatividad y proyectos hacia adelante.</p>
+          <button className="contact-button">Contactanos</button>
+        </Grid>
+      </Grid>
+      <div className='contenedor-carrucel'>
+        <h1>Nuestras características</h1>
+        <div className="card-container">
+          {renderCards()}
+        </div>
+      </div>
+      <div className='fondo-testimonios'>
+        <div className='slider-contenedor'>
+          <h1>¡Nuestro cliente dice!</h1>
+          <div className="testimonial-container">
+            <img src={testimonials[currentTestimonial].image} alt={`Testimonio ${currentTestimonial + 1}`} className="testimonial-img" />
+            <img src={testimonials[(currentTestimonial + 1) % testimonials.length].image} alt={`Testimonio ${currentTestimonial + 2}`} className="testimonial-img middle" style={{marginTop: '-20px'}} />
+            <img src={testimonials[(currentTestimonial + 2) % testimonials.length].image} alt={`Testimonio ${currentTestimonial + 3}`} className="testimonial-img" />
+          </div>
+          <h2>{testimonials[currentTestimonial].name}</h2>
+          <p>{testimonials[currentTestimonial].position}</p>
+          <h3>{testimonials[currentTestimonial].text}</h3>
+        </div>
+      </div>
       <Footer />
     </div>
   );
-};
+}
 
-export default OrdenCompletaView;
+export default Nosotros;
