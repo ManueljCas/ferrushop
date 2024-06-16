@@ -1,53 +1,53 @@
 
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  .order-completed-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  
-  .main-content {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 20px;
-  }
-  
-  .order-status {
-    text-align: center;
-  }
-  
-  .order-status .icon {
-    font-size: 50px;
-    margin-bottom: 20px;
-  }
-  
-  .order-status h1 {
-    font-size: 32px;
-    color: #8a2be2;
-  }
-  .correo h1{
-    color: #ff1493;
-    font-size: 20px;
-  }
-  
-  .order-status p {
-    font-size: 16px;
-    margin: 20px 0;
-  }
-  
-  .continue-shopping-btn {
-    background-color: #ff1493;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.order-completed-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.order-status {
+  text-align: center;
+}
+
+.order-status .icon {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.order-status h1 {
+  font-size: 32px;
+  color: #8a2be2;
+}
+.correo h1{
+  color: #ff1493;
+  font-size: 20px;
+}
+
+.order-status p {
+  font-size: 16px;
+  margin: 20px 0;
+}
+
+.continue-shopping-btn {
+  background-color: #ff1493;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+
