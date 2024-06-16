@@ -1,208 +1,207 @@
 .contenedor-detalles-producto {
-    display: flex;
-    justify-content: center;
-    margin: 20px;
-  }
-  
-  .descripcion-producto {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 800px; /* Limitar el ancho del contenedor */
-    margin: auto; /* Centrar el contenedor */
-  }
-  
-  .imagenes-producto {
-    display: flex;
-    align-items: center;
-  }
-  
-  .demas-imagenes {
-    display: flex;
-    flex-direction: column;
-    margin-right: 20px;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
 
-  .demas-imagenes img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  .demas-imagenes img {
-    width: 80px; /* Ajusta el tamaño de las imágenes pequeñas */
-    height: 80px;
-    margin-bottom: 10px;
-    object-fit: cover;
-    border-radius: 8px; /* Bordes redondeados */
-    cursor: pointer; /* Cursor de mano para indicar que se puede hacer clic */
-    background-color: #f0f0f0; /* Fondo gris claro */
-    padding: 5px; /* Espacio interior para que el fondo sea visible */
-  }
-  
-  .primera-imagen img {
-    width: 250px; /* Ajusta el tamaño de la imagen principal */
-    height: auto;
-    border-radius: 8px; /* Bordes redondeados */
-    cursor: pointer; /* Cursor de mano para indicar que se puede hacer clic */
-    background-color: #f0f0f0; /* Fondo gris claro */
-    padding: 10px; /* Espacio interior para que el fondo sea visible */
-  }
+.descripcion-producto {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px; /* Limitar el ancho del contenedor */
+  margin: auto; /* Centrar el contenedor */
+}
 
-  .primera-imagen img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  .caracteristicas-descripcion {
-    margin-left: 20px;
-  }
-  
-  .caracteristicas-descripcion h1,
-  .caracteristicas-descripcion h2,
-  .caracteristicas-descripcion p {
-    margin: 10px 0;
-  }
-  
-  .precio {
-    font-size: 1.5em;
-    color: #333;
-  }
-  
-  .precio span {
-    color: #ff4081;
-  }
-  
-  .caracteristicas-descripcion h2 span {
-    font-weight: normal;
-    color: #666;
-  }
-  
-  .descripcion-producto button {
-    background-color: #ff4081;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .contenedor-descripcion-productos {
-    margin: 20px auto; /* Centramos el contenedor horizontalmente */
-    background-color: #f9f9f9;
-    padding: 20px;
-    max-width: 100%; /* Limitar el ancho del contenedor */
-    text-align: justify;
-  }
-  
-  .contenedor-descripcion-productos h1,
-  .contenedor-descripcion-productos h2,
-  .contenedor-descripcion-productos p {
-    color: #151875;
-    font-size: 20px;
-    margin: 15px 100px;
-  }
+.imagenes-producto {
+  display: flex;
+  align-items: center;
+}
 
-  .contenedor-descripcion-productos p{
-    color: #A9ACC6;
-  }
-  
-  .Contenedor-comentarios {
-    margin: 20px auto; /* Centramos el contenedor horizontalmente */
-    max-width: 800px; /* Limitar el ancho del contenedor */
-  }
+.demas-imagenes {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  align-items: center;
+}
 
-  .Contenedor-comentarios h1{
-    text-align: center;
-    margin: 20px;
-  }
-  
-  .Todos-comentarios .comentario {
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .Todos-comentarios .comentario h2,
-  .Todos-comentarios .comentario p,
-  .Todos-comentarios .comentario span {
-    margin: 5px 0;
-  }
-  
-  .Agregar-comentario {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-  }
-  
-  .Agregar-comentario input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .Agregar-comentario button {
-    background-color: #ff4081;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 10px;
-  }
-  
-  .modal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .modal-content {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    outline: none;
-    max-width: 90%; /* Ajusta el tamaño máximo del contenedor del modal */
-    max-height: 90%; /* Asegúrate de que el contenedor no se salga del modal */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .imagen-grande {
-    max-width: 100%; /* Ajusta el tamaño máximo de las imágenes en el modal */
-    max-height: 100%; /* Asegúrate de que las imágenes no se salgan del modal */
-    border-radius: 8px;
-    padding: 10px; /* Espacio interior para que el fondo sea visible */
-  }
-  
-  .loading-spinner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .spinner {
-    border: 16px solid #f3f3f3;
-    border-top: 16px solid #3498db;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
+.demas-imagenes img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.demas-imagenes img {
+  width: 80px; /* Ajusta el tamaño de las imágenes pequeñas */
+  height: 80px;
+  margin-bottom: 10px;
+  object-fit: cover;
+  border-radius: 8px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor de mano para indicar que se puede hacer clic */
+  background-color: #f0f0f0; /* Fondo gris claro */
+  padding: 5px; /* Espacio interior para que el fondo sea visible */
+}
+
+.primera-imagen img {
+  width: 250px; /* Ajusta el tamaño de la imagen principal */
+  height: auto;
+  border-radius: 8px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor de mano para indicar que se puede hacer clic */
+  background-color: #f0f0f0; /* Fondo gris claro */
+  padding: 10px; /* Espacio interior para que el fondo sea visible */
+}
+
+.primera-imagen img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.caracteristicas-descripcion {
+  margin-left: 20px;
+}
+
+.caracteristicas-descripcion h1,
+.caracteristicas-descripcion h2,
+.caracteristicas-descripcion p {
+  margin: 10px 0;
+}
+
+.precio {
+  font-size: 1.5em;
+  color: #333;
+}
+
+.precio span {
+  color: #ff4081;
+}
+
+.caracteristicas-descripcion h2 span {
+  font-weight: normal;
+  color: #666;
+}
+
+.descripcion-producto button {
+  background-color: #ff4081;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contenedor-descripcion-productos {
+  margin: 20px auto; /* Centramos el contenedor horizontalmente */
+  background-color: #f9f9f9;
+  padding: 20px;
+  max-width: 100%; /* Limitar el ancho del contenedor */
+  text-align: justify;
+}
+
+.contenedor-descripcion-productos h1,
+.contenedor-descripcion-productos h2,
+.contenedor-descripcion-productos p {
+  color: #151875;
+  font-size: 20px;
+  margin: 15px 100px;
+}
+
+.contenedor-descripcion-productos p{
+  color: #A9ACC6;
+}
+
+.Contenedor-comentarios {
+  margin: 20px auto; /* Centramos el contenedor horizontalmente */
+  max-width: 800px; /* Limitar el ancho del contenedor */
+}
+
+.Contenedor-comentarios h1{
+  text-align: center;
+  margin: 20px;
+}
+
+.Todos-comentarios .comentario {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.Todos-comentarios .comentario h2,
+.Todos-comentarios .comentario p,
+.Todos-comentarios .comentario span {
+  margin: 5px 0;
+}
+
+.Agregar-comentario {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.Agregar-comentario input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.Agregar-comentario button {
+  background-color: #ff4081;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  outline: none;
+  max-width: 90%; /* Ajusta el tamaño máximo del contenedor del modal */
+  max-height: 90%; /* Asegúrate de que el contenedor no se salga del modal */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagen-grande {
+  max-width: 100%; /* Ajusta el tamaño máximo de las imágenes en el modal */
+  max-height: 100%; /* Asegúrate de que las imágenes no se salgan del modal */
+  border-radius: 8px;
+  padding: 10px; /* Espacio interior para que el fondo sea visible */
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.spinner {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
