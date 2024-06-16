@@ -42,7 +42,7 @@ nav ul li {
 
 .header-one {
   background-color: #7E33E0;
-  padding: 10px;
+  padding: 10px 0px;
   margin-bottom: 10px;
   width: 100%;
   text-align: right;
@@ -103,4 +103,29 @@ nav ul li a:active {
   nav ul li {
     margin: 5px 0;
   }
+}
+
+.header-one {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.header-button {
+  background: none;
+  border: none;
+  color: white;
+  font: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0;
+  margin: 0px 10px;
+  border-radius: 5px;
+}
+
+.header-button:hover,
+.header-button:focus {
+  background-color: #00000000;
 }

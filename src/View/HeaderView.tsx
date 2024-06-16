@@ -4,12 +4,38 @@ import { AiOutlineUser } from "react-icons/ai";
 import { IoCartOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import Grid from '@material-ui/core/Grid';
+import { useAuth } from '../Javascript/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Header() {
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    toast.success('Has cerrado sesión', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    navigate('/');
+  };
+
   return (
     <header>
       <div className='header-one'>
-        <a href="/">Login <AiOutlineUser /></a>
+        {isAuthenticated ? (
+          <button onClick={handleLogout} className='header-button'>
+            Cerrar Sesión
+          </button>
+        ) : (
+          <a href="/login">Login <AiOutlineUser /></a>
+        )}
         <a href="/hola"><IoCartOutline /></a>
       </div>
       <div className='header-container'>
@@ -22,7 +48,7 @@ function Header() {
           <Grid item xs={12} sm={6}>
             <nav>
               <ul>
-                <li><a href="/inicio">Inicio</a></li>
+                <li><a href="/">Inicio</a></li>
                 <li><a href="/producto">Productos</a></li>
                 <li><a href="/nosotros">Nosotros</a></li>
                 <li><a href="/faq">FAQ</a></li>

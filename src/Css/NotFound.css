@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.order-completed-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.order-status {
+    text-align: center;
+}
+
+.order-status .icon {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.construction-illustration img {
+    max-width: 45%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.order-status h1 {
+    font-size: 32px;
+    color: #8a2be2;
+}
+
+.order-status p {
+    font-size: 16px;
+    margin: 20px 0;
+}
+
+.continue-shopping-btn {
+    background-color: #ff1493;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 5PX;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.footer {
+    background-color: #f1f1f1;
+    padding: 2rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-section {
+    flex: 1;
+}
+
+.footer-section h4 {
+    margin-bottom: 1rem;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li button {
+    background: none;
+    border: none;
+    color: #000;
+    cursor: pointer;
+}
+
+.footer-section ul li button:hover {
+    text-decoration: underline;
+}

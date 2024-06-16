@@ -5,29 +5,34 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import '../Css/Login.css';
-import { useAuth } from '../Javascript/AuthContext';
+import Admin from '../Components/AdministradorComponen';
 
-const Login = () => {
+const AdministradorLogin = () => {
+  // Estado para almacenar el correo electrónico y la contraseña del usuario
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const { login } = useAuth();
+  const [loading, setLoading] = useState(false); // Estado para manejar el indicador de carga
+  const navigate = useNavigate(); // Hook de navegación para redirigir a diferentes rutas
+  const AdminView = Admin(); // Componente de vista del administrador
 
+  // Manejador del evento de envío del formulario
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
+    e.preventDefault(); // Previene el comportamiento predeterminado de envío del formulario
+    setLoading(true); // Muestra el indicador de carga
 
     try {
+      // Realiza una solicitud POST al endpoint de inicio de sesión
       const response = await fetch('https://localhost:7271/api/usuario/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }) // Envía los datos del formulario en formato JSON
       });
 
+      // Manejo de la respuesta de la solicitud
       if (response.ok) {
+        // Muestra una notificación de éxito si el inicio de sesión es exitoso
         toast.success('Inicio de sesión exitoso', {
           position: "top-right",
           autoClose: 5000,
@@ -37,9 +42,9 @@ const Login = () => {
           draggable: true,
           progress: undefined,
         });
-        login();
-        navigate('/');
+        navigate(`/${AdminView}`); // Redirige a la vista de administrador
       } else {
+        // Muestra un mensaje de error si las credenciales son incorrectas
         const errorData = await response.json();
         toast.error(errorData.message || 'Credenciales incorrectas', {
           position: "top-right",
@@ -52,6 +57,7 @@ const Login = () => {
         });
       }
     } catch (error) {
+      // Muestra un mensaje de error si hay un problema con la conexión
       toast.error('Error en la conexión', {
         position: "top-right",
         autoClose: 5000,
@@ -62,7 +68,7 @@ const Login = () => {
         progress: undefined,
       });
     } finally {
-      setLoading(false);
+      setLoading(false); // Oculta el indicador de carga al finalizar
     }
   };
 
@@ -72,7 +78,7 @@ const Login = () => {
         <Grid item xs={11} sm={8} md={6} lg={4}>
           <div className="login-container">
             <form className="login-form" onSubmit={handleSubmit}>
-              <h2>Inicio de Sesión</h2>
+              <h2>Administrador</h2>
               <h3>Bienvenido a Ferrushop</h3>
               <div className="form-group">
                 <input 
@@ -97,15 +103,13 @@ const Login = () => {
                 />
               </div>
               {loading ? (
+                // Muestra un indicador de carga si se está realizando la solicitud de inicio de sesión
                 <div className="loading-container">
                   <CircularProgress />
                 </div>
               ) : (
-                <>
-                  <h3>¿Haz olvidado tu contraseña? Haz clic <a href="/recuperarContrasena">aquí</a></h3>
-                  <button type="submit" className="login-button">Iniciar Sesión</button>
-                  <h3>¿No tienes una cuenta? Haz clic <a href="/registro">aquí</a></h3>
-                </>
+                // Muestra el botón de envío si no hay una solicitud en curso
+                <button type="submit" className="login-button">Iniciar Sesión</button>
               )}
             </form>
           </div>
@@ -115,4 +119,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdministradorLogin;

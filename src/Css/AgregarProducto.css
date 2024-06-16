@@ -110,10 +110,16 @@ button:hover {
 }
 
 .Segunda-seccion .form-group, .Tercera-seccion .form-group{
+    flex-direction: column;
     margin: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .Cuarta-seccion .form-group {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin: 3px;
 }
 

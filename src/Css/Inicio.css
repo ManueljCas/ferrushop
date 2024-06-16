@@ -1,6 +1,10 @@
 /* src/Css/Inicio.css */
 
 /* Estilos para el primer carrusel */
+.contenedor-principal{
+  width: 100%;
+  overflow: hidden;
+}
 .carousel {
   position: relative;
   width: 100%;
@@ -16,6 +20,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.cards-productos{
+  text-align: center;
+  margin: 20px;
 }
 
 .carousel-content {
@@ -89,9 +98,10 @@
 /* Estilos para el segundo carrusel */
 .new-carousel {
   position: relative;
-  width: 100%;
+  width: 90%;
   overflow: hidden;
-  padding: 20px 0;
+  padding: 20px 20px;
+  margin: 0 auto;
 }
 
 .new-carousel-inner {
@@ -136,6 +146,11 @@
 
 .new-carousel-button.next {
   right: 10px; /* Ajustar la posición desde la derecha */
+}
+
+.productos-recientes{
+  text-align: center;
+  padding: 20px;
 }
 
 .secciones-productos {
@@ -330,12 +345,14 @@
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+  flex-wrap: wrap; /* Asegura que los elementos se ajusten en pantallas pequeñas */
 }
 
 .info-descuento {
   max-width: 500px;
   margin-right: 20px;
-  text-align: left;
+  text-align: center;
+  flex: 1; /* Permite que el contenido se ajuste */
 }
 
 .info-descuento h2 {
@@ -368,8 +385,16 @@
   margin-bottom: 5px;
 }
 
-.imagen-descuento img {
+.imagen-descuento {
   max-width: 300px;
+  height: auto;
+  flex: 1; /* Permite que la imagen se ajuste */
+  display: flex;
+  justify-content: center;
+}
+
+.imagen-descuento img {
+  max-width: 100%;
   height: auto;
 }
 

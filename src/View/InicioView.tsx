@@ -10,7 +10,7 @@ import Desarmador from '../IMG/Desarmador.png';
 import CintaMetica from '../IMG/Desarmador.png';
 import Pinzas from '../IMG/Pinsas.png';
 import FondoSeguirviendo from '../IMG/FondoSeguirviendo.png';
-import Empresas from '../IMG/Empresas.png'
+import Empresas from '../IMG/Empresas.png';
 import Grid from '@material-ui/core/Grid';
 
 const Inicio = () => {
@@ -18,7 +18,7 @@ const Inicio = () => {
   const { renderCards } = NosotrosComponent();
 
   return (
-    <div>
+    <div className='contenedor-principal'>
       <Header />
       
       <div className="carousel">
@@ -39,7 +39,7 @@ const Inicio = () => {
       </div>
 
       <div className='cards-productos'>
-        <h1>Productos destacados</h1>
+        <h1>Productos nuevos</h1>
       </div>
 
       <div className="new-carousel">
@@ -66,7 +66,9 @@ const Inicio = () => {
         </div>
       </div>
 
-      <h1>Productos más recientes </h1>
+      <div className='productos-recientes'>
+        <h1>Productos más recientes</h1>
+      </div>
 
       <Grid container spacing={3} className="secciones-productos">
         <Grid item xs={3} onClick={() => handleChangeTipoProductos('nuevos')}>
@@ -161,8 +163,8 @@ const Inicio = () => {
           <a href='#producto3'>Producto 3</a>
         </div>
         <div className='producto-descuento'>
-          <Grid container spacing={3} alignItems="center">
-            <Grid item xs={12} md={6}>
+          <Grid container spacing={3} justifyContent="center" alignItems="center">
+            <Grid xs={12} sm={6} md={4}>
               <div className='info-descuento'>
                 <h2>20% de descuento en este producto</h2>
                 <h3>Desarmador</h3>
@@ -176,7 +178,7 @@ const Inicio = () => {
                 <a href="./" className="buy-button">Comprar Ahora</a>
               </div>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6} md={3}>
               <div className='imagen-descuento'>
                 <img src={Desarmador} alt="Desarmador" />
               </div>

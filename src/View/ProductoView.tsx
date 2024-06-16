@@ -1,57 +1,99 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import '../Css/Producto.css';
 import Header from './HeaderView';
 import Footer from './FooterView';
-import ProductoImage from '../IMG/Producto.png';
 import Grid from '@material-ui/core/Grid';
+import { useProductos } from '../Components/ProductosComponent';
 
-function Producto() {
+const Producto: React.FC = () => {
+  const {
+    products,
+    hasMore,
+    setSelectedCategories,
+    setSelectedPrices,
+    handleChange,
+    handleShowMore,
+    handleApplyFilters,
+  } = useProductos();
+  
+  const navigate = useNavigate();
+
+  const handleProductClick = (id: number) => {
+    try {
+      navigate(`/producto/${id}`);
+    } catch (error) {
+      toast.error('Error al navegar a la descripción del producto');
+      console.error('Navigation error:', error);
+    }
+  };
+
   return (
-    <div>
+    <div className="contenedor-principal">
       <Header />
 
-      <div className='contenedor-seccion-productos'>
+      <div className="contenedor-seccion-productos">
         <Grid container spacing={3}>
-          <Grid item xs={12} md={3} className='filtro-precio'>
-            <h2>Filtrar Precio</h2>
+          <Grid item xs={12} md={3} className="filtro-precio">
+            <h1>Filtro</h1>
             <ul>
-              <li>
-                <input type="checkbox" id="precio1" name="precio1" value="0-50" />
-                <label htmlFor="precio1">$0.00 - $50.00</label>
-              </li>
-              <li>
-                <input type="checkbox" id="precio2" name="precio2" value="50-100" />
-                <label htmlFor="precio2">$50.00 - $100.00</label>
-              </li>
-              <li>
-                <input type="checkbox" id="precio3" name="precio3" value="100-150" />
-                <label htmlFor="precio3">$100.00 - $150.00</label>
-              </li>
-              <li>
-                <input type="checkbox" id="precio4" name="precio4" value="150-200" />
-                <label htmlFor="precio4">$150.00 - $200.00</label>
-              </li>
+              <h3>Categorías</h3>
+              {['Herramientas de Mano', 'Herramientas Eléctricas', 'Material de Construcción', 'Fijaciones y Sujeciones', 'Pinturas y Acabados'].map((cat, idx) => (
+                <li key={idx}>
+                  <input
+                    type="checkbox"
+                    id={`categoria${idx + 1}`}
+                    value={cat}
+                    onChange={handleChange(setSelectedCategories)}
+                  />
+                  <label htmlFor={`categoria${idx + 1}`}>{cat}</label>
+                </li>
+              ))}
+              <h3>Precios</h3>
+              {['0-50', '50-100', '100-150', '150-200'].map((price, idx) => (
+                <li key={idx}>
+                  <input
+                    type="checkbox"
+                    id={`precio${idx + 1}`}
+                    value={price}
+                    onChange={handleChange(setSelectedPrices)}
+                  />
+                  <label htmlFor={`precio${idx + 1}`}>{`$${price.split('-').join(' - $')}`}</label>
+                </li>
+              ))}
             </ul>
-            <button>Aplicar</button>
+            <button onClick={handleApplyFilters}>Aplicar</button>
           </Grid>
 
-          <Grid item xs={12} md={9} className='lista-productos'>
+          <Grid item xs={12} md={9} className="lista-productos">
             <Grid container spacing={3}>
-              {[1, 2, 3, 4, 5, 6, 7].map((item, index) => (
-                <Grid item xs={12} key={index}>
-                  <div className='producto-item'>
-                    <img src={ProductoImage} alt={`Producto ${item}`} className='producto-imagen' />
-                    <div className='producto-info'>
-                      <h3>Martillo</h3>
-                      <p>$26.00</p>
-                      <p>Martillo de madera, especial para obra y hogar, haciendo de esto una excelente opción para su uso diario.</p>
-                      <div className="producto-iconos">
-                      </div>
+              {products.map((product) => (
+                <Grid item xs={12} key={product.id} onClick={() => handleProductClick(product.id)}>
+                  <div className="producto-item">
+                    {product.images && product.images[0] && product.images[0].data ? (
+                      <img
+                        src={`data:image/jpeg;base64,${product.images[0].data}`}
+                        alt={`Producto ${product.title}`}
+                        className="producto-imagen"
+                      />
+                    ) : (
+                      <p>No image available</p>
+                    )}
+                    <div className="producto-info">
+                      <h3>{product.title}</h3>
+                      <p>${product.price}</p>
+                      <p>{product.description}</p>
                     </div>
                   </div>
                 </Grid>
               ))}
             </Grid>
+            {hasMore && (
+              <div className="show-more-container">
+                <button onClick={handleShowMore} className="show-more-button">Mostrar más</button>
+              </div>
+            )}
           </Grid>
         </Grid>
       </div>
@@ -59,6 +101,6 @@ function Producto() {
       <Footer />
     </div>
   );
-}
+};
 
 export default Producto;
