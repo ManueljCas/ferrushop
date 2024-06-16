@@ -1,3 +1,4 @@
+import React from 'react';
 import '../Css/AgregarProducto.css';
 import AgregarProductoComponent from '../Components/AgregarProductoComponent';
 
@@ -21,7 +22,6 @@ function AgregarProducto() {
     <div className='contenedor-pantalla'>
       <div className='ContenedorAgregar'>
         <h1>Agregar producto</h1>
-
         <div className='Imagenes-productos'>
           <h2>Imágenes del producto</h2>
           <span>{imagePreviews.length} archivos seleccionados</span>
@@ -143,4 +143,4 @@ function AgregarProducto() {
   );
 }
 
-export default AgregarProducto;
+export default AgregarProductoView;
