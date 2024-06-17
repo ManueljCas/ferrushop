@@ -46,15 +46,16 @@ const FAQ: React.FC = () => {
                     </div>
                 </div>
                 <div className="contact-form-container">
-                    <h2>Contacto</h2>
+                    <h1>Contacto</h1>
+                    <h2>Por favor ingrese los datos que se solicitan.</h2>
                     <form onSubmit={handleSubmit} className="contact-form">
                         <div>
                             <label>Nombre:</label>
-                            <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+                            <input type="text" placeholder='Agrega tu nombre completo' value={name} onChange={(e) => setName(e.target.value)} required />
                         </div>
                         <div>
                             <label>Mensaje:</label>
-                            <textarea value={message} onChange={(e) => setMessage(e.target.value)} required />
+                            <textarea value={message} placeholder='Agrega tu mensaje' onChange={(e) => setMessage(e.target.value)} required />
                         </div>
                         <button type="submit">Enviar</button>
                     </form>

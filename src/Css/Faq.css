@@ -13,8 +13,17 @@
 }
 
 .faq-text {
+    background-color: #f9f9f9;
     text-align: center;
-    margin: 20px;
+    margin: 0px 55px;
+    padding: 50px;
+    border-radius: 10px;
+    color: #1D3178;
+}
+
+
+.faq-text p{
+    color: #A1ABCC;
 }
 
 .content-container {
@@ -31,12 +40,19 @@
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
+    color: #1D3178;
 }
+
+.faq-content h1{
+    margin: 10px 0px;
+}
+
 
 .question-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    text-align: justify;
 }
 
 .question-item h2 {
@@ -47,6 +63,8 @@
 .question-item p {
     font-size: 1.2em;
     margin: 10px 0 0 0;
+    color: #A1ABCC;
+
 }
 
 .contact-form-container {
@@ -54,7 +72,19 @@
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
+    color: #A1ABCC;   
+}
+
+.contact-form-container h1{
     text-align: center;
+    color: #1D3178;
+
+}
+
+.contact-form-container h2{
+    text-align: center;
+    color: #A1ABCC;  
+    font-size: 15px; 
 }
 
 .contact-form div {
@@ -69,25 +99,35 @@
 
 .contact-form input,
 .contact-form textarea {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
+.contact-form textarea {
+    resize: none;
+}
+
+.contact-form textarea::placeholder {
+    font-style: inherit; /* Heredar el estilo de la fuente */
+    font-weight: inherit; /* Heredar el peso de la fuente */
+    text-decoration: inherit; /* Heredar la decoración del texto */
+}
+
 .contact-form button {
     padding: 10px 20px;
     font-size: 1em;
     color: #fff;
-    background-color: #007bff;
+    background-color: #FB2E86;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
 .contact-form button:hover {
-    background-color: #0056b3;
+    background-color: #c81261;
 }
 
 .contact-form p {
