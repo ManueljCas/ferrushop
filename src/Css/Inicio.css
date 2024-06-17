@@ -134,10 +134,11 @@
   bottom: 10px; /* Ajustar la posición desde la parte inferior */
   width: 50px; /* Ajustar el ancho si es necesario */
   color: rgb(0, 0, 0);
-  border: none;
+  border-color: rgba(0, 0, 0, 0.06);
   padding: 10px;
   cursor: pointer;
-  background-color: #00000000;
+  background-color: rgba(0, 0, 0, 0.056);
+  border-radius: 10px;
 }
 
 .new-carousel-button:hover {
