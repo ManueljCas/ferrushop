@@ -15,23 +15,29 @@
     max-width: 400px;
     box-shadow: -10px 10px 5px #2B3CAB;
     border-radius: 10px;
+    margin: 0px 0px 0px 50px;
 }
 
 .nosotros-text {
     text-align: justify;
-    padding: 0 20px;
+    align-items: center;
+    justify-content: center;
 }
 
 .nosotros-text h1 {
     color: #151875;
     font-size: 24px;
     margin-bottom: 10px;
+    margin: 30px 50px 0px 0;
+
 }
 
 .nosotros-text p {
     color: #8A8FB9;
     font-size: 16px;
     margin-bottom: 20px;
+    margin: 10px 50px 0px 0;
+
 }
 
 .contact-button {
@@ -41,6 +47,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin: 10px 0;
 }
 
 .contact-button:hover {
@@ -48,6 +55,7 @@
 }
 
 .contenedor-carrucel h1 {
+    margin: 30px;
     text-align: center;
 }
 

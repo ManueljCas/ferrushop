@@ -13,7 +13,7 @@ const Nosotros = () => {
     <div>
       <Header />
       <Grid container className="nosotros-container" spacing={4}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} >
           <img className="nosotros-img" src={NosotrosIMG} alt="Nosotros" />
         </Grid>
         <Grid item xs={12} md={6} className="nosotros-text">
