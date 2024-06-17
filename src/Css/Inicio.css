@@ -133,15 +133,20 @@
   position: absolute;
   bottom: 10px; /* Ajustar la posición desde la parte inferior */
   width: 50px; /* Ajustar el ancho si es necesario */
-  background-color: rgba(0,0,0,0.5);
-  color: white;
+  color: rgb(0, 0, 0);
   border: none;
   padding: 10px;
   cursor: pointer;
+  background-color: #00000000;
+}
+
+.new-carousel-button:hover {
+  background-color: #0000002f;
+  border-radius: 10px;
 }
 
 .new-carousel-button.prev {
-  left: 10px; /* Ajustar la posición desde la izquierda */
+  left: 5px; /* Ajustar la posición desde la izquierda */
 }
 
 .new-carousel-button.next {
@@ -160,10 +165,18 @@
   justify-content: center;
 }
 
+
 .secciones-productos .titulo-seccion {
   font-size: 10px;
   padding: 10px;
 }
+
+.secciones-productos .titulo-seccion:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #c81261;
+}
+
 
 .productos-container {
   display: flex;
@@ -180,10 +193,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  background-color: #ffffff;
+  padding: 50px 0px;
   margin: 20px;
   border-radius: 10px;
+  background-color: #f9f9f9;
 }
 
 .producto {
@@ -195,10 +208,17 @@
     border-radius: 10px;
   }
   
-.producto-imagen {
+.producto-imagen-inicio {
     height: auto;
     margin: 0 auto;
     display: block;
+  }
+
+  .producto-imagen-inicio-dos{
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    width: 250px;
   }
 
 .producto-contenido {
@@ -252,12 +272,15 @@
 
 /* Estilos para Productos de tendencia */
 .trend-products {
+  justify-content: center;
+  align-items: center;
   text-align: center;
   margin: 50px 0;
 }
 
 .trend-products-container {
   display: flex;
+  align-items: center;
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -386,7 +409,7 @@
 }
 
 .imagen-descuento {
-  max-width: 300px;
+  max-width: 450px;
   height: auto;
   flex: 1; /* Permite que la imagen se ajuste */
   display: flex;

@@ -1,20 +1,21 @@
+import React from 'react';
 import '../Css/AgregarProducto.css';
 import AgregarProductoComponent from '../Components/AgregarProductoComponent';
 
-function AgregarProducto() {
+const AgregarProducto = () => {
   // Desestructuramos los valores y funciones necesarios del componente AgregarProductoComponent
   const {
-    imagePreviews, // Previsualizaciones de imágenes seleccionadas
-    handleImageChange, // Manejador de cambio de imágenes
-    handleAddProduct, // Manejador para agregar producto
-    title, setTitle, // Título del producto y su setter
-    description, setDescription, // Descripción breve del producto y su setter
-    price, setPrice, // Precio del producto y su setter
-    category, setCategory, // Categoría del producto y su setter
-    quantity, setQuantity, // Cantidad del producto y su setter
-    fullDescription, setFullDescription, // Descripción completa del producto y su setter
-    details, setDetails, // Detalles adicionales del producto y su setter
-    loading // Indicador de estado de carga
+    imagePreviews,
+    handleImageChange,
+    handleAddProduct,
+    title, setTitle,
+    description, setDescription,
+    price, setPrice,
+    category, setCategory,
+    quantity, setQuantity,
+    fullDescription, setFullDescription,
+    details, setDetails,
+    loading
   } = AgregarProductoComponent();
 
   return (
@@ -50,7 +51,7 @@ function AgregarProducto() {
               value={title} 
               onChange={(e) => setTitle(e.target.value)} 
               minLength={3}
-              maxLength={15}
+              maxLength={50}
               required
             />
           </div>
@@ -73,7 +74,7 @@ function AgregarProducto() {
               value={price} 
               onChange={(e) => setPrice(e.target.value)} 
               min={1}
-              max={3000}
+              max={10000}
               required
             />
           </div>
@@ -100,7 +101,7 @@ function AgregarProducto() {
               value={fullDescription} 
               onChange={(e) => setFullDescription(e.target.value)} 
               minLength={20}
-              maxLength={300}
+              maxLength={500}
               required
             />
           </div>

@@ -3,7 +3,6 @@ import Header from './HeaderView';
 import Footer from './FooterView';
 import '../Css/Inicio.css';
 import useInicioComponent from '../Components/InicioComponent';
-import NosotrosComponent from '../Components/NosotrosComponent';
 import ProductoImage from '../IMG/Perico.png';
 import Serrucho from '../IMG/Serrucho.png';
 import Desarmador from '../IMG/Desarmador.png';
@@ -12,10 +11,13 @@ import Pinzas from '../IMG/Pinsas.png';
 import FondoSeguirviendo from '../IMG/FondoSeguirviendo.png';
 import Empresas from '../IMG/Empresas.png';
 import Grid from '@material-ui/core/Grid';
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import { AiOutlineArrowRight } from "react-icons/ai";
+
+
 
 const Inicio = () => {
   const { currentSlide, images, currentGroup, carrucel2, nextGroup, prevGroup, handleChangeTipoProductos, obtenerProductosSegunTipo } = useInicioComponent();
-  const { renderCards } = NosotrosComponent();
 
   return (
     <div className='contenedor-principal'>
@@ -61,8 +63,8 @@ const Inicio = () => {
           ))}
         </Grid>
         <div>
-          <button className="new-carousel-button prev" onClick={prevGroup}>Prev</button>
-          <button className="new-carousel-button next" onClick={nextGroup}>Next</button>
+          <button className="new-carousel-button prev" onClick={prevGroup}><AiOutlineArrowLeft /></button>
+          <button className="new-carousel-button next" onClick={nextGroup}><AiOutlineArrowRight /></button>
         </div>
       </div>
 
@@ -97,27 +99,23 @@ const Inicio = () => {
         {obtenerProductosSegunTipo().map((producto, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
             <div className="producto">
-              <img src={producto.src} alt={producto.nombre} className='producto-imagen'/>
+              <img src={producto.src} alt={producto.nombre} className='producto-imagen-inicio'/>
               <div className="producto-info">
                 <h2>{producto.nombre}</h2>
                 <p>Precio: ${producto.precio}</p>
+                <a href="./" className="buy-button">Comprar Ahora</a>
+
               </div>
             </div>
           </Grid>
         ))}
       </Grid>
 
-      <div className='contenedor-carrucel'>
-        <h1>¡Lo mejor que tenemos para ofrecerte!</h1>
-        <div className="card-container">
-          {renderCards()}
-        </div>
-      </div>
 
       <div className='contenedor-producto'>
         <Grid container spacing={3} alignItems="center">
           <Grid item xs={12} md={6}>
-            <img src={ProductoImage} alt="Producto especial" className="producto-imagen" />
+            <img src={ProductoImage} alt="Producto especial" className="producto-imagen-inicio-dos" />
           </Grid>
           <Grid item xs={12} md={6}>
             <div className="producto-contenido">
@@ -138,7 +136,7 @@ const Inicio = () => {
         <h1>Productos de tendencia</h1>
         <Grid container spacing={3} className='trend-products-container'>
           {[1, 2, 3, 4].map((item, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
+            <Grid item xs={12} sm={6} md={2} key={index}>
               <div className='trend-product'>
                 <div className="trend-product-image-wrapper">
                   <img src={Serrucho} alt={`Trend Product ${item}`} className="trend-product-image" />
@@ -156,12 +154,7 @@ const Inicio = () => {
       </div>
 
       <div className='contenedor-descuento'>
-        <h1>Artículo con descuento</h1>
-        <div className='navegacion-productos'>
-          <a href='#producto1' className='activo'>Producto 1</a>
-          <a href='#producto2'>Producto 2</a>
-          <a href='#producto3'>Producto 3</a>
-        </div>
+        <h1>¡Artículo con descuento!</h1>
         <div className='producto-descuento'>
           <Grid container spacing={3} justifyContent="center" alignItems="center">
             <Grid xs={12} sm={6} md={4}>
@@ -191,7 +184,7 @@ const Inicio = () => {
         <h1>Categorías principales</h1>
         <Grid container spacing={3} className='categorias-container'>
           {[1, 2, 3, 4].map((item, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
+            <Grid item xs={12} sm={6} md={2} key={index}>
               <div className='categoria-item'>
                 <div className='categoria-imagen-wrapper'>
                   <img src={CintaMetica} alt={`Categoría ${item}`} className='categoria-imagen' />
@@ -208,9 +201,9 @@ const Inicio = () => {
 
       <div className='productos-recomendados'>
         <h1>Productos recomendados</h1>
-        <Grid container spacing={3} className='productos-recomendados-container'>
+        <Grid container spacing={10} className='productos-recomendados-container'>
           {[1, 2, 3, 4].map((item, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
+            <Grid item xs={12} sm={6} md={2} key={index}>
               <div className='producto-recomendado'>
                 <div className='producto-recomendado-imagen-wrapper'>
                   <img src={Pinzas} alt={`Recomendado ${item}`} className='producto-recomendado-imagen' />
@@ -231,8 +224,8 @@ const Inicio = () => {
         <img src={FondoSeguirviendo} alt="Seguir viendo" className="fondo-imagen" />
         <div className="fondo-texto">
           <h1>Seguir viendo</h1>
-          <button className="fondo-boton">Ver más</button>
-        </div>
+          <a href="/producto" className="buy-button">Haz clik aqui</a>
+          </div>
       </div>
 
       <div className="Contenedor-empresas">
