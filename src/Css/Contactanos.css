@@ -58,6 +58,8 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 16px;
+    resize: none;
+
   }
   
   .form-contact input[type="text"], .form-contact input[type="email"] {
