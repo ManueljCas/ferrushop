@@ -13,17 +13,20 @@ function Header() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout();
-    toast.success('Has cerrado sesión', {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-    navigate('/');
+    const confirmed = window.confirm('¿Estás seguro de que quieres cerrar sesión?');
+    if (confirmed) {
+      logout();
+      toast.success('Has cerrado sesión', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      navigate('/');
+    }
   };
 
   return (
