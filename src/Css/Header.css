@@ -46,6 +46,9 @@ nav ul li {
   margin-bottom: 10px;
   width: 100%;
   text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: right;
 }
 
 .header-one a {
@@ -105,12 +108,6 @@ nav ul li a:active {
   }
 }
 
-.header-one {
-  display: flex;
-  align-items: center;
-  justify-content: right;
-}
-
 .header-button {
   background: none;
   border: none;
@@ -128,4 +125,37 @@ nav ul li a:active {
 .header-button:hover,
 .header-button:focus {
   background-color: #00000000;
+}
+
+#carrito {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cart-count {
+  width: 3px;
+  height: 10px;
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  opacity: 0;
+  transform: scale(0);
+  animation: showCount 0.3s forwards;
+}
+
+.cart-count p{
+  margin-top: -4px;
+  margin-left: -2px;
+}
+@keyframes showCount {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

@@ -7,9 +7,11 @@ import Grid from '@material-ui/core/Grid';
 import { useAuth } from '../Javascript/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useCart } from '../context/CartContext';
 
 function Header() {
   const { isAuthenticated, logout } = useAuth();
+  const { cart } = useCart();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -39,7 +41,10 @@ function Header() {
         ) : (
           <a href="/login">Login <AiOutlineUser /></a>
         )}
-        <a href="/carrito"><IoCartOutline /></a>
+        <a href="/carrito" id='carrito'>
+          <IoCartOutline />
+          {cart.length > 0 && <span className="cart-count"> <p>{cart.length}</p></span>}
+        </a>
       </div>
       <div className='header-container'>
         <Grid container alignItems="center">
