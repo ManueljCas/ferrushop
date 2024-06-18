@@ -1,112 +1,145 @@
 .carrito-container {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-  }
-  
-  .carrito-productos {
-    width: 65%;
-  }
-  
-  .total-carrito {
-    width: 30%;
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  th, td {
-    text-align: left;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: #f4f4f4;
-  }
-  
-  #Carrito-img {
-    width: 80px;
-    margin-right: 10px;
-  }
-  
-  td div {
-    display: inline-block;
-    vertical-align: top;
-  }
-  
-  .botones-carrito {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .agregar-mas, .eliminar-todo, .pagar {
-    background-color: #ff69b4;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .agregar-mas {
-    background-color: #ff69b4;
-  }
-  
-  .eliminar-todo {
-    background-color: #ff69b4;
-  }
-  
-  .pagar {
-    background-color: #00cc66;
-    width: 100%;
-  }
-  
-  .totales {
-    margin-bottom: 20px;
-  }
-  
-  .totales p {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-  }
-  
-  .totales span {
-    font-weight: bold;
-  }
-  
-  .quantity-input {
-    display: flex;
-    align-items: center;
-  }
-  
-  .quantity-input button {
-    background-color: #f1f1f1;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .quantity-input input {
-    width: 40px;
-    text-align: center;
-    border: none;
-    background-color: #f1f1f1;
-    padding: 5px;
-  }
-  
-  .quantity-input button:focus, .quantity-input input:focus {
-    outline: none;
-  }
-  
-  .quantity-input button:active {
-    background-color: #ddd;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.carrito-productos {
+  width: 65%;
+}
+
+.total-carrito {
+  width: 30%;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+#Carrito-img {
+  width: 80px;
+  margin-right: 10px;
+}
+
+td div {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.botones-carrito {
+  display: flex;
+  justify-content: space-between;
+}
+
+.agregar-mas, .eliminar-todo, .pagar {
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.agregar-mas {
+  background-color: #ff69b4;
+}
+
+.eliminar-todo {
+  background-color: #ff69b4;
+}
+
+.pagar {
+  background-color: #00cc66;
+  width: 100%;
+}
+
+.totales {
+  margin-bottom: 20px;
+}
+
+.totales p {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.totales span {
+  font-weight: bold;
+}
+
+.quantity-input {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-input button {
+  background-color: #f1f1f1;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.quantity-input input {
+  width: 40px;
+  text-align: center;
+  border: none;
+  background-color: #f1f1f1;
+  padding: 5px;
+}
+
+.quantity-input button:focus, .quantity-input input:focus {
+  outline: none;
+}
+
+.quantity-input button:active {
+  background-color: #ddd;
+}
+
+.carrito-vacio {
+  text-align: center;
+  padding: 50px;
+  background-color: #f8f8f8;
+  border: 2px dashed #ccc;
+  margin: 20px 0;
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.carrito-vacio p {
+  font-size: 18px;
+  color: #666;
+}
+
+.carrito-vacio .agregar-mas {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.carrito-vacio .agregar-mas:hover {
+  background-color: #bd226f;
+}

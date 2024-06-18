@@ -11,11 +11,12 @@ interface CartItem {
 interface CartContextType {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
+  clearCart: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>(() => {
     const savedCart = localStorage.getItem('cart');
     return savedCart ? JSON.parse(savedCart) : [];
@@ -27,30 +28,29 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const addToCart = (item: CartItem) => {
     setCart(prevCart => {
-      console.log('Adding to cart:', item); // Debug message
       const existingItem = prevCart.find(cartItem => cartItem.id === item.id);
       if (existingItem) {
-        const updatedCart = prevCart.map(cartItem =>
+        return prevCart.map(cartItem =>
           cartItem.id === item.id
             ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
             : cartItem
         );
-        console.log('Updated cart:', updatedCart); // Debug message
-        return updatedCart;
       } else {
-        const newCart = [...prevCart, item];
-        console.log('New cart:', newCart); // Debug message
-        return newCart;
+        return [...prevCart, item];
       }
     });
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   useEffect(() => {
-    console.log('Current cart:', cart); // Debug message
+    console.log('Current cart:', cart);
   }, [cart]);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart }}>
+    <CartContext.Provider value={{ cart, addToCart, clearCart }}>
       {children}
     </CartContext.Provider>
   );
@@ -63,3 +63,5 @@ export const useCart = (): CartContextType => {
   }
   return context;
 };
+
+export { CartProvider };
