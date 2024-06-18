@@ -36,7 +36,7 @@ function Header() {
         ) : (
           <a href="/login">Login <AiOutlineUser /></a>
         )}
-        <a href="/hola"><IoCartOutline /></a>
+        <a href="/carrito"><IoCartOutline /></a>
       </div>
       <div className='header-container'>
         <Grid container alignItems="center">

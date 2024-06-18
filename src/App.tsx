@@ -25,6 +25,7 @@ import EditarProducto from './View/EditarProductoView';
 import Contacto from './View/ContactanosView';
 import NotFound from './Components/NotFound';
 import ProductoDescripcion from './View/DescripcionProducto';
+import CarritoView from './View/CarritoView';
 
 import { AuthProvider } from './Javascript/AuthContext';
 
@@ -58,6 +59,7 @@ function App() {
           <Route path="/completa" element={<OrdenCompleta />} />
           <Route path="/producto" element={<Producto />} />
           <Route path="/producto/:id" element={<ProductoDescripcion />} />
+          <Route path="/carrito" element={<CarritoView />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path={`/${encodedPath}`} element={<AgregarProducto />} />
           <Route path={`/${AdminLogin}`} element={<AdministradorLogin />} />
