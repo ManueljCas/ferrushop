@@ -47,7 +47,7 @@ const CarritoView = () => {
       <div className="carrito-container">
         {cart.length === 0 ? (
           <div className="carrito-vacio">
-            <p>Agregar un producto y aquí aparecerán</p>
+            <p>Agrega un producto y aquí aparecerán</p>
             <button className="agregar-mas" onClick={handleAddMore}>Agregar productos</button>
           </div>
         ) : (
