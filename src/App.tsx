@@ -28,6 +28,7 @@ import ProductoDescripcion from './View/DescripcionProducto';
 import CarritoView from './View/CarritoView';
 
 import { AuthProvider } from './Javascript/AuthContext';
+import { CartProvider } from './context/CartContext';
 
 function App() {
   const encodedPath = AgregarProductoComponent();
@@ -47,28 +48,30 @@ function App() {
 
   return (
     <AuthProvider>
-      <Router>
-        <ToastContainer />
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/registro" element={<Register />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="/nosotros" element={<Nosotros />} />
-          <Route path="/recuperarContrasena" element={<RecuperarContrasena />} />
-          <Route path="/" element={<Inicio />} />
-          <Route path="/completa" element={<OrdenCompleta />} />
-          <Route path="/producto" element={<Producto />} />
-          <Route path="/producto/:id" element={<ProductoDescripcion />} />
-          <Route path="/carrito" element={<CarritoView />} />
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path={`/${encodedPath}`} element={<AgregarProducto />} />
-          <Route path={`/${AdminLogin}`} element={<AdministradorLogin />} />
-          <Route path={`/${Admin}`} element={<Administrador />} />
-          <Route path={`/${AdminVerProductos}`} element={<AdminidtradorVerProductos />} />
-          <Route path="/editar-producto/:id" element={<EditarProducto />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
+      <CartProvider>
+        <Router>
+          <ToastContainer />
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/registro" element={<Register />} />
+            <Route path="/faq" element={<Faq />} />
+            <Route path="/nosotros" element={<Nosotros />} />
+            <Route path="/recuperarContrasena" element={<RecuperarContrasena />} />
+            <Route path="/" element={<Inicio />} />
+            <Route path="/completa" element={<OrdenCompleta />} />
+            <Route path="/producto" element={<Producto />} />
+            <Route path="/producto/:id" element={<ProductoDescripcion />} />
+            <Route path="/carrito" element={<CarritoView />} />
+            <Route path="/contacto" element={<Contacto />} />
+            <Route path={`/${encodedPath}`} element={<AgregarProducto />} />
+            <Route path={`/${AdminLogin}`} element={<AdministradorLogin />} />
+            <Route path={`/${Admin}`} element={<Administrador />} />
+            <Route path={`/${AdminVerProductos}`} element={<AdminidtradorVerProductos />} />
+            <Route path="/editar-producto/:id" element={<EditarProducto />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Router>
+      </CartProvider>
     </AuthProvider>
   );
 }

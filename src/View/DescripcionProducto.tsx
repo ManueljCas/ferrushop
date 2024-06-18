@@ -7,6 +7,7 @@ import Header from './HeaderView';
 import Footer from './FooterView';
 import Grid from '@material-ui/core/Grid';
 import Modal from '@material-ui/core/Modal';
+import { useCart } from '../context/CartContext';
 
 interface Product {
   id: number;
@@ -26,30 +27,25 @@ const ProductoDescripcion: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        console.log('Fetching product data for ID:', id); // Mensaje de depuración
         const response = await axios.get(`https://localhost:7271/api/Products/${id}`);
-        console.log('Product data received:', response.data); // Mensaje de depuración
         setProduct(response.data);
       } catch (error) {
         if (axios.isAxiosError(error)) {
           if (error.response) {
-            // El servidor respondió con un estado fuera del rango 2xx
             toast.error(`Error ${error.response.status}: ${error.response.data}`);
           } else if (error.request) {
-            // La solicitud fue hecha pero no se recibió respuesta
             toast.error('No se recibió respuesta del servidor');
           } else {
-            // Algo pasó al configurar la solicitud
             toast.error(`Error: ${error.message}`);
           }
         } else {
           toast.error('Error desconocido al cargar los datos del producto');
         }
-        console.error('Error fetching product data:', error);
       } finally {
         setLoading(false);
       }
@@ -66,6 +62,22 @@ const ProductoDescripcion: React.FC = () => {
   const handleClose = () => {
     setOpen(false);
     setSelectedImage('');
+  };
+
+  const handleAddToCart = () => {
+    if (product) {
+      console.log('Adding product to cart:', product); // Debug message
+      addToCart({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        quantity: 1,
+        image: product.images[0].data
+      });
+      toast.success('Producto agregado al carrito');
+    } else {
+      console.error('Product not found!'); // Debug message
+    }
   };
 
   if (loading) {
@@ -116,7 +128,7 @@ const ProductoDescripcion: React.FC = () => {
                 <h2>Categoría: <span>{product.category}</span></h2>
                 <p className="descripcion">Descripción: {product.description}</p>
                 <p>Cantidad: {product.quantity}</p>
-                <button>Comprar Ahora</button>
+                <button onClick={handleAddToCart}>Comprar Ahora</button>
               </div>
             </div>
           </Grid>
