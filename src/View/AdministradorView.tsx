@@ -1,25 +1,19 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../Css/Administrador.css';
 import 'react-toastify/dist/ReactToastify.css';
-import AgregarProducto from '../Components/AppComponent';
-import { Link } from 'react-router-dom';
-import AdministradorLogin from '../Components/AdminLoginComponent';
-import AdminidtradorVerProductos from '../Components/AdminVerProductosComponent';
 
 const Administrador = () => {
-    // Inicializa las vistas de los diferentes componentes de administración
-    const AgregarProductoView = AgregarProducto();
-    const AdministradorLoginView = AdministradorLogin();
-    const AdmintVerProducto = AdminidtradorVerProductos();
+    const navigate = useNavigate();
 
     return (
-        <div className="admin-container">
-            <h1>Ferrushop</h1>
-            <h2>¿Qué queremos hacer hoy?</h2>
-            <div className="admin-links">
-                {/* Enlaces de navegación a las diferentes vistas de administración */}
-                <Link to={`/${AgregarProductoView}`} className="admin-link">Agregar producto</Link>
-                <Link to={`/${AdmintVerProducto}`} className="admin-link">Ver productos</Link>
-                <Link to={`/${AdministradorLoginView}`} className="admin-link">Salir</Link>
+        <div className="admin-container-custom">
+            <h1 className="admin-title-custom">Ferrushop</h1>
+            <h2 className="admin-subtitle-custom">¿Qué queremos hacer hoy?</h2>
+            <div className="admin-links-custom">
+                <button onClick={() => navigate('/QWdyZYs1RU03AK')} className="admin-button-custom">Ver productos</button>
+                <button onClick={() => navigate('/QWdyZWdhclByb2R1Y3Rv')} className="admin-button-custom">Agregar productos</button>
+                <button onClick={() => navigate('/U29tZUNvbnRlbnQz')} className="admin-button-custom">Salir</button>
             </div>
         </div>
     );

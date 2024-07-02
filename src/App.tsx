@@ -8,34 +8,25 @@ import { urlFerrushop } from './endpoints';
 import Login from './View/LoginView';
 import Nosotros from './View/NosotrosView';
 import Inicio from './View/InicioView';
-import AgregarProducto from './View/AgregarProductoView';
 import RecuperarContrasena from './View/RecuperarContrasenaView';
 import Producto from './View/ProductoView';
 import Register from './View/RegisterView';
 import OrdenCompleta from './Components/OrdenCompleta';
 import Faq from './View/FaqView';
-import AgregarProductoComponent from './Components/AppComponent';
-import AdministradorLoginComponent from './Components/AdminLoginComponent';
 import AdministradorLogin from './View/AdministradorLoginView';
-import AdminComponent from './Components/AdministradorComponen';
 import Administrador from './View/AdministradorView';
-import AdminidtradorVerProductosComponent from './Components/AdminVerProductosComponent';
-import AdminidtradorVerProductos from './View/AdministradorVerProductosView';
 import EditarProducto from './View/EditarProductoView';
 import Contacto from './View/ContactanosView';
 import NotFound from './Components/NotFound';
 import ProductoDescripcion from './View/DescripcionProducto';
 import CarritoView from './View/CarritoView';
+import AgregarProductiView from './View/AgregarProductoView';
+import AdministrarProductos from './View/AdministradorVerProductosView';
 
 import { AuthProvider } from './Javascript/AuthContext';
 import { CartProvider } from './context/CartContext';
 
 function App() {
-  const encodedPath = AgregarProductoComponent();
-  const AdminLogin = AdministradorLoginComponent();
-  const Admin = AdminComponent();
-  const AdminVerProductos = AdminidtradorVerProductosComponent();
-
   useEffect(() => {
     axios.get(urlFerrushop)
       .then(() => {
@@ -63,10 +54,10 @@ function App() {
             <Route path="/producto/:id" element={<ProductoDescripcion />} />
             <Route path="/carrito" element={<CarritoView />} />
             <Route path="/contacto" element={<Contacto />} />
-            <Route path={`/${encodedPath}`} element={<AgregarProducto />} />
-            <Route path={`/${AdminLogin}`} element={<AdministradorLogin />} />
-            <Route path={`/${Admin}`} element={<Administrador />} />
-            <Route path={`/${AdminVerProductos}`} element={<AdminidtradorVerProductos />} />
+            <Route path={`/QWdyZWdhclByb2R1Y3Rv`} element={<AgregarProductiView />} />
+            <Route path={`/U29tZUNvbnRlbnQz`} element={<AdministradorLogin />} />
+            <Route path={`/UBKJASNnasjkn1212`} element={<Administrador />} />
+            <Route path={`/QWdyZYs1RU03AK`} element={<AdministrarProductos />} />
             <Route path="/editar-producto/:id" element={<EditarProducto />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

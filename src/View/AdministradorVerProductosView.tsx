@@ -1,66 +1,151 @@
+import React, { useEffect, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
-import '../Css/Login.css';
-import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import '../Css/Administrador.css';
-import Admin from '../Components/AdministradorComponen';
+import '../Css/AdministrarProductos.css';
 
-const AdminVerProductosView = () => {
-    const [products, setProducts] = useState<any[]>([]); // Estado para almacenar la lista de productos
-    const navigate = useNavigate(); // Hook de navegación para redirigir a diferentes rutas
-    const AdminView = Admin(); // Componente de vista del administrador
+interface ImageModel {
+    data: ArrayBuffer;
+    preview: string;
+}
 
-    // useEffect para cargar los productos cuando el componente se monta
+interface ProductModel {
+    id: number;
+    title: string;
+    category: string;
+    price: number;
+    description: string;
+    fullDescription: string;
+    details: string;
+    quantity: number;
+    images: ImageModel[];
+}
+
+function AdministrarProductos() {
+    const [products, setProducts] = useState<ProductModel[]>([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [showModal, setShowModal] = useState(false);
+    const [confirmInput, setConfirmInput] = useState('');
+    const [productIdToDelete, setProductIdToDelete] = useState<number | null>(null);
+    const navigate = useNavigate();
+
     useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await fetch('https://localhost:7271/api/Products');
+                if (response.ok) {
+                    const data = await response.json();
+                    setProducts(data);
+                } else {
+                    console.error('Error fetching products:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        };
+
         fetchProducts();
     }, []);
 
-    // Función para obtener los productos desde el servidor
-    const fetchProducts = async () => {
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(e.target.value);
+    };
+
+    const handleDelete = async () => {
+        if (confirmInput !== 'CONFIRMAR' || productIdToDelete === null) {
+            toast.error('Debes escribir CONFIRMAR para eliminar el producto');
+            return;
+        }
+
         try {
-            const response = await axios.get('https://localhost:7271/api/product');
-            setProducts(response.data.products); // Actualiza el estado con los productos obtenidos
+            const response = await fetch(`https://localhost:7271/api/Products/${productIdToDelete}`, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                setProducts(prevProducts => prevProducts.filter(product => product.id !== productIdToDelete));
+                toast.success('Producto eliminado exitosamente');
+                setShowModal(false);
+                setConfirmInput('');
+                setProductIdToDelete(null);
+            } else {
+                toast.error('Error al eliminar el producto');
+            }
         } catch (error) {
-            console.error('Error fetching products:', error);
+            console.error('Error:', error);
+            toast.error('Error al eliminar el producto');
         }
     };
 
-    // Función para manejar la edición de un producto
-    const handleEdit = (id: number) => {
-        navigate(`/editar-producto/${id}`); // Redirige a la página de edición del producto
+    const openModal = (id: number) => {
+        setProductIdToDelete(id);
+        setShowModal(true);
     };
 
-    // Función para manejar la eliminación de un producto
-    const handleDelete = async (id: number) => {
-        try {
-            await axios.delete(`https://localhost:7271/api/product/${id}`);
-            toast.success('Producto eliminado exitosamente'); // Muestra una notificación de éxito
-            fetchProducts(); // Vuelve a cargar la lista de productos
-        } catch (error) {
-            toast.error('Error eliminando el producto'); // Muestra una notificación de error
-        }
+    const closeModal = () => {
+        setShowModal(false);
+        setConfirmInput('');
+        setProductIdToDelete(null);
+    };
+
+    const filteredProducts = products.filter(product =>
+        product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.id.toString().includes(searchTerm)
+    );
+
+    const handleBack = () => {
+        navigate('/UBKJASNnasjkn1212');
     };
 
     return (
         <div className="admin-container">
-            <h1>Gestión de Productos</h1>
-            <Link to={`/${AdminView}`} className="admin-back-button">Regresar</Link> {/* Botón para regresar a la vista de administrador */}
-            <div className="product-list">
-                {products.map((product) => (
-                    <div key={product.id} className="product-card">
-                        <h3>{product.title}</h3>
-                        <p>{product.description}</p>
-                        <div className="product-buttons">
-                            <button className="edit-button" onClick={() => handleEdit(product.id)}>Editar</button> {/* Botón para editar el producto */}
-                            <button className="delete-button" onClick={() => handleDelete(product.id)}>Eliminar</button> {/* Botón para eliminar el producto */}
+            <ToastContainer />
+            <h2 className="admin-title">Administrar Productos</h2>
+            <button onClick={handleBack} className="admin-back-button">Regresar</button>
+
+            <input
+                type="text"
+                placeholder="Buscar por ID o nombre"
+                value={searchTerm}
+                onChange={handleSearchChange}
+                className="admin-search"
+            />
+            <div className="admin-card-container">
+                {filteredProducts.map(product => (
+                    <div className="admin-card" key={product.id}>
+                        <div className="admin-card-image">
+                            <img src={`data:image/png;base64,${product.images[0]?.data}`} alt={product.title} />
                         </div>
+                        <div className="admin-card-content">
+                            <h3 className="admin-card-title">{product.title}</h3>
+                            <p className="admin-card-category">{product.category}</p>
+                            <p className="admin-card-price">${product.price}</p>
+                            <p className="admin-card-description">{product.description}</p>
+                        </div>
+                        <button className="admin-card-delete-button" onClick={() => openModal(product.id)}>
+                            Eliminar
+                        </button>
                     </div>
                 ))}
             </div>
+            {showModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h3>Confirmar Eliminación</h3>
+                        <p>Escribe CONFIRMAR para eliminar el producto:</p>
+                        <input
+                            type="text"
+                            value={confirmInput}
+                            onChange={(e) => setConfirmInput(e.target.value)}
+                            className="modal-input"
+                        />
+                        <button onClick={handleDelete} className="modal-button">Eliminar</button>
+                        <button onClick={closeModal} className="modal-button modal-cancel-button">Cancelar</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
-};
+}
 
-export default AdminVerProductosView;
+export default AdministrarProductos;

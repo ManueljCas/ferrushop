@@ -1,173 +1,157 @@
-.contenedor-pantalla {
+/* Contenedor principal del formulario */
+.ap-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  width: 600px; /* Ajustar el ancho para que sea más estrecho */
+  margin: 50px auto;
+}
+
+/* Título del formulario */
+.ap-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+/* Subtítulo del formulario */
+.ap-subtitle {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #777;
+  text-align: center;
+}
+
+/* Mensaje de error */
+.ap-error {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Estilos para las etiquetas y los inputs */
+.ap-label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+  width: 100%;
+  text-align: left;
+}
+
+.ap-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+  font-size: 14px;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box; /* Asegura que el padding no expanda el input */
+}
+
+.ap-textarea {
+  height: 80px;
+  resize: none; /* Desactiva el redimensionamiento */
+}
+
+.ap-input-file {
+  display: none; /* Ocultar input de archivo original */
+}
+
+.ap-file-upload {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
-
-}
-
-.ContenedorAgregar h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.Imagenes-productos {
-  text-align: center;
-}
-
-.Imagenes-productos h2 {
-  margin-bottom: 10px;
-  color: #555;
-}
-
-.preview-image {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 10px;
   padding: 10px;
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-}
-
-.input-img-label {
-  display: inline-block;
-  width: 30%;
-  padding: 10px;
-  margin-top: 10px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  text-align: center;
+  border: 2px dashed #ccc;
+  background: #fafafa;
+  border-radius: 5px;
   cursor: pointer;
-}
-
-.input-img-label:hover {
-  background-color: #f0f0f0;
-}
-
-.input-img-label::before {
-  content: 'Agregar imágenes';
-}
-
-.input-img-label input[type="file"] {
-  display: none;
-}
-
-.input-img-label input[type="file"]:not(:empty) + span {
-  display: block;
-  margin-top: 5px;
-  font-size: 14px;
   color: #666;
-}
-
-.Segunda-seccion, .Tercera-seccion, .Cuarta-seccion{
-    display: flex;
-    font-size: 10px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.Segunda-seccion,
-.Tercera-seccion,
-.Cuarta-seccion {
   margin-bottom: 20px;
-}
-
-.Segunda-seccion h2,
-.Tercera-seccion h2,
-.Cuarta-seccion h2 {
-  margin-bottom: 10px;
-  color: #555;
-}
-
-.Segunda-seccion input,
-.Tercera-seccion input,
-.Cuarta-seccion input {
-  background-color: #EEEEEE;
-  width: 300px;
-  padding: 10px;
-  margin-top: 5px;
-  border-radius: 4px;
-  box-sizing: border-box;
+  margin-top: 10px;
+  width: 100%;
   text-align: center;
 }
 
-.ContenedorAgregar button {
-  display: block;
-  width: 100%;
-  padding: 15px;
-  background-color: #28a745;
-  color: #fff;
+.ap-file-upload:hover {
+  border-color: #007bff;
 }
 
-button:hover {
+/* Estilos para los botones */
+.ap-button {
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px; /* Añadir margen superior a los botones */
+}
+
+.ap-submit-button {
+  background-color: #28a745;
+  color: white;
+  margin-right: 10px;
+}
+
+.ap-submit-button:hover {
   background-color: #218838;
 }
 
-.Segunda-seccion .form-group, .Tercera-seccion .form-group{
-    flex-direction: column;
-    margin: 10px;
-    justify-content: center;
-    align-items: center;
+.ap-cancel-button {
+  background-color: #dc3545;
+  color: white;
 }
 
-.Cuarta-seccion .form-group {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 3px;
+.ap-cancel-button:hover {
+  background-color: #c82333;
 }
 
-.Segunda-seccion select,
-.Tercera-seccion select,
-.Cuarta-seccion select {
-  width: 300px;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  color: #7a7a7a;
-  text-align: center;
-  background-color: #EEEEEE;
+/* Contenedores para los diferentes grupos de campos */
+.ap-group {
+  display: grid;
+  gap: 20px;
+  width: 100%;
+  justify-items: center;
 }
 
-.Tercera-seccion input{
-    width: 300px;
-    height: 200px;
-    text-align: center;
+.ap-group-1 {
+  grid-template-columns: 1fr;
 }
 
-.Cuarta-seccion input{
-    width: 300px;
-    height: 200px;
-    text-align: center;
+.ap-group-3 {
+  grid-template-columns: repeat(3, 1fr);
 }
 
-.form-group .input-two{
-  height: 50px;
+.ap-group-2 {
+  grid-template-columns: repeat(2, 1fr);
 }
 
-@media screen and (max-width: 768px){
-    .Segunda-seccion{
-        flex-direction: column;
-        justify-content: center;
-        align-items:center;
-    }
-
-    .Tercera-seccion{
-        flex-direction: column;
-        justify-content: center;
-        align-items:center;
-    }
-
-    .Cuarta-seccion{
-        flex-direction: column;
-    }
+.ap-item {
+  width: 100%;
 }
 
+/* Estilos para la previsualización de imágenes */
+.ap-image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.ap-image-preview img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+}

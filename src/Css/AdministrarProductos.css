@@ -1,0 +1,164 @@
+.admin-container {
+    margin-top: 60px;
+    padding: 20px;
+    background: #f8f8f8;
+  }
+  
+  .admin-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .admin-search {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .admin-card-container {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  .admin-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s;
+    position: relative;
+  }
+  
+  .admin-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .admin-card-image img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .admin-card-content {
+    padding: 15px;
+  }
+  
+  .admin-card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .admin-card-category {
+    font-size: 14px;
+    color: #777;
+    margin: 5px 0;
+  }
+  
+  .admin-card-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #28a745;
+    margin: 5px 0;
+  }
+  
+  .admin-card-description {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .admin-card-delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .admin-card-delete-button:hover {
+    background-color: #c82333;
+  }
+  
+  .admin-back-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .admin-back-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Estilos para el modal */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  
+  .modal-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 0;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  .modal-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+  }
+  
+  .modal-button:hover {
+    opacity: 0.9;
+  }
+  
+  .modal-cancel-button {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .modal-cancel-button:hover {
+    background-color: #5a6268;
+  }
+  

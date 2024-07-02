@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import '../Css/Login.css';
-import Admin from '../Components/AdministradorComponen';
 
 const AdministradorLogin = () => {
   // Estado para almacenar el correo electrónico y la contraseña del usuario
@@ -13,7 +12,6 @@ const AdministradorLogin = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false); // Estado para manejar el indicador de carga
   const navigate = useNavigate(); // Hook de navegación para redirigir a diferentes rutas
-  const AdminView = Admin(); // Componente de vista del administrador
 
   // Manejador del evento de envío del formulario
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -42,7 +40,7 @@ const AdministradorLogin = () => {
           draggable: true,
           progress: undefined,
         });
-        navigate(`/${AdminView}`); // Redirige a la vista de administrador
+        navigate(`/UBKJASNnasjkn1212`); // Redirige a la vista de administrador
       } else {
         // Muestra un mensaje de error si las credenciales son incorrectas
         const errorData = await response.json();

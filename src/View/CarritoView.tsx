@@ -5,31 +5,36 @@ import Footer from './FooterView';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 
-const CarritoView = () => {
+const CarritoView: React.FC = () => {
   const { cart, clearCart } = useCart();
   const navigate = useNavigate();
 
   const handleCheckout = async () => {
-    const response = await fetch('https://localhost:7271/api/Carrito/checkout', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        total: cart.reduce((total, item) => total + item.price * item.quantity, 0),
-        items: cart.map(item => ({
-          productId: item.id,
-          quantity: item.quantity
-        }))
-      })
-    });
+    try {
+      const response = await fetch('https://localhost:7271/api/Carrito/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          total: cart.reduce((total, item) => total + item.price * item.quantity, 0),
+          items: cart.map(item => ({
+            productId: item.productId,
+            quantity: item.quantity,
+          })),
+        }),
+      });
 
-    if (response.ok) {
-      alert('Checkout successful!');
-      clearCart(); // Vaciar el carrito después del checkout
-    } else {
-      const errorMessage = await response.text();
-      alert(`Checkout failed: ${errorMessage}`);
+      if (response.ok) {
+        alert('Checkout successful!');
+        clearCart(); // Vaciar el carrito después del checkout
+      } else {
+        const errorMessage = await response.text();
+        alert(`Checkout failed: ${errorMessage}`);
+      }
+    } catch (error) {
+      console.error('Error during checkout:', error);
+      alert('Checkout failed: An unexpected error occurred.');
     }
   };
 
@@ -64,7 +69,7 @@ const CarritoView = () => {
                 </thead>
                 <tbody>
                   {cart.map(item => (
-                    <tr key={item.id}>
+                    <tr key={item.productId}>
                       <td>
                         <img src={`data:image/jpeg;base64,${item.image}`} alt="Producto" id='Carrito-img' />
                         <div>

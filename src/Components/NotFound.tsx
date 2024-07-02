@@ -8,7 +8,7 @@ const NotFound: React.FC = () => {
   const navigate = useNavigate();
 
   const handleContinueShopping = () => {
-    navigate('/Inicio'); // Redirige a la página de inicio
+    navigate('/'); // Redirige a la página de inicio
   };
 
   return (

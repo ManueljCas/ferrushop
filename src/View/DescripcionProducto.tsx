@@ -37,7 +37,11 @@ const ProductoDescripcion: React.FC = () => {
       } catch (error) {
         if (axios.isAxiosError(error)) {
           if (error.response) {
-            toast.error(`Error ${error.response.status}: ${error.response.data}`);
+            if (error.response.status === 404) {
+              toast.error('Producto no encontrado');
+            } else {
+              toast.error(`Error ${error.response.status}: ${error.response.data}`);
+            }
           } else if (error.request) {
             toast.error('No se recibió respuesta del servidor');
           } else {
@@ -64,19 +68,27 @@ const ProductoDescripcion: React.FC = () => {
     setSelectedImage('');
   };
 
-  const handleAddToCart = () => {
-    if (product) {
-      console.log('Adding product to cart:', product); // Debug message
-      addToCart({
-        id: product.id,
+  const handleAddToCart = async () => {
+    console.log('handleAddToCart called'); // Debug message
+    if (!product) {
+      console.error('Product not found!');
+      toast.error('Producto no encontrado');
+      return;
+    }
+
+    console.log('Adding product to cart:', product); // Debug message
+    try {
+      await addToCart({
+        productId: product.id,
         title: product.title,
         price: product.price,
         quantity: 1,
         image: product.images[0].data
       });
       toast.success('Producto agregado al carrito');
-    } else {
-      console.error('Product not found!'); // Debug message
+    } catch (error) {
+      toast.error('Error al agregar el producto al carrito');
+      console.error('Error:', error);
     }
   };
 
