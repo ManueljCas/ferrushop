@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../Css/Header.css';
 import { AiOutlineUser } from "react-icons/ai";
 import { IoCartOutline } from "react-icons/io5";
@@ -13,6 +13,7 @@ function Header() {
   const { isAuthenticated, logout } = useAuth();
   const { cart } = useCart();
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleLogout = () => {
     const confirmed = window.confirm('¿Estás seguro de que quieres cerrar sesión?');
@@ -28,6 +29,16 @@ function Header() {
         progress: undefined,
       });
       navigate('/');
+    }
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleSearchSubmit = () => {
+    if (searchTerm.trim() !== '') {
+      navigate(`/producto?search=${searchTerm}`);
     }
   };
 
@@ -66,8 +77,13 @@ function Header() {
           </Grid>
           <Grid item xs={12} sm={3}>
             <div className='buscador'>
-              <input type="text" placeholder="Buscar" />
-              <button><CiSearch /></button>
+              <input
+                type="text"
+                placeholder="Buscar"
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+              <button onClick={handleSearchSubmit}><CiSearch /></button>
             </div>
           </Grid>
         </Grid>

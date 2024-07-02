@@ -10,6 +10,7 @@ interface Product {
   description: string;
   fullDescription: string;
   details: string;
+  category: string; // Agregar esta línea para incluir la categoría
   quantity: number;
   images: { data: string }[]; // Asegúrate de que la propiedad 'images' esté definida
 }

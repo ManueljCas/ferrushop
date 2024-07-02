@@ -1,5 +1,5 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import '../Css/Producto.css';
 import Header from './HeaderView';
@@ -8,17 +8,16 @@ import Grid from '@material-ui/core/Grid';
 import { useProductos } from '../Components/ProductosComponent';
 
 const Producto: React.FC = () => {
-  const {
-    products,
-    hasMore,
-    setSelectedCategories,
-    setSelectedPrices,
-    handleChange,
-    handleShowMore,
-    handleApplyFilters,
-  } = useProductos();
-  
+  const { products } = useProductos();
+
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const searchTerm = searchParams.get('search') || '';
+
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedPrices, setSelectedPrices] = useState<string[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [visibleCount, setVisibleCount] = useState(5);
 
   const handleProductClick = (id: number) => {
     try {
@@ -27,6 +26,47 @@ const Producto: React.FC = () => {
       toast.error('Error al navegar a la descripción del producto');
       console.error('Navigation error:', error);
     }
+  };
+
+  const handleChangeCategories = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = e.target;
+    setSelectedCategories(prev =>
+      checked ? [...prev, value] : prev.filter(cat => cat !== value)
+    );
+  };
+
+  const handleChangePrices = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = e.target;
+    setSelectedPrices(prev =>
+      checked ? [...prev, value] : prev.filter(price => price !== value)
+    );
+  };
+
+  const applyFilters = () => {
+    const filtered = products.filter(product => {
+      const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(product.category);
+      const matchesPrice = selectedPrices.length === 0 || selectedPrices.some(priceRange => {
+        const [min, max] = priceRange.split('-').map(Number);
+        return product.price >= min && product.price <= max;
+      });
+      return matchesSearch && matchesCategory && matchesPrice;
+    });
+
+    setFilteredProducts(filtered);
+    setVisibleCount(5); // Reset visible count when applying new filters
+  };
+
+  useEffect(() => {
+    const filtered = products.filter(product => {
+      const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase());
+      return matchesSearch;
+    });
+    setFilteredProducts(filtered);
+  }, [products, searchTerm]);
+
+  const handleLoadMore = () => {
+    setVisibleCount(prevCount => prevCount + 5);
   };
 
   return (
@@ -45,7 +85,7 @@ const Producto: React.FC = () => {
                     type="checkbox"
                     id={`categoria${idx + 1}`}
                     value={cat}
-                    onChange={handleChange(setSelectedCategories)}
+                    onChange={handleChangeCategories}
                   />
                   <label htmlFor={`categoria${idx + 1}`}>{cat}</label>
                 </li>
@@ -57,18 +97,18 @@ const Producto: React.FC = () => {
                     type="checkbox"
                     id={`precio${idx + 1}`}
                     value={price}
-                    onChange={handleChange(setSelectedPrices)}
+                    onChange={handleChangePrices}
                   />
                   <label htmlFor={`precio${idx + 1}`}>{`$${price.split('-').join(' - $')}`}</label>
                 </li>
               ))}
             </ul>
-            <button onClick={handleApplyFilters}>Aplicar</button>
+            <button onClick={applyFilters}>Aplicar</button>
           </Grid>
 
           <Grid item xs={12} md={9} className="lista-productos">
             <Grid container spacing={3}>
-              {products.map((product) => (
+              {filteredProducts.slice(0, visibleCount).map((product) => (
                 <Grid item xs={12} key={product.id} onClick={() => handleProductClick(product.id)}>
                   <div className="producto-item">
                     {product.images && product.images[0] && product.images[0].data ? (
@@ -89,9 +129,9 @@ const Producto: React.FC = () => {
                 </Grid>
               ))}
             </Grid>
-            {hasMore && (
+            {visibleCount < filteredProducts.length && (
               <div className="show-more-container">
-                <button onClick={handleShowMore} className="show-more-button">Mostrar más</button>
+                <button onClick={handleLoadMore} className="show-more-button">Más productos</button>
               </div>
             )}
           </Grid>

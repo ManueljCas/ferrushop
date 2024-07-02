@@ -178,3 +178,27 @@
     padding: 0;
   }
 }
+
+/* Estilo para el contenedor del botón de mostrar más */
+.show-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Estilo para el botón de mostrar más */
+.show-more-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #FB2E86;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.show-more-button:hover {
+  background-color: #db1269;
+}
