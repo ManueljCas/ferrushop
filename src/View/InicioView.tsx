@@ -101,9 +101,9 @@ const InicioView: React.FC = () => {
 
     if (loading) {
         return (
-            <div className="inicio-loading-screen">
-                <div className="inicio-loading-spinner"></div>
-                <p className="inicio-loading-text">Cargando...</p>
+            <div className="producto-loading-screen">
+            <div className="producto-loading-spinner"></div>
+            <p className="producto-loading-text">Cargando...</p>
             </div>
         );
     }

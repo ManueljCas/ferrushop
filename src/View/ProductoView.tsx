@@ -10,6 +10,7 @@ import { useProductos } from '../Components/ProductosComponent';
 const Producto: React.FC = () => {
   const { products } = useProductos();
 
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const searchTerm = searchParams.get('search') || '';
@@ -18,6 +19,13 @@ const Producto: React.FC = () => {
   const [selectedPrices, setSelectedPrices] = useState<string[]>([]);
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [visibleCount, setVisibleCount] = useState(5);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 1000); // Simula una carga inicial
+    return () => clearTimeout(timeout);
+  }, []);
 
   const handleProductClick = (id: number) => {
     try {
@@ -68,6 +76,15 @@ const Producto: React.FC = () => {
   const handleLoadMore = () => {
     setVisibleCount(prevCount => prevCount + 5);
   };
+
+  if (loading) {
+    return (
+      <div className="producto-loading-screen">
+        <div className="producto-loading-spinner"></div>
+        <p className="producto-loading-text">Cargando...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="contenedor-principal">

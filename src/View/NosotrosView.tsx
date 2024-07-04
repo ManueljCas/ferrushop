@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './HeaderView';
 import Footer from './FooterView';
 import '../Css/Nosotros.css';
@@ -8,12 +8,43 @@ import Grid from '@material-ui/core/Grid';
 
 const Nosotros = () => {
   const { renderCards, currentTestimonial, testimonials } = NosotrosComponent();
+  const [loading, setLoading] = useState(true);
+
+  const loadImage = (src: string): Promise<void> => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => resolve();
+      img.onerror = () => resolve();
+    });
+  };
+
+  useEffect(() => {
+    const loadContent = async () => {
+      // Simula la carga de contenido
+      await new Promise((resolve) => setTimeout(resolve, 2000)); // Ajusta el tiempo según tus necesidades
+      await loadImage(NosotrosIMG);
+      await Promise.all(testimonials.map(testimonial => loadImage(testimonial.image)));
+      setLoading(false);
+    };
+
+    loadContent();
+  }, [testimonials]);
+
+  if (loading) {
+    return (
+      <div className="producto-loading-screen">
+        <div className="producto-loading-spinner"></div>
+        <p className="producto-loading-text">Cargando...</p>
+      </div>
+    );
+  }
 
   return (
     <div>
       <Header />
       <Grid container className="nosotros-container" spacing={4}>
-        <Grid item xs={12} md={6} >
+        <Grid item xs={12} md={6}>
           <img className="nosotros-img" src={NosotrosIMG} alt="Nosotros" />
         </Grid>
         <Grid item xs={12} md={6} className="nosotros-text">
@@ -33,7 +64,7 @@ const Nosotros = () => {
           <h1>¡Nuestro cliente dice!</h1>
           <div className="testimonial-container">
             <img src={testimonials[currentTestimonial].image} alt={`Testimonio ${currentTestimonial + 1}`} className="testimonial-img" />
-            <img src={testimonials[(currentTestimonial + 1) % testimonials.length].image} alt={`Testimonio ${currentTestimonial + 2}`} className="testimonial-img middle" style={{marginTop: '-20px'}} />
+            <img src={testimonials[(currentTestimonial + 1) % testimonials.length].image} alt={`Testimonio ${currentTestimonial + 2}`} className="testimonial-img middle" style={{ marginTop: '-20px' }} />
             <img src={testimonials[(currentTestimonial + 2) % testimonials.length].image} alt={`Testimonio ${currentTestimonial + 3}`} className="testimonial-img" />
           </div>
           <h2>{testimonials[currentTestimonial].name}</h2>

@@ -31,11 +31,23 @@ const ProductoDescripcion: React.FC = () => {
   const { addToCart } = useCart();
   const { userEmail } = useAuth(); // Obtener el estado de autenticación
 
+  const loadImage = (src: string): Promise<void> => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => resolve();
+      img.onerror = () => resolve();
+    });
+  };
+
   useEffect(() => {
     const fetchProductData = async () => {
       try {
         const response = await axios.get(`https://localhost:7271/api/Products/${id}`);
         setProduct(response.data);
+
+        // Cargar imágenes del producto
+        await Promise.all(response.data.images.map((image: { data: string }) => loadImage(`data:image/jpeg;base64,${image.data}`)));
       } catch (error) {
         if (axios.isAxiosError(error)) {
           if (error.response) {
@@ -103,8 +115,9 @@ const ProductoDescripcion: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="loading-spinner">
-        <div className="spinner"></div>
+      <div className="producto-loading-screen">
+        <div className="producto-loading-spinner"></div>
+        <p className="producto-loading-text">Cargando...</p>
       </div>
     );
   }
