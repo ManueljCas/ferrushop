@@ -19,6 +19,14 @@ interface ProductModel {
     images: ImageModel[];
 }
 
+const categories = [
+    'Herramientas de Mano',
+    'Herramientas Eléctricas',
+    'Material de Construcción',
+    'Fijaciones y Sujeciones',
+    'Pinturas y Acabados'
+];
+
 function AgregarProductiView() {
     const [product, setProduct] = useState<ProductModel>({
         title: '',
@@ -40,7 +48,7 @@ function AgregarProductiView() {
         };
     }, [product.images]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setProduct(prev => ({ ...prev, [name]: value }));
     };
@@ -82,6 +90,10 @@ function AgregarProductiView() {
     const validateForm = () => {
         if (!product.title || !product.category || !product.price || !product.description || !product.fullDescription || !product.details || !product.quantity) {
             toast.error('Todos los campos son obligatorios.');
+            return false;
+        }
+        if (product.category === '') {
+            toast.error('Debe seleccionar una categoría.');
             return false;
         }
         if (product.images.length !== 4) {
@@ -177,7 +189,12 @@ function AgregarProductiView() {
                     </div>
                     <div className="ap-item">
                         <label className="ap-label">Categoría:</label>
-                        <input className="ap-input" type="text" name="category" value={product.category} onChange={handleChange} maxLength={50} />
+                        <select className="ap-input" name="category" value={product.category} onChange={handleChange} required>
+                            <option value="">Seleccionar categoría</option>
+                            {categories.map((category, index) => (
+                                <option key={index} value={category}>{category}</option>
+                            ))}
+                        </select>
                     </div>
                     <div className="ap-item">
                         <label className="ap-label">Precio:</label>

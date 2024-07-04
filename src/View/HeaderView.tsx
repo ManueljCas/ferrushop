@@ -39,6 +39,7 @@ function Header() {
           className: 'logout-toast',
         });
         navigate('/');
+        window.location.reload(); // Recarga la página después de la navegación
       }
     });
   };
