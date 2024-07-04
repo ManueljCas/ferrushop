@@ -8,45 +8,48 @@
   width: 65%;
 }
 
-.total-carrito {
+.carrito-total {
   width: 30%;
   background: #f9f9f9;
   padding: 20px;
   border-radius: 10px;
+  flex-shrink: 0;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
-table {
+.carrito-tabla {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-th, td {
+.carrito-th, .carrito-td {
   text-align: left;
   padding: 10px;
   border-bottom: 1px solid #ddd;
 }
 
-th {
+.carrito-th {
   background-color: #f4f4f4;
 }
 
-#Carrito-img {
+.carrito-img {
   width: 80px;
   margin-right: 10px;
 }
 
-td div {
+.carrito-td div {
   display: inline-block;
   vertical-align: top;
 }
 
-.botones-carrito {
+.carrito-botones {
   display: flex;
   justify-content: space-between;
 }
 
-.agregar-mas, .eliminar-todo, .pagar {
+.carrito-agregar-mas, .carrito-eliminar-todo, .carrito-pagar {
   background-color: #ff69b4;
   color: white;
   border: none;
@@ -55,30 +58,30 @@ td div {
   border-radius: 5px;
 }
 
-.agregar-mas {
+.carrito-agregar-mas {
   background-color: #ff69b4;
 }
 
-.eliminar-todo {
+.carrito-eliminar-todo {
   background-color: #ff69b4;
 }
 
-.pagar {
+.carrito-pagar {
   background-color: #00cc66;
   width: 100%;
 }
 
-.totales {
+.carrito-totales {
   margin-bottom: 20px;
 }
 
-.totales p {
+.carrito-totales p {
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
 }
 
-.totales span {
+.carrito-totales span {
   font-weight: bold;
 }
 
@@ -117,7 +120,7 @@ td div {
   border: 2px dashed #ccc;
   margin: 20px 0;
   border-radius: 10px;
-  width: 100%;
+  width: 100%; /* Ancho completo */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -129,7 +132,7 @@ td div {
   color: #666;
 }
 
-.carrito-vacio .agregar-mas {
+.carrito-vacio .carrito-agregar-mas {
   margin-top: 20px;
   padding: 10px 20px;
   background-color: #ff69b4;
@@ -140,6 +143,6 @@ td div {
   font-size: 16px;
 }
 
-.carrito-vacio .agregar-mas:hover {
+.carrito-vacio .carrito-agregar-mas:hover {
   background-color: #bd226f;
 }

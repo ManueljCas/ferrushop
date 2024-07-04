@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import '../Css/Login.css';
 import { useAuth } from '../Javascript/AuthContext';
 
-const Login = () => {
+const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -37,7 +37,7 @@ const Login = () => {
           draggable: true,
           progress: undefined,
         });
-        login();
+        login(email); // Pasar el correo electrónico aquí
         navigate('/');
       } else {
         const errorData = await response.json();

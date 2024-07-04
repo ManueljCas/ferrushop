@@ -1,10 +1,10 @@
-.contenedor-detalles-producto {
+.producto-contenedor-detalles {
   display: flex;
   justify-content: center;
   margin: 20px;
 }
 
-.descripcion-producto {
+.producto-descripcion {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,24 +17,24 @@
   margin: auto; /* Centrar el contenedor */
 }
 
-.imagenes-producto {
+.producto-imagenes {
   display: flex;
   align-items: center;
 }
 
-.demas-imagenes {
+.producto-demas-imagenes {
   display: flex;
   flex-direction: column;
   margin-right: 20px;
   align-items: center;
 }
 
-.demas-imagenes img:hover {
+.producto-demas-imagenes img:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.demas-imagenes img {
+.producto-demas-imagenes img {
   width: 80px; /* Ajusta el tamaño de las imágenes pequeñas */
   height: 80px;
   margin-bottom: 10px;
@@ -45,7 +45,7 @@
   padding: 5px; /* Espacio interior para que el fondo sea visible */
 }
 
-.primera-imagen img {
+.producto-primera-imagen img {
   width: 250px; /* Ajusta el tamaño de la imagen principal */
   height: auto;
   border-radius: 8px; /* Bordes redondeados */
@@ -54,36 +54,36 @@
   padding: 10px; /* Espacio interior para que el fondo sea visible */
 }
 
-.primera-imagen img:hover {
+.producto-primera-imagen img:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.caracteristicas-descripcion {
+.producto-caracteristicas-descripcion {
   margin-left: 20px;
 }
 
-.caracteristicas-descripcion h1,
-.caracteristicas-descripcion h2,
-.caracteristicas-descripcion p {
+.producto-caracteristicas-descripcion h1,
+.producto-caracteristicas-descripcion h2,
+.producto-caracteristicas-descripcion p {
   margin: 10px 0;
 }
 
-.precio {
+.producto-precio {
   font-size: 1.5em;
   color: #333;
 }
 
-.precio span {
+.producto-precio span {
   color: #ff4081;
 }
 
-.caracteristicas-descripcion h2 span {
+.producto-caracteristicas-descripcion h2 span {
   font-weight: normal;
   color: #666;
 }
 
-.descripcion-producto button {
+.producto-descripcion button {
   background-color: #ff4081;
   color: white;
   border: none;
@@ -92,7 +92,7 @@
   cursor: pointer;
 }
 
-.contenedor-descripcion-productos {
+.producto-contenedor-descripcion {
   margin: 20px auto; /* Centramos el contenedor horizontalmente */
   background-color: #f9f9f9;
   padding: 20px;
@@ -100,29 +100,29 @@
   text-align: justify;
 }
 
-.contenedor-descripcion-productos h1,
-.contenedor-descripcion-productos h2,
-.contenedor-descripcion-productos p {
+.producto-contenedor-descripcion h1,
+.producto-contenedor-descripcion h2,
+.producto-contenedor-descripcion p {
   color: #151875;
   font-size: 20px;
   margin: 15px 100px;
 }
 
-.contenedor-descripcion-productos p{
+.producto-contenedor-descripcion p {
   color: #A9ACC6;
 }
 
-.Contenedor-comentarios {
+.producto-contenedor-comentarios {
   margin: 20px auto; /* Centramos el contenedor horizontalmente */
   max-width: 800px; /* Limitar el ancho del contenedor */
 }
 
-.Contenedor-comentarios h1{
+.producto-contenedor-comentarios h1 {
   text-align: center;
   margin: 20px;
 }
 
-.Todos-comentarios .comentario {
+.producto-todos-comentarios .producto-comentario {
   margin-bottom: 20px;
   padding: 10px;
   background-color: #fff;
@@ -130,26 +130,26 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.Todos-comentarios .comentario h2,
-.Todos-comentarios .comentario p,
-.Todos-comentarios .comentario span {
+.producto-todos-comentarios .producto-comentario h2,
+.producto-todos-comentarios .producto-comentario p,
+.producto-todos-comentarios .producto-comentario span {
   margin: 5px 0;
 }
 
-.Agregar-comentario {
+.producto-agregar-comentario {
   display: flex;
   align-items: center;
   margin-top: 10px;
 }
 
-.Agregar-comentario input {
+.producto-agregar-comentario input {
   flex: 1;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.Agregar-comentario button {
+.producto-agregar-comentario button {
   background-color: #ff4081;
   color: white;
   border: none;
@@ -159,13 +159,13 @@
   margin-left: 10px;
 }
 
-.modal {
+.producto-modal {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.modal-content {
+.producto-modal-content {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -178,7 +178,7 @@
   justify-content: center;
 }
 
-.imagen-grande {
+.producto-imagen-grande {
   max-width: 100%; /* Ajusta el tamaño máximo de las imágenes en el modal */
   max-height: 100%; /* Asegúrate de que las imágenes no se salgan del modal */
   border-radius: 8px;

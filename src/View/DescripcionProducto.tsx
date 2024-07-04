@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import '../Css/DescripcionProductos.css';
+import '../Css/DescripcionProductos.css'; // Cambia el nombre del archivo CSS para reflejar el cambio de clases
 import Header from './HeaderView';
 import Footer from './FooterView';
 import Grid from '@material-ui/core/Grid';
 import Modal from '@material-ui/core/Modal';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../Javascript/AuthContext'; // Importar el contexto de autenticación
 
 interface Product {
   id: number;
@@ -28,6 +29,7 @@ const ProductoDescripcion: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
   const { addToCart } = useCart();
+  const { userEmail } = useAuth(); // Obtener el estado de autenticación
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -69,21 +71,28 @@ const ProductoDescripcion: React.FC = () => {
   };
 
   const handleAddToCart = async () => {
-    console.log('handleAddToCart called'); // Debug message
     if (!product) {
-      console.error('Product not found!');
       toast.error('Producto no encontrado');
       return;
     }
 
-    console.log('Adding product to cart:', product); // Debug message
+    if (!userEmail) {
+      toast.error('Debes iniciar sesión para agregar productos al carrito');
+      setTimeout(() => {
+        toast.info('Haz clic aquí para iniciar sesión', {
+          onClick: () => (window.location.href = '/login'),
+          autoClose: false,
+        });
+      }, 500);
+      return;
+    }
+
     try {
       await addToCart({
         productId: product.id,
         title: product.title,
         price: product.price,
-        quantity: 1,
-        image: product.images[0].data
+        quantity: 1
       });
       toast.success('Producto agregado al carrito');
     } catch (error) {
@@ -108,37 +117,37 @@ const ProductoDescripcion: React.FC = () => {
     <div>
       <Header />
 
-      <div className="contenedor-detalles-producto">
+      <div className="producto-contenedor-detalles">
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} md={8}>
-            <div className="descripcion-producto">
-              <div className="imagenes-producto">
-                <div className="demas-imagenes">
+            <div className="producto-descripcion">
+              <div className="producto-imagenes">
+                <div className="producto-demas-imagenes">
                   {product.images.map((image, index) => (
                     <img 
                       key={index} 
                       src={`data:image/jpeg;base64,${image.data}`} 
                       alt={`Imagen ${index + 1}`} 
-                      className="imagen-pequena" 
+                      className="producto-imagen-pequena" 
                       onClick={() => handleOpen(`data:image/jpeg;base64,${image.data}`)} 
                     />
                   ))}
                 </div>
-                <div className="primera-imagen">
+                <div className="producto-primera-imagen">
                   <img 
                     src={`data:image/jpeg;base64,${product.images[0].data}`} 
                     alt="Imagen Principal" 
-                    className="imagen-principal" 
+                    className="producto-imagen-principal" 
                     onClick={() => handleOpen(`data:image/jpeg;base64,${product.images[0].data}`)} 
                   />
                 </div>
               </div>
               
-              <div className="caracteristicas-descripcion">
+              <div className="producto-caracteristicas-descripcion">
                 <h1>{product.title}</h1>
-                <p className="precio">Precio: <span>${product.price}</span></p>
+                <p className="producto-precio">Precio: <span>${product.price}</span></p>
                 <h2>Categoría: <span>{product.category}</span></h2>
-                <p className="descripcion">Descripción: {product.description}</p>
+                <p className="producto-descripcion-texto">Descripción: {product.description}</p>
                 <p>Cantidad: {product.quantity}</p>
                 <button onClick={handleAddToCart}>Comprar Ahora</button>
               </div>
@@ -152,14 +161,14 @@ const ProductoDescripcion: React.FC = () => {
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
-        className="modal"
+        className="producto-modal"
       >
-        <div className="modal-content">
-          <img src={selectedImage} alt="Imagen en grande" className="imagen-grande" />
+        <div className="producto-modal-content">
+          <img src={selectedImage} alt="Imagen en grande" className="producto-imagen-grande" />
         </div>
       </Modal>
 
-      <div className="contenedor-descripcion-productos">
+      <div className="producto-contenedor-descripcion">
         <h1>Descripción</h1>
         <h2>Resumen</h2>
         <p>{product.fullDescription}</p>

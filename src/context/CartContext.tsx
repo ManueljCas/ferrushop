@@ -6,7 +6,6 @@ interface CartItem {
   title: string;
   price: number;
   quantity: number;
-  image: string;
 }
 
 interface CartContextType {
@@ -19,19 +18,20 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const { user } = useAuth();
+  const { userEmail } = useAuth();
   const [cart, setCart] = useState<CartItem[]>([]);
 
   useEffect(() => {
-    if (user) {
+    if (userEmail) {
+      console.log('Fetching cart for userEmail:', userEmail);
       fetchCart();
     }
-  }, [user]);
+  }, [userEmail]);
 
   const fetchCart = async () => {
     try {
-      if (user) {
-        const response = await fetch(`https://localhost:7271/api/Cart/${user.email}`);
+      if (userEmail) {
+        const response = await fetch(`https://localhost:7271/api/Cart/${userEmail}`);
         if (!response.ok) throw new Error('Error fetching cart');
         const data = await response.json();
         setCart(data);
@@ -42,7 +42,13 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   };
 
   const addToCart = async (item: CartItem) => {
-    console.log('addToCart called with item:', item); // Debug message
+    if (!userEmail) {
+      console.error('User not logged in');
+      return;
+    }
+
+    console.log('Adding to cart with userEmail:', userEmail);
+
     if (item.quantity <= 0) {
       throw new Error('Cantidad debe ser mayor que cero');
     }
@@ -61,34 +67,34 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         newCart = [...cart, item];
       }
 
-      if (user) {
-        const response = await fetch(`https://localhost:7271/api/Cart/${user.email}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newCart),
-        });
+      const response = await fetch(`https://localhost:7271/api/Cart/${userEmail}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newCart),
+      });
 
-        if (!response.ok) throw new Error('Error updating cart');
-
-        const updatedCart = await response.json();
-        setCart(updatedCart); // Actualizar el estado local del carrito con la respuesta del servidor
-        console.log('Cart updated:', updatedCart);
-      } else {
-        setCart(newCart);
-        console.log('Cart updated locally:', newCart);
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Error updating cart: ${errorText}`);
       }
+
+      const updatedCart = await response.json().catch(() => {
+        console.warn('Response is not a valid JSON, returning newCart instead');
+        return newCart;
+      });
+      setCart(updatedCart);
     } catch (error) {
       console.error('Error updating cart:', error);
-      throw error; // Re-lanzar el error para manejarlo en el componente
+      throw error;
     }
   };
 
   const clearCart = async () => {
     try {
-      if (user) {
-        const response = await fetch(`https://localhost:7271/api/Cart/${user.email}`, {
+      if (userEmail) {
+        const response = await fetch(`https://localhost:7271/api/Cart/${userEmail}`, {
           method: 'DELETE',
         });
         if (!response.ok) throw new Error('Error clearing cart');
