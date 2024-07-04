@@ -9,6 +9,7 @@ const CarritoView: React.FC = () => {
   const { cart, clearCart } = useCart();
   const { userEmail } = useAuth(); // Obtener el estado de autenticación
   const [products, setProducts] = useState<Map<number, string>>(new Map());
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -19,6 +20,7 @@ const CarritoView: React.FC = () => {
         productMap.set(item.productId, `data:image/jpeg;base64,${data.images[0].data}`);
       }
       setProducts(productMap);
+      setLoading(false);
     };
 
     fetchProducts();
@@ -31,6 +33,15 @@ const CarritoView: React.FC = () => {
   const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
   const iva = subtotal * 0.14;
   const total = subtotal + iva;
+
+  if (loading) {
+    return (
+      <div className="producto-loading-screen">
+        <div className="producto-loading-spinner"></div>
+        <p className="producto-loading-text">Cargando...</p>
+      </div>
+    );
+  }
 
   return (
     <div>

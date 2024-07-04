@@ -22,7 +22,7 @@ const Nosotros = () => {
   useEffect(() => {
     const loadContent = async () => {
       // Simula la carga de contenido
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // Ajusta el tiempo según tus necesidades
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Ajusta el tiempo según tus necesidades
       await loadImage(NosotrosIMG);
       await Promise.all(testimonials.map(testimonial => loadImage(testimonial.image)));
       setLoading(false);

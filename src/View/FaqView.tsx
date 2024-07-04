@@ -1,5 +1,4 @@
-// src/Views/FAQ.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './HeaderView';
 import Footer from './FooterView';
 import '../Css/Faq.css';
@@ -10,6 +9,14 @@ const FAQ: React.FC = () => {
     const [name, setName] = useState('');
     const [message, setMessage] = useState('');
     const [status, setStatus] = useState('');
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setLoading(false);
+        }, 1000); // Simula una carga inicial
+        return () => clearTimeout(timeout);
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -28,11 +35,19 @@ const FAQ: React.FC = () => {
         }
     };
 
+    if (loading) {
+        return (
+            <div className="producto-loading-screen">
+                <div className="producto-loading-spinner"></div>
+                <p className="producto-loading-text">Cargando...</p>
+            </div>
+        );
+    }
+
     return (
         <div>
             <Header />
             <div className="faq-container">
-               
                 <div className="faq-text">
                     <h1>Preguntas Frecuentes</h1>
                     <p>Encuentra respuestas a las preguntas más comunes sobre nuestra ferretería, productos y servicios. Si no encuentras lo que buscas, no dudes en contactarnos.</p>

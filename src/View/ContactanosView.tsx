@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './HeaderView';
 import Footer from './FooterView';
 import '../Css/Contactanos.css';
@@ -10,6 +10,24 @@ import Rosa from '../IMG/Rosa.png';
 import Verde from '../IMG/Verde.png';
 
 function Contacto() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 1000); // Simula una carga inicial
+    return () => clearTimeout(timeout);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="producto-loading-screen">
+        <div className="producto-loading-spinner"></div>
+        <p className="producto-loading-text">Cargando...</p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Header />
