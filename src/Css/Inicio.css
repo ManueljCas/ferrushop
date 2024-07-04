@@ -1,11 +1,11 @@
 /* src/Css/Inicio.css */
 
-/* Estilos para el primer carrusel */
-.contenedor-principal{
+.inicio-contenedor-principal {
   width: 100%;
   overflow: hidden;
 }
-.carousel {
+
+.inicio-carousel {
   position: relative;
   width: 100%;
   height: 90vh;
@@ -13,7 +13,7 @@
   animation: fadeInOut 6s infinite;
 }
 
-.carousel img {
+.inicio-carousel img {
   position: absolute;
   top: 0;
   left: 0;
@@ -22,12 +22,12 @@
   object-fit: cover;
 }
 
-.cards-productos{
+.inicio-cards-productos {
   text-align: center;
   margin: 20px;
 }
 
-.carousel-content {
+.inicio-carousel-content {
   width: 400px;
   position: absolute;
   top: 45%;
@@ -37,17 +37,17 @@
   text-align: left;
 }
 
-.carousel-content h2 {
+.inicio-carousel-content h2 {
   font-size: 24px;
   margin-bottom: 10px;
 }
 
-.carousel-content p {
+.inicio-carousel-content p {
   font-size: 16px;
   margin-bottom: 20px;
 }
 
-.buy-button {
+.inicio-buy-button {
   display: inline-block;
   padding: 10px 20px;
   background-color: #FB2E86;
@@ -57,12 +57,12 @@
   transition: background-color 0.3s ease;
 }
 
-.buy-button:hover {
+.inicio-buy-button:hover {
   background-color: #c81261;
 }
 
-.prev-button,
-.next-button {
+.inicio-prev-button,
+.inicio-next-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -74,20 +74,19 @@
   transition: background-color 0.3s ease;
 }
 
-.prev-button:hover,
-.next-button:hover {
+.inicio-prev-button:hover,
+.inicio-next-button:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-.prev-button {
+.inicio-prev-button {
   left: 10px;
 }
 
-.next-button {
+.inicio-next-button {
   right: 10px;
 }
 
-/* Animación para el primer carrusel */
 @keyframes fadeInOut {
   0% { opacity: 0; }
   25% { opacity: 1; }
@@ -95,8 +94,7 @@
   100% { opacity: 0; }
 }
 
-/* Estilos para el segundo carrusel */
-.new-carousel {
+.inicio-new-carousel {
   position: relative;
   width: 90%;
   overflow: hidden;
@@ -104,19 +102,19 @@
   margin: 0 auto;
 }
 
-.new-carousel-inner {
+.inicio-new-carousel-inner {
   display: flex;
   transition: transform 0.5s ease-in-out;
   position: relative;
 }
 
-.new-carousel-item {
-  flex: 0 0 25%; /* Mostrar 4 items por pantalla */
+.inicio-new-carousel-item {
+  flex: 0 0 25%;
   box-sizing: border-box;
   padding: 10px;
 }
 
-.contenedor-imagenes-carrucel {
+.inicio-contenedor-imagenes-carrucel {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -124,15 +122,15 @@
   background-color: #F6F7FB;
 }
 
-.new-carousel-content {
+.inicio-new-carousel-content {
   background-color: white;
   text-align: center;
 }
 
-.new-carousel-button {
+.inicio-new-carousel-button {
   position: absolute;
-  bottom: 10px; /* Ajustar la posición desde la parte inferior */
-  width: 50px; /* Ajustar el ancho si es necesario */
+  bottom: 10px;
+  width: 50px;
   color: rgb(0, 0, 0);
   border-color: rgba(0, 0, 0, 0.06);
   padding: 10px;
@@ -141,56 +139,53 @@
   border-radius: 10px;
 }
 
-.new-carousel-button:hover {
+.inicio-new-carousel-button:hover {
   background-color: #0000002f;
   border-radius: 10px;
 }
 
-.new-carousel-button.prev {
-  left: 5px; /* Ajustar la posición desde la izquierda */
+.inicio-new-carousel-button.prev {
+  left: 5px;
 }
 
-.new-carousel-button.next {
-  right: 10px; /* Ajustar la posición desde la derecha */
+.inicio-new-carousel-button.next {
+  right: 10px;
 }
 
-.productos-recientes{
+.inicio-productos-recientes {
   text-align: center;
   padding: 20px;
 }
 
-.secciones-productos {
+.inicio-secciones-productos {
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
 }
 
-
-.secciones-productos .titulo-seccion {
+.inicio-secciones-productos .inicio-titulo-seccion {
   font-size: 10px;
   padding: 10px;
 }
 
-.secciones-productos .titulo-seccion:hover {
+.inicio-secciones-productos .inicio-titulo-seccion:hover {
   text-decoration: underline;
   cursor: pointer;
   color: #c81261;
 }
 
-
-.productos-container {
+.inicio-productos-container {
   display: flex;
   justify-content: center;
 }
 
-.productos-container .producto {
-    margin: 10px;
-    background-color: #F7F7F7;
+.inicio-productos-container .inicio-producto {
+  margin: 10px;
+  background-color: #F7F7F7;
 }
 
-/* Estilos para el contenedor del producto */
-.contenedor-producto {
+.inicio-contenedor-producto {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -200,56 +195,55 @@
   background-color: #f9f9f9;
 }
 
-.producto {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra el contenido horizontalmente */
-    justify-content: center;
-    background-color: white;
-    border-radius: 10px;
-  }
-  
-.producto-imagen-inicio {
-    height: auto;
-    margin: 0 auto;
-    display: block;
-  }
+.inicio-producto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 10px;
+}
 
-  .producto-imagen-inicio-dos{
-    height: auto;
-    margin: 0 auto;
-    display: block;
-    width: 250px;
-  }
+.inicio-producto-imagen-inicio {
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
 
-.producto-contenido {
+.inicio-producto-imagen-inicio-dos {
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  width: 250px;
+}
+
+.inicio-producto-contenido {
   max-width: 500px;
 }
 
-
-.producto-info{
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: white;
+.inicio-producto-info {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: white;
 }
 
-.producto-contenido h2 {
+.inicio-producto-contenido h2 {
   font-size: 24px;
   margin-bottom: 10px;
 }
 
-.producto-contenido ul {
+.inicio-producto-contenido ul {
   list-style-type: none;
   padding: 0;
 }
 
-.producto-contenido li {
+.inicio-producto-contenido li {
   font-size: 16px;
   margin-bottom: 5px;
 }
 
-.producto-contenido .buy-button {
+.inicio-producto-contenido .inicio-buy-button {
   display: inline-block;
   padding: 10px 20px;
   background-color: #FB2E86;
@@ -260,33 +254,32 @@
   margin-top: 10px;
 }
 
-.producto-contenido .buy-button:hover {
+.inicio-producto-contenido .inicio-buy-button:hover {
   background-color: #c81261;
 }
 
-.producto-contenido .price {
+.inicio-producto-contenido .inicio-price {
   font-size: 20px;
   font-weight: bold;
   color: #333;
   margin-top: 10px;
 }
 
-/* Estilos para Productos de tendencia */
-.trend-products {
+.inicio-trend-products {
   justify-content: center;
   align-items: center;
   text-align: center;
   margin: 50px 0;
 }
 
-.trend-products-container {
+.inicio-trend-products-container {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.trend-product {
+.inicio-trend-product {
   margin: 10px;
   padding: 10px;
   border: 1px solid #ddd;
@@ -296,56 +289,55 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.trend-product-image-wrapper {
+.inicio-trend-product-image-wrapper {
   background-color: #F5F6F8;
   padding: 20px;
 }
 
-.trend-product .trend-product-image {
-  width: 150px; /* Ajusta según sea necesario */
+.inicio-trend-product .inicio-trend-product-image {
+  width: 150px;
   height: auto;
 }
 
-.trend-product .producto-info {
+.inicio-trend-product .inicio-producto-info {
   margin-top: 10px;
 }
 
-.trend-product .product-name {
+.inicio-trend-product .inicio-product-name {
   font-size: 16px;
   font-weight: bold;
-  color: #151875; /* Ajusta el color según sea necesario */
+  color: #151875;
   margin: 10px 0;
 }
 
-.trend-product .product-price {
+.inicio-trend-product .inicio-product-price {
   font-size: 14px;
   color: #151875;
 }
 
-.trend-product .product-price .price-old {
+.inicio-trend-product .inicio-product-price .inicio-price-old {
   text-decoration: line-through;
   color: #999;
   margin-left: 10px;
 }
 
-/* Estilos para la sección de productos con descuento */
-.contenedor-descuento {
+.inicio-contenedor-descuento {
   text-align: center;
   padding: 40px 20px;
   background-color: #f9f9f9;
 }
 
-.contenedor-descuento h1 {
+.inicio-contenedor-descuento h1 {
   font-size: 32px;
   color: #2A2A2A;
   margin-bottom: 20px;
 }
 
-.navegacion-productos {
+.inicio-navegacion-productos {
   margin-bottom: 20px;
 }
 
-.navegacion-productos a {
+.inicio-navegacion-productos a {
   font-size: 16px;
   color: #151875;
   text-decoration: none;
@@ -353,7 +345,7 @@
   position: relative;
 }
 
-.navegacion-productos a.activo::after {
+.inicio-navegacion-productos a.activo::after {
   content: ' ';
   display: block;
   width: 100%;
@@ -364,175 +356,159 @@
   left: 0;
 }
 
-.producto-descuento {
+.inicio-producto-descuento {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  flex-wrap: wrap; /* Asegura que los elementos se ajusten en pantallas pequeñas */
+  flex-wrap: wrap;
 }
 
-.info-descuento {
+.inicio-info-descuento {
   max-width: 500px;
   margin-right: 20px;
   text-align: center;
-  flex: 1; /* Permite que el contenido se ajuste */
+  flex: 1;
 }
 
-.info-descuento h2 {
+.inicio-info-descuento h2 {
   font-size: 28px;
   color: #2A2A2A;
   margin-bottom: 10px;
 }
 
-.info-descuento h3 {
+.inicio-info-descuento h3 {
   font-size: 24px;
   color: #FB2E86;
   margin-bottom: 10px;
 }
 
-.info-descuento p {
+.inicio-info-descuento p {
   font-size: 16px;
   color: #2A2A2A;
   margin-bottom: 20px;
 }
 
-.info-descuento ul {
+.inicio-info-descuento ul {
   list-style-type: none;
   padding: 0;
   margin-bottom: 20px;
 }
 
-.info-descuento li {
+.inicio-info-descuento li {
   font-size: 16px;
   color: #2A2A2A;
   margin-bottom: 5px;
 }
 
-.imagen-descuento {
+.inicio-imagen-descuento {
   max-width: 450px;
   height: auto;
-  flex: 1; /* Permite que la imagen se ajuste */
+  flex: 1;
   display: flex;
   justify-content: center;
 }
 
-.imagen-descuento img {
+.inicio-imagen-descuento img {
   max-width: 100%;
   height: auto;
 }
 
-.buy-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #FB2E86;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.buy-button:hover {
-  background-color: #c81261;
-}
-
-/* Estilos para Categorías principales */
-.categorias-principales {
-    text-align: center;
-    padding: 40px 20px;
-    background-color: #fff;
-  }
-  
-  .categorias-principales h1 {
-    font-size: 32px;
-    color: #2A2A2A;
-    margin-bottom: 20px;
-  }
-  
-  .categorias-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  
-  .categoria-item {
-    margin: 10px;
-    border: 1px solid #ddd;
-    background-color: #9877E7;
-    text-align: center;
-    width: 200px;
-    border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .categoria-imagen-wrapper {
-    margin-left: 10px;
-    background-color: #F5F6F8;
-    padding: 20px;
-    border-radius: 50%;
-  }
-  
-  .categoria-imagen {
-    width: 100px; /* Ajusta según sea necesario */
-    height: auto;
-  }
-  
-  .categoria-info {
-    margin-top: 10px;
-  }
-  
-  .categoria-nombre {
-    font-size: 16px;
-    font-weight: bold;
-    color: #151875; /* Ajusta el color según sea necesario */
-    margin: 10px 0;
-  }
-  
-  .categoria-precio {
-    font-size: 14px;
-    color: #151875;
-  }
-  
-  .categorias-paginacion {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .categorias-paginacion span {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: #ddd;
-    border-radius: 50%;
-    margin: 0 5px;
-    cursor: pointer;
-  }
-  
-  .categorias-paginacion .paginacion-activa {
-    background-color: #FB2E86;
-  }
-
-/* Estilos para productos recomendados */
-.productos-recomendados {
+.inicio-categorias-principales {
   text-align: center;
   padding: 40px 20px;
   background-color: #fff;
 }
 
-.productos-recomendados h1 {
+.inicio-categorias-principales h1 {
   font-size: 32px;
   color: #2A2A2A;
   margin-bottom: 20px;
 }
 
-.productos-recomendados-container {
+.inicio-categorias-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.producto-recomendado {
+.inicio-categoria-item {
+  margin: 10px;
+  border: 1px solid #ddd;
+  background-color: #9877E7;
+  text-align: center;
+  width: 200px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.inicio-categoria-imagen-wrapper {
+  margin-left: 10px;
+  background-color: #F5F6F8;
+  padding: 20px;
+  border-radius: 50%;
+}
+
+.inicio-categoria-imagen {
+  width: 100px;
+  height: auto;
+}
+
+.inicio-categoria-info {
+  margin-top: 10px;
+}
+
+.inicio-categoria-nombre {
+  font-size: 16px;
+  font-weight: bold;
+  color: #151875;
+  margin: 10px 0;
+}
+
+.inicio-categoria-precio {
+  font-size: 14px;
+  color: #151875;
+}
+
+.inicio-categorias-paginacion {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.inicio-categorias-paginacion span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.inicio-categorias-paginacion .inicio-paginacion-activa {
+  background-color: #FB2E86;
+}
+
+.inicio-productos-recomendados {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #fff;
+}
+
+.inicio-productos-recomendados h1 {
+  font-size: 32px;
+  color: #2A2A2A;
+  margin-bottom: 20px;
+}
+
+.inicio-productos-recomendados-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.inicio-producto-recomendado {
   margin: 10px;
   padding: 10px;
   border: 1px solid #ddd;
@@ -542,52 +518,51 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.producto-recomendado-imagen-wrapper {
+.inicio-producto-recomendado-imagen-wrapper {
   background-color: #F5F6F8;
   padding: 20px;
 }
 
-.producto-recomendado .producto-recomendado-imagen {
-  width: 150px; /* Ajusta según sea necesario */
+.inicio-producto-recomendado .inicio-producto-recomendado-imagen {
+  width: 150px;
   height: auto;
 }
 
-.producto-recomendado .producto-info {
+.inicio-producto-recomendado .inicio-producto-info {
   margin-top: 10px;
 }
 
-.producto-recomendado .product-name {
+.inicio-producto-recomendado .inicio-product-name {
   font-size: 16px;
   font-weight: bold;
-  color: #151875; /* Ajusta el color según sea necesario */
+  color: #151875;
   margin: 10px 0;
 }
 
-.producto-recomendado .product-price {
+.inicio-producto-recomendado .inicio-product-price {
   font-size: 14px;
   color: #151875;
 }
 
-.producto-recomendado .product-price .price-old {
+.inicio-producto-recomendado .inicio-product-price .inicio-price-old {
   text-decoration: line-through;
   color: #999;
   margin-left: 10px;
 }
 
-/* Estilos para sección "Seguir viendo" */
-.contenedor-fondo {
+.inicio-contenedor-fondo {
   position: relative;
   text-align: center;
   color: white;
 }
 
-.fondo-imagen {
+.inicio-fondo-imagen {
   width: 100%;
   height: auto;
   display: block;
 }
 
-.fondo-texto {
+.inicio-fondo-texto {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -595,12 +570,12 @@
   color: #2A2A2A;
 }
 
-.fondo-texto h1 {
+.inicio-fondo-texto h1 {
   font-size: 24px;
   margin-bottom: 20px;
 }
 
-.fondo-boton {
+.inicio-fondo-boton {
   display: inline-block;
   padding: 10px 20px;
   background-color: #FB2E86;
@@ -610,24 +585,22 @@
   transition: background-color 0.3s ease;
 }
 
-.fondo-boton:hover {
+.inicio-fondo-boton:hover {
   background-color: #c81261;
 }
 
-/* Estilos para empresas colaboradoras */
-.Contenedor-empresas {
+.inicio-contenedor-empresas {
   text-align: center;
   padding: 40px 20px;
   background-color: #f9f9f9;
 }
 
-.imagen-empresas {
+.inicio-imagen-empresas {
   width: 100%;
   height: auto;
   display: block;
 }
 
-/* Ajustes generales */
 body {
   font-family: 'Arial', sans-serif;
   line-height: 1.6;
@@ -659,4 +632,38 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.inicio-contenedor-imagenes-carrucel-img{
+  width: 100%;
+}
+
+/* Pantalla de carga */
+.inicio-loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fff;
+  flex-direction: column;
+}
+
+.inicio-loading-spinner {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.inicio-loading-text {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #3498db;
 }
