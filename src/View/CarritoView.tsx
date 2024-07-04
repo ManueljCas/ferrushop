@@ -49,7 +49,7 @@ const CarritoView: React.FC = () => {
       <div className="carrito-container">
         {cart.length === 0 ? (
           <div className="carrito-vacio">
-            <p>{userEmail ? 'Tu carrito está vacío' : 'Inicia sesión para agregar producto'}</p>
+            <p>{userEmail ? 'Tu carrito está vacío' : 'Inicia sesión para agregar un producto'}</p>
             <button className="carrito-agregar-mas" onClick={() => window.location.href = userEmail ? "/producto" : "/login"}>
               {userEmail ? 'Agregar' : 'Iniciar sesión'}
             </button>
