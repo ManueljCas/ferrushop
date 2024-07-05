@@ -22,12 +22,13 @@
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .carrito-th, .carrito-td {
-  text-align: left;
   padding: 10px;
   border-bottom: 1px solid #ddd;
+  text-align: center; /* Centra el texto en las celdas */
 }
 
 .carrito-th {

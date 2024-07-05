@@ -74,9 +74,9 @@ const CarritoView: React.FC = () => {
                         <img src={products.get(item.productId)} alt="Producto" className="carrito-img" />
                       </td>
                       <td className="carrito-td">{item.title}</td>
-                      <td className="carrito-td">${item.price.toFixed(2)}</td>
+                      <td className="carrito-td precio">{item.price.toFixed(2)}</td>
                       <td className="carrito-td">{item.quantity}</td>
-                      <td className="carrito-td">${(item.price * item.quantity).toFixed(2)}</td>
+                      <td className="carrito-td total">{(item.price * item.quantity).toFixed(2)}</td>
                     </tr>
                   ))}
                 </tbody>

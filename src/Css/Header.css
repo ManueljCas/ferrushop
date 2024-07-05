@@ -1,3 +1,20 @@
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: top 0.3s;
+  background-color: white; /* Asegúrate de tener un fondo para que no se superponga al contenido */
+}
+
+.header.hidden {
+  top: -100px;
+}
+
+.header.visible {
+  top: 0;
+}
+
 .header-container-custom {
   display: flex;
   flex-wrap: wrap;
