@@ -4,12 +4,14 @@ import { useAuth } from '../Javascript/AuthContext'; // Importar el contexto de 
 import '../Css/Carrito.css';
 import Header from './HeaderView';
 import Footer from './FooterView';
+import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 
 const CarritoView: React.FC = () => {
-  const { cart, clearCart } = useCart();
+  const { cart, clearCart, setTotals } = useCart();
   const { userEmail } = useAuth(); // Obtener el estado de autenticación
   const [products, setProducts] = useState<Map<number, string>>(new Map());
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); // Usar useNavigate para la redirección
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -30,9 +32,17 @@ const CarritoView: React.FC = () => {
     await clearCart();
   };
 
+  const handlePagar = () => {
+    navigate('/pasareladepago'); // Redirigir a la pasarela de pago
+  };
+
   const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
   const iva = subtotal * 0.14;
   const total = subtotal + iva;
+
+  useEffect(() => {
+    setTotals(subtotal, iva, total);
+  }, [subtotal, iva, total, setTotals]);
 
   if (loading) {
     return (
@@ -92,7 +102,7 @@ const CarritoView: React.FC = () => {
                 <p><span>IVA:</span> ${iva.toFixed(2)}</p>
                 <p><span>Total:</span> ${total.toFixed(2)}</p>
               </div>
-              <button className="carrito-pagar" disabled={cart.length === 0}>Pagar</button>
+              <button className="carrito-pagar" onClick={handlePagar} disabled={cart.length === 0}>Pagar</button>
             </div>
           </>
         )}

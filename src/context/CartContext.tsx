@@ -13,6 +13,10 @@ interface CartContextType {
   addToCart: (item: CartItem) => Promise<void>;
   clearCart: () => void;
   fetchCart: () => void;
+  subtotal: number;
+  iva: number;
+  total: number;
+  setTotals: (subtotal: number, iva: number, total: number) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -20,10 +24,12 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { userEmail } = useAuth();
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [subtotal, setSubtotal] = useState<number>(0);
+  const [iva, setIva] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
 
   useEffect(() => {
     if (userEmail) {
-      console.log('Fetching cart for userEmail:', userEmail);
       fetchCart();
     }
   }, [userEmail]);
@@ -35,6 +41,7 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         if (!response.ok) throw new Error('Error fetching cart');
         const data = await response.json();
         setCart(data);
+        calculateAndSetTotals(data);
       }
     } catch (error) {
       console.error('Error fetching cart:', error);
@@ -46,8 +53,6 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       console.error('User not logged in');
       return;
     }
-
-    console.log('Adding to cart with userEmail:', userEmail);
 
     if (item.quantity <= 0) {
       throw new Error('Cantidad debe ser mayor que cero');
@@ -85,6 +90,7 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         return newCart;
       });
       setCart(updatedCart);
+      calculateAndSetTotals(updatedCart);
     } catch (error) {
       console.error('Error updating cart:', error);
       throw error;
@@ -99,16 +105,47 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         });
         if (!response.ok) throw new Error('Error clearing cart');
         setCart([]);
+        setSubtotal(0);
+        setIva(0);
+        setTotal(0);
+        localStorage.removeItem('subtotal');
+        localStorage.removeItem('iva');
+        localStorage.removeItem('total');
       } else {
         setCart([]);
+        setSubtotal(0);
+        setIva(0);
+        setTotal(0);
+        localStorage.removeItem('subtotal');
+        localStorage.removeItem('iva');
+        localStorage.removeItem('total');
       }
     } catch (error) {
       console.error('Error clearing cart:', error);
     }
   };
 
+  const calculateAndSetTotals = (cart: CartItem[]) => {
+    const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    const iva = subtotal * 0.14;
+    const total = subtotal + iva;
+    console.log('Calculando Totales - Subtotal:', subtotal, 'IVA:', iva, 'Total:', total);
+    setSubtotal(subtotal);
+    setIva(iva);
+    setTotal(total);
+    localStorage.setItem('subtotal', subtotal.toString());
+    localStorage.setItem('iva', iva.toString());
+    localStorage.setItem('total', total.toString());
+  };
+
+  const setTotals = (subtotal: number, iva: number, total: number) => {
+    setSubtotal(subtotal);
+    setIva(iva);
+    setTotal(total);
+  };
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, clearCart, fetchCart }}>
+    <CartContext.Provider value={{ cart, addToCart, clearCart, fetchCart, subtotal, iva, total, setTotals }}>
       {children}
     </CartContext.Provider>
   );
