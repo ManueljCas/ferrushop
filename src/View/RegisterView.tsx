@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { toast } from 'react-toastify';
@@ -13,7 +13,28 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [isPageLoading, setIsPageLoading] = useState(true);
   const navigate = useNavigate();
+
+  const loadImage = (src: string): Promise<void> => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => resolve();
+      img.onerror = () => resolve();
+    });
+  };
+
+  useEffect(() => {
+    const loadContent = async () => {
+      await Promise.all([
+        loadImage('../IMG/Ferreteria.jpg'),
+      ]);
+      setIsPageLoading(false);
+    };
+
+    loadContent();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -125,6 +146,15 @@ const Register = () => {
   const onCaptchaChange = (token: string | null) => {
     setCaptchaToken(token);
   };
+
+  if (isPageLoading) {
+    return (
+      <div className="producto-loading-screen">
+        <div className="producto-loading-spinner"></div>
+        <p className="producto-loading-text">Cargando...</p>
+      </div>
+    );
+  }
 
   return (
     <div className='bodyy'>
