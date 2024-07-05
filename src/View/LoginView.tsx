@@ -6,16 +6,32 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import '../Css/Login.css';
 import { useAuth } from '../Javascript/AuthContext';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const navigate = useNavigate();
   const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!captchaToken) {
+      toast.error('Por favor, completa el reCAPTCHA.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -24,7 +40,7 @@ const Login: React.FC = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password, captchaToken })
       });
 
       if (response.ok) {
@@ -66,6 +82,10 @@ const Login: React.FC = () => {
     }
   };
 
+  const onCaptchaChange = (token: string | null) => {
+    setCaptchaToken(token);
+  };
+
   return (
     <div className='bodyy'>
       <Grid container justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
@@ -94,6 +114,12 @@ const Login: React.FC = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required 
+                />
+              </div>
+              <div className="form-group captcha-container">
+                <ReCAPTCHA
+                  sitekey="6Lc7zwgqAAAAAK5XcywNJP6UMb2Os-j2eDtNPljf"
+                  onChange={onCaptchaChange}
                 />
               </div>
               {loading ? (
