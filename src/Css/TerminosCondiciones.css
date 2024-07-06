@@ -1,0 +1,35 @@
+.terminos-condiciones {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .terminos-condiciones h1, .terminos-condiciones h2 {
+    color: #151875;
+  }
+  
+  .terminos-condiciones p {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .terminos-condiciones a {
+    color: #FB2E86;
+    transition: color 0.3s ease;
+  }
+  
+  .terminos-condiciones a:hover {
+    color: #c81261;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
