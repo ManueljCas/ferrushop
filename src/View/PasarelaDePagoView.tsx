@@ -9,6 +9,7 @@ import { useCart } from '../context/CartContext';
 const PasarelaDePagoView: React.FC = () => {
   const [orderID, setOrderID] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
   const { cart, subtotal: storedSubtotal, iva: storedIva, total: storedTotal } = useCart();
   const [localTotal, setLocalTotal] = useState<number>(0);
   const [localSubtotal, setLocalSubtotal] = useState<number>(0);
@@ -41,6 +42,14 @@ const PasarelaDePagoView: React.FC = () => {
       setLocalIva(parseFloat(storedIva));
       setLocalTotal(parseFloat(storedTotal));
     }
+
+    // Simular un tiempo de carga para la pantalla de carga
+    const loadContent = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Ajusta el tiempo según tus necesidades
+      setLoading(false);
+    };
+
+    loadContent();
   }, []);
 
   useEffect(() => {
@@ -97,6 +106,15 @@ const PasarelaDePagoView: React.FC = () => {
       return Promise.reject(new Error('Actions order is undefined'));
     }
   };
+
+  if (loading) {
+    return (
+      <div className="producto-loading-screen">
+        <div className="producto-loading-spinner"></div>
+        <p className="producto-loading-text">Cargando...</p>
+      </div>
+    );
+  }
 
   return (
     <div>

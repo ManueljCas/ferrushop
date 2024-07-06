@@ -33,7 +33,7 @@ const CarritoView: React.FC = () => {
   };
 
   const handlePagar = () => {
-    navigate('/pasareladepago'); // Redirigir a la pasarela de pago
+    navigate('/pasareladepago');
   };
 
   const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);

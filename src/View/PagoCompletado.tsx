@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import '../Css/PagoCompletado.css';
 import reloj from '../IMG/clock.png';
@@ -10,17 +10,35 @@ import Confetti from 'react-confetti';
 
 function PagoCompletadoView() {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
     const handleContinueShopping = () => {
         navigate('/');
     };
 
     useEffect(() => {
-        const card = document.querySelector('.contenido-wrapper');
-        if (card) {
-            card.classList.add('fade-in');
-        }
+        // Simular un tiempo de carga para la pantalla de carga
+        const loadContent = async () => {
+            await new Promise((resolve) => setTimeout(resolve, 1000)); // Ajusta el tiempo según tus necesidades
+            setLoading(false);
+
+            const card = document.querySelector('.contenido-wrapper');
+            if (card) {
+                card.classList.add('fade-in');
+            }
+        };
+
+        loadContent();
     }, []);
+
+    if (loading) {
+        return (
+            <div className="producto-loading-screen">
+                <div className="producto-loading-spinner"></div>
+                <p className="producto-loading-text">Cargando...</p>
+            </div>
+        );
+    }
 
     return (
         <>
