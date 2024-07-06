@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { PayPalScriptProvider, PayPalButtons, PayPalButtonsComponentProps } from "@paypal/react-paypal-js";
+import { useNavigate } from 'react-router-dom';
 import Header from './HeaderView';
 import Footer from './FooterView';
 import '../Css/PasarelaDePago.css';
@@ -12,6 +13,7 @@ const PasarelaDePagoView: React.FC = () => {
   const [localTotal, setLocalTotal] = useState<number>(0);
   const [localSubtotal, setLocalSubtotal] = useState<number>(0);
   const [localIva, setLocalIva] = useState<number>(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const calcularTotales = () => {
@@ -41,9 +43,16 @@ const PasarelaDePagoView: React.FC = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (cart.length === 0) {
+      navigate('/carrito');
+    }
+  }, [cart, navigate]);
+
   const handleApprove = (orderID: string) => {
     setOrderID(orderID);
     alert('Pago realizado con éxito');
+    navigate('/pagocompletado'); // Redirigir al usuario a /pagocompletado
   };
 
   const createOrder: PayPalButtonsComponentProps["createOrder"] = (data, actions) => {
