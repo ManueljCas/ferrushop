@@ -33,6 +33,12 @@
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación añadida */
+}
+
+.terms-card:hover {
+  transform: translateY(-5px); /* Mover hacia arriba cuando se pasa el cursor */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más grande cuando se pasa el cursor */
 }
 
 .terms-card-header {
@@ -41,6 +47,9 @@
   color: #000000;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: space-between; /* Para alinear el texto y el icono */
+  align-items: center;
 }
 
 .terms-card-header:hover {

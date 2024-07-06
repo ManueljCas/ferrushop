@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 import Header from './HeaderView';
 import Footer from './FooterView';
 import '../Css/TerminosCondiciones.css';
@@ -31,7 +32,7 @@ const TerminosCondiciones = () => {
         <div className="terms-cards-container">
           <div className="terms-card">
             <div onClick={() => toggleSection('infoTienda')} className="terms-card-header">
-              I. Información de la Tienda
+              I. Información de la Tienda {openSections.infoTienda ? <BsChevronUp /> : <BsChevronDown />}
             </div>
             {openSections.infoTienda && (
               <div className="terms-card-body">
@@ -44,7 +45,7 @@ const TerminosCondiciones = () => {
 
           <div className="terms-card">
             <div onClick={() => toggleSection('preciosPagos')} className="terms-card-header">
-              II. Precios y Pagos
+              II. Precios y Pagos {openSections.preciosPagos ? <BsChevronUp /> : <BsChevronDown />}
             </div>
             {openSections.preciosPagos && (
               <div className="terms-card-body">
@@ -58,7 +59,7 @@ const TerminosCondiciones = () => {
 
           <div className="terms-card">
             <div onClick={() => toggleSection('devolucionesReembolsos')} className="terms-card-header">
-              III. Devoluciones y Reembolsos
+              III. Devoluciones y Reembolsos {openSections.devolucionesReembolsos ? <BsChevronUp /> : <BsChevronDown />}
             </div>
             {openSections.devolucionesReembolsos && (
               <div className="terms-card-body">
@@ -70,7 +71,7 @@ const TerminosCondiciones = () => {
 
           <div className="terms-card">
             <div onClick={() => toggleSection('propiedadIntelectual')} className="terms-card-header">
-              IV. Propiedad Intelectual
+              IV. Propiedad Intelectual {openSections.propiedadIntelectual ? <BsChevronUp /> : <BsChevronDown />}
             </div>
             {openSections.propiedadIntelectual && (
               <div className="terms-card-body">
@@ -82,7 +83,7 @@ const TerminosCondiciones = () => {
 
           <div className="terms-card">
             <div onClick={() => toggleSection('privacidad')} className="terms-card-header">
-              V. Privacidad
+              V. Privacidad {openSections.privacidad ? <BsChevronUp /> : <BsChevronDown />}
             </div>
             {openSections.privacidad && (
               <div className="terms-card-body">
@@ -94,7 +95,7 @@ const TerminosCondiciones = () => {
 
           <div className="terms-card">
             <div onClick={() => toggleSection('limitacionResponsabilidad')} className="terms-card-header">
-              VI. Limitación de Responsabilidad
+              VI. Limitación de Responsabilidad {openSections.limitacionResponsabilidad ? <BsChevronUp /> : <BsChevronDown />}
             </div>
             {openSections.limitacionResponsabilidad && (
               <div className="terms-card-body">
@@ -105,7 +106,7 @@ const TerminosCondiciones = () => {
 
           <div className="terms-card">
             <div onClick={() => toggleSection('leyAplicable')} className="terms-card-header">
-              VII. Ley Aplicable y Jurisdicción
+              VII. Ley Aplicable y Jurisdicción {openSections.leyAplicable ? <BsChevronUp /> : <BsChevronDown />}
             </div>
             {openSections.leyAplicable && (
               <div className="terms-card-body">
@@ -116,7 +117,7 @@ const TerminosCondiciones = () => {
 
           <div className="terms-card">
             <div onClick={() => toggleSection('disposicionesGenerales')} className="terms-card-header">
-              VIII. Disposiciones Generales
+              VIII. Disposiciones Generales {openSections.disposicionesGenerales ? <BsChevronUp /> : <BsChevronDown />}
             </div>
             {openSections.disposicionesGenerales && (
               <div className="terms-card-body">

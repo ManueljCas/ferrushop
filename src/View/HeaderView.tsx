@@ -58,7 +58,7 @@ function Header() {
         <div className='header-one-custom'>
           {isAuthenticated ? (
           <a href="/configuracion" id='carrito'>
-          <AiOutlineUser />          
+          <AiOutlineUser /> <p>Configuración</p>          
           </a>
           ) : (
             <a href="/login">Login</a>
