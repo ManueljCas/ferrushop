@@ -6,45 +6,17 @@ import { CiSearch } from "react-icons/ci";
 import Grid from '@material-ui/core/Grid';
 import { useAuth } from '../Javascript/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { useCart } from '../context/CartContext';
-import Swal from 'sweetalert2';
+
 
 function Header() {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated } = useAuth();
   const { cart } = useCart();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  const handleLogout = () => {
-    Swal.fire({
-      title: '¿Estás seguro de que quieres cerrar sesión?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, cerrar sesión',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        logout();
-        toast.success('Has cerrado sesión', {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          className: 'logout-toast',
-        });
-        navigate('/');
-        window.location.reload(); // Recarga la página después de la navegación
-      }
-    });
-  };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -85,11 +57,11 @@ function Header() {
       <header className={`header ${isVisible ? 'visible' : 'hidden'}`}>
         <div className='header-one-custom'>
           {isAuthenticated ? (
-            <button onClick={handleLogout} className='header-button-custom'>
-              Cerrar Sesión
-            </button>
+          <a href="/configuracion" id='carrito'>
+          <AiOutlineUser />          
+          </a>
           ) : (
-            <a href="/login">Login <AiOutlineUser /></a>
+            <a href="/login">Login</a>
           )}
           <a href="/carrito" id='carrito'>
             <IoCartOutline />
@@ -128,7 +100,7 @@ function Header() {
           </Grid>
         </div>
       </header>
-      <div style={{ paddingTop: '120px' }}></div> {/* Añade espacio en la parte superior */}
+      <div style={{ paddingTop: '120px' }}></div> 
     </>
   );
 }

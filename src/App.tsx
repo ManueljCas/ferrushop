@@ -24,6 +24,7 @@ import AgregarProductiView from './View/AgregarProductoView';
 import AdministrarProductos from './View/AdministradorVerProductosView';
 import PasarelaDePagoView from './View/PasarelaDePagoView';
 import PagoCompletadoView from './View/PagoCompletado';
+import ConfiguracionView from './View/ConfiguracionView';
 
 import { AuthProvider } from './Javascript/AuthContext';
 import { CartProvider } from './context/CartContext';
@@ -63,6 +64,7 @@ function App() {
             <Route path="/editar-producto/:id" element={<EditarProducto />} />
             <Route path="/pasareladepago" element={<PasarelaDePagoView />} />
             <Route path="/pagocompletado" element={<PagoCompletadoView />} />
+            <Route path="/configuracion" element={<ConfiguracionView />} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>
