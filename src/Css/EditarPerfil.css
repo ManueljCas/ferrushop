@@ -1,15 +1,19 @@
 /* EditarPerfil.css */
-.editar-perfil-container {
+.editar-perfil-container-custom {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
-    margin-top: 80px; /* Ajusta el margen superior */
-    margin-bottom: 80px; /* Ajusta el margen inferior */
+    margin-top: 80px;
+    margin-bottom: 80px;
 }
 
-.editar-perfil-card {
+.editar-perfil-card-custom h2{
+    text-align: center;
+}
+
+.editar-perfil-card-custom {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -19,41 +23,40 @@
     text-align: left;
 }
 
-.editar-perfil-card h2 {
+.editar-perfil-card-custom h2 {
     margin-bottom: 20px;
     font-size: 24px;
     color: #333;
-    text-align: center;
 }
 
-.form-group {
+.form-group-custom {
     margin-bottom: 15px;
-    display: flex;
-    flex-direction: column; /* Asegura que los labels estén encima de los inputs */
 }
 
-.form-group label {
+.form-group-custom label {
+    display: block;
     margin-bottom: 5px;
     color: #555;
-    font-weight: bold; /* Añadir negrita para hacer que el label resalte */
+    font-weight: bold;
 }
 
-.form-group input {
+.form-group-custom input {
     width: 100%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 16px;
-    box-sizing: border-box; /* Asegura que el padding no afecte al width total */
+    box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
-.buttons {
+.buttons-custom {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
 
-.guardar-button, .cancelar-button {
+.guardar-button-custom, .cancelar-button-custom {
     background-color: #ff007f;
     color: white;
     border: none;
@@ -64,6 +67,6 @@
     transition: background-color 0.3s ease;
 }
 
-.guardar-button:hover, .cancelar-button:hover {
+.guardar-button-custom:hover, .cancelar-button-custom:hover {
     background-color: #e60073;
 }

@@ -104,10 +104,10 @@ const EditarPerfilView: React.FC = () => {
     return (
         <>
             <Header />
-            <div className="editar-perfil-container">
-                <div className="editar-perfil-card">
+            <div className="editar-perfil-container-custom">
+                <div className="editar-perfil-card-custom">
                     <h2>Editar Perfil</h2>
-                    <div className="form-group">
+                    <div className="form-group-custom">
                         <label htmlFor="name">Nombre</label>
                         <input
                             type="text"
@@ -116,7 +116,7 @@ const EditarPerfilView: React.FC = () => {
                             onChange={(e) => setName(e.target.value)}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group-custom">
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"
@@ -125,7 +125,7 @@ const EditarPerfilView: React.FC = () => {
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group-custom">
                         <label htmlFor="password">Contraseña Actual</label>
                         <input
                             type="password"
@@ -134,7 +134,7 @@ const EditarPerfilView: React.FC = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group-custom">
                         <label htmlFor="new-password">Nueva Contraseña</label>
                         <input
                             type="password"
@@ -143,7 +143,7 @@ const EditarPerfilView: React.FC = () => {
                             onChange={(e) => setNewPassword(e.target.value)}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group-custom">
                         <label htmlFor="confirm-password">Confirmar Nueva Contraseña</label>
                         <input
                             type="password"
@@ -152,9 +152,9 @@ const EditarPerfilView: React.FC = () => {
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                     </div>
-                    <div className="buttons">
-                        <button onClick={handleGuardarCambios} className="guardar-button">Guardar Cambios</button>
-                        <button onClick={handleCancelar} className="cancelar-button">Cancelar</button>
+                    <div className="buttons-custom">
+                        <button onClick={handleGuardarCambios} className="guardar-button-custom">Guardar Cambios</button>
+                        <button onClick={handleCancelar} className="cancelar-button-custom">Cancelar</button>
                     </div>
                 </div>
             </div>
