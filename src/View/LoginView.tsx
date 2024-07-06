@@ -65,6 +65,7 @@ const Login: React.FC = () => {
       });
 
       if (response.ok) {
+        const data = await response.json();
         toast.success('Inicio de sesión exitoso', {
           position: "top-right",
           autoClose: 5000,
@@ -74,7 +75,7 @@ const Login: React.FC = () => {
           draggable: true,
           progress: undefined,
         });
-        login(email); // Pasar el correo electrónico aquí
+        login(email, data.userId); // Asegúrate de pasar el userId aquí
         navigate('/');
       } else {
         const errorData = await response.json();
@@ -107,9 +108,7 @@ const Login: React.FC = () => {
     setCaptchaToken(token);
   };
 
-
-
-  if (isPageLoading ) {
+  if (isPageLoading) {
     return (
       <div className="producto-loading-screen">
         <div className="producto-loading-spinner"></div>

@@ -1,0 +1,69 @@
+/* EditarPerfil.css */
+.editar-perfil-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    margin-top: 80px; /* Ajusta el margen superior */
+    margin-bottom: 80px; /* Ajusta el margen inferior */
+}
+
+.editar-perfil-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+    text-align: left;
+}
+
+.editar-perfil-card h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column; /* Asegura que los labels estén encima de los inputs */
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold; /* Añadir negrita para hacer que el label resalte */
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box; /* Asegura que el padding no afecte al width total */
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.guardar-button, .cancelar-button {
+    background-color: #ff007f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.guardar-button:hover, .cancelar-button:hover {
+    background-color: #e60073;
+}
