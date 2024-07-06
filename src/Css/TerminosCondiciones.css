@@ -48,6 +48,7 @@
 }
 
 .terms-card-body {
+  text-align: justify;
   padding: 15px;
   border-top: 1px solid #ddd;
   animation: fadeIn 0.5s;

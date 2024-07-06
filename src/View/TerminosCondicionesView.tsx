@@ -35,8 +35,9 @@ const TerminosCondiciones = () => {
             </div>
             {openSections.infoTienda && (
               <div className="terms-card-body">
-                <p>Ferrushop es propiedad de Ferrushop S.A DE C.V, registrada en México. Nuestro número de identificación fiscal es c170090535-7.</p>
-                <p>La dirección de nuestra tienda virtual es Ferrushop.com. Si necesita comunicarse con nosotros, puede hacerlo a través de nuestro correo electrónico info@ferrushop.com.</p>
+                <p>a. Ferrushop es propiedad de Ferrushop S.A DE C.V, registrada en México. Nuestro número de identificación fiscal es c170090535-7.</p>
+                <p>b. La dirección de nuestra tienda virtual es Ferrushop.com.</p>
+                <p>c. Si necesita comunicarse con nosotros, puede hacerlo a través de nuestro correo electrónico info@ferrushop.com.</p>
               </div>
             )}
           </div>
@@ -47,9 +48,10 @@ const TerminosCondiciones = () => {
             </div>
             {openSections.preciosPagos && (
               <div className="terms-card-body">
-                <p>Todos los precios que aparecen en nuestra tienda virtual están en MXN e incluyen el impuesto al valor agregado (IVA).</p>
-                <p>Aceptamos las siguientes formas de pago: TDC / TDD.</p>
-                <p>El pago se realizará en el momento de la compra. Una vez que se haya realizado el pago, se enviará un correo electrónico de confirmación al usuario.</p>
+                <p>a. Todos los precios que aparecen en nuestra tienda virtual están en MXN e incluyen el impuesto al valor agregado (IVA).</p>
+                <p>b. Aceptamos las siguientes formas de pago: TDC / TDD.</p>
+                <p>c. El pago se realizará en el momento de la compra.</p>
+                <p>d. Una vez que se haya realizado el pago, se enviará un correo electrónico de confirmación al usuario.</p>
               </div>
             )}
           </div>
@@ -60,7 +62,8 @@ const TerminosCondiciones = () => {
             </div>
             {openSections.devolucionesReembolsos && (
               <div className="terms-card-body">
-                <p>Si el usuario no está satisfecho con su compra, puede devolver el producto en un plazo de 7 días hábiles a partir de la fecha de entrega. El producto debe estar en las mismas condiciones en que fue recibido, sin usar y en su embalaje original.</p>
+                <p>a. Si el usuario no está satisfecho con su compra, puede devolver el producto en un plazo de 7 días hábiles a partir de la fecha de entrega.</p>
+                <p>b. El producto debe estar en las mismas condiciones en que fue recibido, sin usar y en su embalaje original.</p>
               </div>
             )}
           </div>
@@ -71,8 +74,8 @@ const TerminosCondiciones = () => {
             </div>
             {openSections.propiedadIntelectual && (
               <div className="terms-card-body">
-                <p>Todo el contenido de nuestra tienda virtual, incluyendo imágenes, textos y diseños, son propiedad de Ferrushop S.A DE C.V y están protegidos por las leyes de propiedad intelectual.</p>
-                <p>Queda prohibida la reproducción, distribución, exhibición, transmisión o explotación de cualquier contenido de nuestra tienda virtual sin nuestro permiso expreso por escrito.</p>
+                <p>a. Todo el contenido de nuestra tienda virtual, incluyendo imágenes, textos y diseños, son propiedad de Ferrushop S.A DE C.V y están protegidos por las leyes de propiedad intelectual.</p>
+                <p>b. Queda prohibida la reproducción, distribución, exhibición, transmisión o explotación de cualquier contenido de nuestra tienda virtual sin nuestro permiso expreso por escrito.</p>
               </div>
             )}
           </div>
@@ -83,7 +86,8 @@ const TerminosCondiciones = () => {
             </div>
             {openSections.privacidad && (
               <div className="terms-card-body">
-                <p>Nos comprometemos a proteger la privacidad de nuestros usuarios. Para obtener más información sobre cómo manejamos su información personal, consulte nuestra Política de Privacidad.</p>
+                <p>a. Nos comprometemos a proteger la privacidad de nuestros usuarios.</p>
+                <p>b. Para obtener más información sobre cómo manejamos su información personal, consulte nuestra Política de Privacidad.</p>
               </div>
             )}
           </div>
@@ -94,7 +98,7 @@ const TerminosCondiciones = () => {
             </div>
             {openSections.limitacionResponsabilidad && (
               <div className="terms-card-body">
-                <p>No nos hacemos responsables de ningún daño directo, indirecto, incidental, especial o consecuente que pueda resultar del uso o la imposibilidad de uso de nuestra tienda virtual.</p>
+                <p>a. No nos hacemos responsables de ningún daño directo, indirecto, incidental, especial o consecuente que pueda resultar del uso o la imposibilidad de uso de nuestra tienda virtual.</p>
               </div>
             )}
           </div>
@@ -105,7 +109,7 @@ const TerminosCondiciones = () => {
             </div>
             {openSections.leyAplicable && (
               <div className="terms-card-body">
-                <p>Estas políticas, términos y condiciones se regirán e interpretarán de acuerdo con las leyes del país de México, sin dar efecto a ninguna disposición sobre conflicto de leyes.</p>
+                <p>a. Estas políticas, términos y condiciones se regirán e interpretarán de acuerdo con las leyes del país de México, sin dar efecto a ninguna disposición sobre conflicto de leyes.</p>
               </div>
             )}
           </div>
@@ -116,8 +120,8 @@ const TerminosCondiciones = () => {
             </div>
             {openSections.disposicionesGenerales && (
               <div className="terms-card-body">
-                <p>Estas políticas, términos y condiciones constituyen el acuerdo completo entre el usuario y Ferrushop con respecto al uso de nuestra tienda virtual y reemplazan cualquier acuerdo previo.</p>
-                <p>Fecha de última actualización: 06/07/2024</p>
+                <p>a. Estas políticas, términos y condiciones constituyen el acuerdo completo entre el usuario y Ferrushop con respecto al uso de nuestra tienda virtual y reemplazan cualquier acuerdo previo.</p>
+                <p>b. Fecha de última actualización: 06/07/2024</p>
               </div>
             )}
           </div>

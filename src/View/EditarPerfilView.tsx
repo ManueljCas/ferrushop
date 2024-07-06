@@ -154,7 +154,7 @@ const EditarPerfilView: React.FC = () => {
                     </div>
                     <div className="buttons-custom">
                         <button onClick={handleGuardarCambios} className="guardar-button-custom">Guardar Cambios</button>
-                        <button onClick={handleCancelar} className="cancelar-button-custom">Cancelar</button>
+                        <button onClick={handleCancelar} className="cancelar-button-custom">Cancelar Cambios</button>
                     </div>
                 </div>
             </div>
