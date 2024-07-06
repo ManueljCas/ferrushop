@@ -25,6 +25,7 @@ import AdministrarProductos from './View/AdministradorVerProductosView';
 import PasarelaDePagoView from './View/PasarelaDePagoView';
 import PagoCompletadoView from './View/PagoCompletado';
 import ConfiguracionView from './View/ConfiguracionView';
+import TerminosCondiciones from './View/TerminosCondicionesView';
 import EditarPerfilView from './View/EditarPerfilView';
 
 import { AuthProvider } from './Javascript/AuthContext';
@@ -66,8 +67,8 @@ function App() {
             <Route path="/pasareladepago" element={<PasarelaDePagoView />} />
             <Route path="/pagocompletado" element={<PagoCompletadoView />} />
             <Route path="/configuracion" element={<ConfiguracionView />} />
+            <Route path="/TerminosCondiciones" element={<TerminosCondiciones/>}/>
             <Route path="/configuracion/editarperfil" element={<EditarPerfilView />} />
-
 
             <Route path="*" element={<NotFound />} />
           </Routes>
