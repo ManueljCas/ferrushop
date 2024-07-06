@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from './HeaderView';
+import Footer from './FooterView';
 import '../Css/TerminosCondiciones.css';
 
 const TerminosCondiciones = () => {
   const navigate = useNavigate();
+  const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({});
+
+  const toggleSection = (section: string) => {
+    setOpenSections((prevState) => ({
+      ...prevState,
+      [section]: !prevState[section],
+    }));
+  };
 
   // Función para manejar el retroceso
   const handleBack = () => {
@@ -11,44 +21,111 @@ const TerminosCondiciones = () => {
   };
 
   return (
-    <div className="terminos-condiciones">
-      <button onClick={handleBack} className="back-button">Volver</button>
-      <h1>Bienvenido a Ferrushop</h1>
-      <p>Una tienda virtual dedicada a la venta de Herramientas para ferreteria y el hogar. Estas políticas, términos y condiciones se aplican a todas las compras realizadas en nuestra tienda virtual. Al hacer una compra, usted acepta estas políticas, términos y condiciones. Si no está de acuerdo con alguna de ellas, no podrá realizar una compra en nuestra tienda.</p>
-      <p>Nos reservamos el derecho de actualizar, modificar o cambiar estas políticas, términos y condiciones en cualquier momento y sin previo aviso. Es responsabilidad del usuario revisar periódicamente estos términos y condiciones para estar al tanto de cualquier cambio.</p>
-      
-      <h2>Información de la Tienda</h2>
-      <p>Ferrushop es propiedad de Ferrushop S.A DE C.V, registrada en México. Nuestro número de identificación fiscal es c170090535-7.</p>
-      <p>La dirección de nuestra tienda virtual es Ferrushop.com. Si necesita comunicarse con nosotros, puede hacerlo a través de nuestro correo electrónico info@ferrushop.com.</p>
-      
-      <h2>Precios y Pagos</h2>
-      <p>Todos los precios que aparecen en nuestra tienda virtual están en MXN e incluyen el impuesto al valor agregado (IVA).</p>
-      <p>Aceptamos las siguientes formas de pago: TDC / TDD.</p>
-      <p>El pago se realizará en el momento de la compra. Una vez que se haya realizado el pago, se enviará un correo electrónico de confirmación al usuario.</p>
-      
-      
-      <h2>Devoluciones y Reembolsos</h2>
-      <p> Si el usuario no está satisfecho con su compra, puede devolver el producto en un plazo de 7 días hábiles días a partir de la fecha de entrega. El producto debe estar en las mismas condiciones en que fue recibido, sin usar y en su embalaje original.</p>
-      
-      <h2>Propiedad Intelectual</h2>
-      <p>Todo el contenido de nuestra tienda virtual, incluyendo imágenes, textos y diseños, son propiedad de Ferrushop S.A DE C.V y están protegidos por las leyes de propiedad intelectual.</p>
-      <p>Queda prohibida la reproducción, distribución, exhibición, transmisión o explotación de cualquier contenido de nuestra tienda virtual sin nuestro permiso expreso por escrito.</p>
-      
-      <h2>Privacidad</h2>
-      <p>Nos comprometemos a proteger la privacidad de nuestros usuarios. Para obtener más información sobre cómo manejamos su información personal, consulte nuestra Política de Privacidad.</p>
-      
-      <h2>Limitación de Responsabilidad</h2>
-      <p>No nos hacemos responsables de ningún daño directo, indirecto, incidental...</p>
-      <p>No nos hacemos responsables de ningún daño directo, indirecto, incidental, especial o consecuente que pueda resultar del uso o la imposibilidad de uso de nuestra tienda virtual.</p>
+    <>
+      <Header />
+      <div className="terms-conditions-container">
+        <h1 className="terms-title">Bienvenido a Ferrushop</h1>
+        <p className="terms-intro">Somos una tienda virtual dedicada a la venta de Herramientas para ferretería y el hogar. Estas políticas, términos y condiciones se aplican a todas las compras realizadas en nuestra tienda virtual. Al hacer una compra, usted acepta estas políticas, términos y condiciones. Si no está de acuerdo con alguna de ellas, no podrá realizar una compra en nuestra tienda.</p>
+        <p className="terms-intro">Nos reservamos el derecho de actualizar, modificar o cambiar estas políticas, términos y condiciones en cualquier momento y sin previo aviso. Es responsabilidad del usuario revisar periódicamente estos términos y condiciones para estar al tanto de cualquier cambio.</p>
+        
+        <div className="terms-cards-container">
+          <div className="terms-card">
+            <div onClick={() => toggleSection('infoTienda')} className="terms-card-header">
+              I. Información de la Tienda
+            </div>
+            {openSections.infoTienda && (
+              <div className="terms-card-body">
+                <p>Ferrushop es propiedad de Ferrushop S.A DE C.V, registrada en México. Nuestro número de identificación fiscal es c170090535-7.</p>
+                <p>La dirección de nuestra tienda virtual es Ferrushop.com. Si necesita comunicarse con nosotros, puede hacerlo a través de nuestro correo electrónico info@ferrushop.com.</p>
+              </div>
+            )}
+          </div>
 
-      <h2>Ley Aplicable y Jurisdicción</h2>
-      <p>Estas políticas, términos y condiciones se regirán e interpretarán de acuerdo con las leyes del país de México, sin dar efecto a ninguna disposición sobre conflicto de leyes.</p>
-      
-      <h2>Disposiciones Generales</h2>
-      <p>Estas políticas, términos y condiciones constituyen el acuerdo completo entre el usuario y Ferrushop con respecto al uso de nuestra tienda virtual y reemplazan cualquier acuerdo previo.</p>
-      
-      <p>Fecha de última actualización: 06/07/2024</p>
-    </div>
+          <div className="terms-card">
+            <div onClick={() => toggleSection('preciosPagos')} className="terms-card-header">
+              II. Precios y Pagos
+            </div>
+            {openSections.preciosPagos && (
+              <div className="terms-card-body">
+                <p>Todos los precios que aparecen en nuestra tienda virtual están en MXN e incluyen el impuesto al valor agregado (IVA).</p>
+                <p>Aceptamos las siguientes formas de pago: TDC / TDD.</p>
+                <p>El pago se realizará en el momento de la compra. Una vez que se haya realizado el pago, se enviará un correo electrónico de confirmación al usuario.</p>
+              </div>
+            )}
+          </div>
+
+          <div className="terms-card">
+            <div onClick={() => toggleSection('devolucionesReembolsos')} className="terms-card-header">
+              III. Devoluciones y Reembolsos
+            </div>
+            {openSections.devolucionesReembolsos && (
+              <div className="terms-card-body">
+                <p>Si el usuario no está satisfecho con su compra, puede devolver el producto en un plazo de 7 días hábiles a partir de la fecha de entrega. El producto debe estar en las mismas condiciones en que fue recibido, sin usar y en su embalaje original.</p>
+              </div>
+            )}
+          </div>
+
+          <div className="terms-card">
+            <div onClick={() => toggleSection('propiedadIntelectual')} className="terms-card-header">
+              IV. Propiedad Intelectual
+            </div>
+            {openSections.propiedadIntelectual && (
+              <div className="terms-card-body">
+                <p>Todo el contenido de nuestra tienda virtual, incluyendo imágenes, textos y diseños, son propiedad de Ferrushop S.A DE C.V y están protegidos por las leyes de propiedad intelectual.</p>
+                <p>Queda prohibida la reproducción, distribución, exhibición, transmisión o explotación de cualquier contenido de nuestra tienda virtual sin nuestro permiso expreso por escrito.</p>
+              </div>
+            )}
+          </div>
+
+          <div className="terms-card">
+            <div onClick={() => toggleSection('privacidad')} className="terms-card-header">
+              V. Privacidad
+            </div>
+            {openSections.privacidad && (
+              <div className="terms-card-body">
+                <p>Nos comprometemos a proteger la privacidad de nuestros usuarios. Para obtener más información sobre cómo manejamos su información personal, consulte nuestra Política de Privacidad.</p>
+              </div>
+            )}
+          </div>
+
+          <div className="terms-card">
+            <div onClick={() => toggleSection('limitacionResponsabilidad')} className="terms-card-header">
+              VI. Limitación de Responsabilidad
+            </div>
+            {openSections.limitacionResponsabilidad && (
+              <div className="terms-card-body">
+                <p>No nos hacemos responsables de ningún daño directo, indirecto, incidental, especial o consecuente que pueda resultar del uso o la imposibilidad de uso de nuestra tienda virtual.</p>
+              </div>
+            )}
+          </div>
+
+          <div className="terms-card">
+            <div onClick={() => toggleSection('leyAplicable')} className="terms-card-header">
+              VII. Ley Aplicable y Jurisdicción
+            </div>
+            {openSections.leyAplicable && (
+              <div className="terms-card-body">
+                <p>Estas políticas, términos y condiciones se regirán e interpretarán de acuerdo con las leyes del país de México, sin dar efecto a ninguna disposición sobre conflicto de leyes.</p>
+              </div>
+            )}
+          </div>
+
+          <div className="terms-card">
+            <div onClick={() => toggleSection('disposicionesGenerales')} className="terms-card-header">
+              VIII. Disposiciones Generales
+            </div>
+            {openSections.disposicionesGenerales && (
+              <div className="terms-card-body">
+                <p>Estas políticas, términos y condiciones constituyen el acuerdo completo entre el usuario y Ferrushop con respecto al uso de nuestra tienda virtual y reemplazan cualquier acuerdo previo.</p>
+                <p>Fecha de última actualización: 06/07/2024</p>
+              </div>
+            )}
+          </div>
+        </div>
+        <button onClick={handleBack} className="terms-back-button">Volver</button>
+      </div>
+      <Footer />
+    </>
   );
 };
 

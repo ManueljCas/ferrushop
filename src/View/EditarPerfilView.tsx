@@ -89,7 +89,7 @@ const EditarPerfilView: React.FC = () => {
                         throw new Error(`Solicitud fallida con el código de estado ${response.status}`);
                     }
                     toast.success('Perfil actualizado correctamente');
-                    navigate('/configuracion');
+                    navigate(-1);
                 } catch (error) {
                     toast.error('Error al actualizar los datos del usuario');
                 }
@@ -98,7 +98,7 @@ const EditarPerfilView: React.FC = () => {
     };
 
     const handleCancelar = () => {
-        navigate('/configuracion');
+        navigate(-1);
     };
 
     return (

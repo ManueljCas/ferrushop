@@ -1,48 +1,80 @@
-.terminos-condiciones {
-    width: 90%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.terms-conditions-container {
+  width: 80%;
+  margin: 50px auto; /* Ajustado para agregar espacio superior e inferior */
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.terms-title {
+  text-align: center;
+  color: #151875;
+  font-size: 2em;
+}
+
+.terms-intro {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  text-align: justify; /* Para justificado */
+}
+
+.terms-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.terms-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.terms-card-header {
+  padding: 15px;
+  background-color: #f5f1f1;
+  color: #000000;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.terms-card-header:hover {
+  background-color: #c7c7c7;
+}
+
+.terms-card-body {
+  padding: 15px;
+  border-top: 1px solid #ddd;
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  .terminos-condiciones h1, .terminos-condiciones h2 {
-    color: #151875;
+  to {
+    opacity: 1;
   }
-  
-  .terminos-condiciones p {
-    font-size: 16px;
-    color: #333;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-  
-  .terminos-condiciones a {
-    color: #FB2E86;
-    transition: color 0.3s ease;
-  }
-  
-  .terminos-condiciones a:hover {
-    color: #c81261;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  .back-button {
-    padding: 10px 20px;
-    background-color: #FB2E86;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .back-button:hover {
-    background-color: #c81261;
-  }
-  
+}
+
+.terms-back-button {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background-color: #FB2E86;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.terms-back-button:hover {
+  background-color: #c81261;
+}
