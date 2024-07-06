@@ -1,9 +1,18 @@
 import React from 'react';
-import '../Css/TerminosCondiciones.css'; // Asegúrate de crear este archivo CSS para estilos
+import { useNavigate } from 'react-router-dom';
+import '../Css/TerminosCondiciones.css';
 
 const TerminosCondiciones = () => {
+  const navigate = useNavigate();
+
+  // Función para manejar el retroceso
+  const handleBack = () => {
+    navigate(-1);  // Retrocede en el historial del navegador
+  };
+
   return (
     <div className="terminos-condiciones">
+      <button onClick={handleBack} className="back-button">Volver</button>
       <h1>Bienvenido a Ferrushop</h1>
       <p>Una tienda virtual dedicada a la venta de Herramientas para ferreteria y el hogar. Estas políticas, términos y condiciones se aplican a todas las compras realizadas en nuestra tienda virtual. Al hacer una compra, usted acepta estas políticas, términos y condiciones. Si no está de acuerdo con alguna de ellas, no podrá realizar una compra en nuestra tienda.</p>
       <p>Nos reservamos el derecho de actualizar, modificar o cambiar estas políticas, términos y condiciones en cualquier momento y sin previo aviso. Es responsabilidad del usuario revisar periódicamente estos términos y condiciones para estar al tanto de cualquier cambio.</p>

@@ -32,4 +32,17 @@
     margin: 0 auto;
     padding: 20px;
   }
+  .back-button {
+    padding: 10px 20px;
+    background-color: #FB2E86;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background-color: #c81261;
+  }
   
