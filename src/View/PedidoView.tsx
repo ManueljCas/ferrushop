@@ -25,6 +25,7 @@ const PedidoView: React.FC = () => {
     const { orderId } = useParams<{ orderId: string }>();
     const [order, setOrder] = useState<Order | null>(null);
     const [images, setImages] = useState<Map<number, string>>(new Map());
+    const [loading, setLoading] = useState(true); // Estado de carga
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -46,6 +47,8 @@ const PedidoView: React.FC = () => {
                 setImages(imageMap);
             } catch (error) {
                 console.error('Error fetching order:', error);
+            } finally {
+                setLoading(false); // Finaliza la carga
             }
         };
 
@@ -56,8 +59,17 @@ const PedidoView: React.FC = () => {
         }
     }, [orderId]);
 
+    if (loading) {
+        return (
+            <div className="producto-loading-screen">
+                <div className="producto-loading-spinner"></div>
+                <p className="producto-loading-text">Cargando...</p>
+            </div>
+        );
+    }
+
     if (!order) {
-        return <div>Cargando...</div>;
+        return <div>No se pudo cargar el pedido.</div>;
     }
 
     return (
