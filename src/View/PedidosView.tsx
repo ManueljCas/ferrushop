@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../Javascript/AuthContext';
 import Header from './HeaderView';
 import Footer from './FooterView';
@@ -13,7 +13,9 @@ interface Order {
 
 const PedidosView: React.FC = () => {
     const [orders, setOrders] = useState<Order[]>([]);
+    const [loading, setLoading] = useState(true); // Estado de carga
     const { userId } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -23,40 +25,54 @@ const PedidosView: React.FC = () => {
                 setOrders(data);
             } catch (error) {
                 console.error('Error fetching orders:', error);
+            } finally {
+                setLoading(false); // Finaliza la carga
             }
         };
 
         fetchOrders();
     }, [userId]);
 
+    if (loading) {
+        return (
+            <div className="producto-loading-screen">
+                <div className="producto-loading-spinner"></div>
+                <p className="producto-loading-text">Cargando...</p>
+            </div>
+        );
+    }
+
     return (
         <div>
             <Header />
-            <div className="ferrushop-pedido-container">
-                <h1 className="ferrushop-pedido-title">Mis Pedidos</h1>
+            <div className="pedido-container">
                 {orders.length === 0 ? (
-                    <div className="ferrushop-pedido-vacio">
-                        <p>No tienes pedidos en este momento.</p>
-                        <button className="ferrushop-pedido-agregar-mas" onClick={() => window.location.href = "/producto"}>
-                            Agregar un producto
+                    <div className="pedido-vacio">
+                        <p>{userId ? 'No tienes pedidos en este momento.' : 'Inicia sesión para ver tus pedidos'}</p>
+                        <button className="pedido-agregar-mas" onClick={() => window.location.href = userId ? "/producto" : "/login"}>
+                            {userId ? 'Agregar un producto' : 'Iniciar sesión'}
                         </button>
                     </div>
                 ) : (
-                    <div className="ferrushop-pedido-list">
-                        {orders.map((order) => (
-                            <div key={order.id} className="ferrushop-pedido-card">
-                                <Link to={`/configuracion/pedidos/${order.id}`} className="ferrushop-pedido-link">
-                                    <div className="ferrushop-pedido-card-content">
-                                        <div className="ferrushop-pedido-info">
-                                            <h2>Pedido #{order.id}</h2>
-                                            <p>Fecha: {new Date(order.orderDate).toLocaleDateString()}</p>
+                    <>
+                        <h1 className="pedido-title">Mis Pedidos</h1>
+                        <button className="pedido-regresar" onClick={() => navigate(-1)}>Regresar</button>
+                        <div className="pedido-list">
+                            {orders.map((order) => (
+                                <div key={order.id} className="pedido-card">
+                                    <Link to={`/configuracion/pedidos/${order.id}`} className="pedido-link">
+                                        <div className="pedido-card-content">
+                                            <div className="pedido-info">
+                                                <h2>Pedido #{order.id}</h2>
+                                                <p>Fecha: {new Date(order.orderDate).toLocaleDateString()}</p>
+                                            </div>
+                                            <p className="pedido-detalles-text">Más detalles <BsArrowRight /></p>
                                         </div>
-                                        <p className="ferrushop-pedido-detalles-text">Más detalles <BsArrowRight /></p>
-                                    </div>
-                                </Link>
-                            </div>
-                        ))}
-                    </div>
+                                    </Link>
+                                </div>
+                            ))}
+                        </div>
+                    </>
                 )}
             </div>
             <Footer />

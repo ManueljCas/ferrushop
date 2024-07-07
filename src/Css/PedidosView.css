@@ -1,24 +1,41 @@
-.ferrushop-pedido-container {
+.pedido-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
 }
 
-.ferrushop-pedido-title {
+.pedido-title {
     font-size: 2em;
     margin-bottom: 20px;
     animation: fadeIn 1s ease-in-out;
+    text-align: center;
 }
 
-.ferrushop-pedido-list {
+.pedido-regresar {
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.pedido-regresar:hover {
+    background-color: #bd226f;
+}
+
+.pedido-list {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    margin-top: 20px;
 }
 
-.ferrushop-pedido-card {
+.pedido-card {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -30,49 +47,63 @@
     justify-content: space-between;
 }
 
-.ferrushop-pedido-card:hover {
+.pedido-card:hover {
     transform: translateY(-10px);
 }
 
-.ferrushop-pedido-link {
+.pedido-link {
     text-decoration: none;
     color: inherit;
 }
 
-.ferrushop-pedido-card-content {
+.pedido-card-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.ferrushop-pedido-info {
+.pedido-info {
     display: flex;
     flex-direction: column;
 }
 
-.ferrushop-pedido-detalles-text {
+.pedido-detalles-text {
     font-weight: bold;
-    color: #007bff;
+    color: #2012e7;
 }
 
-.ferrushop-pedido-vacio {
+.pedido-vacio {
     text-align: center;
-    padding: 20px;
+    padding: 50px;
+    background-color: #f8f8f8;
+    border: 2px dashed #ccc;
+    margin: 20px 0;
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.ferrushop-pedido-agregar-mas {
-    background-color: #007bff;
+.pedido-vacio p {
+    font-size: 18px;
+    color: #666;
+}
+
+.pedido-vacio .pedido-agregar-mas {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ff69b4;
     color: white;
     border: none;
-    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 20px;
 }
 
-.ferrushop-pedido-agregar-mas:hover {
-    background-color: #0056b3;
+.pedido-vacio .pedido-agregar-mas:hover {
+    background-color: #bd226f;
 }
 
 @keyframes fadeIn {
