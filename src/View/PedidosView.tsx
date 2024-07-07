@@ -34,21 +34,30 @@ const PedidosView: React.FC = () => {
             <Header />
             <div className="ferrushop-pedido-container">
                 <h1 className="ferrushop-pedido-title">Mis Pedidos</h1>
-                <div className="ferrushop-pedido-list">
-                    {orders.map((order) => (
-                        <div key={order.id} className="ferrushop-pedido-card">
-                            <Link to={`/configuracion/pedidos/${order.id}`} className="ferrushop-pedido-link">
-                                <div className="ferrushop-pedido-card-content">
-                                    <div className="ferrushop-pedido-info">
-                                        <h2>Pedido #{order.id}</h2>
-                                        <p>Fecha: {new Date(order.orderDate).toLocaleDateString()}</p>
+                {orders.length === 0 ? (
+                    <div className="ferrushop-pedido-vacio">
+                        <p>No tienes pedidos en este momento.</p>
+                        <button className="ferrushop-pedido-agregar-mas" onClick={() => window.location.href = "/producto"}>
+                            Agregar un producto
+                        </button>
+                    </div>
+                ) : (
+                    <div className="ferrushop-pedido-list">
+                        {orders.map((order) => (
+                            <div key={order.id} className="ferrushop-pedido-card">
+                                <Link to={`/configuracion/pedidos/${order.id}`} className="ferrushop-pedido-link">
+                                    <div className="ferrushop-pedido-card-content">
+                                        <div className="ferrushop-pedido-info">
+                                            <h2>Pedido #{order.id}</h2>
+                                            <p>Fecha: {new Date(order.orderDate).toLocaleDateString()}</p>
+                                        </div>
+                                        <p className="ferrushop-pedido-detalles-text">Más detalles <BsArrowRight /></p>
                                     </div>
-                                    <p className="ferrushop-pedido-detalles-text">Más detalles <BsArrowRight /></p>
-                                </div>
-                            </Link>
-                        </div>
-                    ))}
-                </div>
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
             <Footer />
         </div>
