@@ -95,7 +95,8 @@ const PasarelaDePagoView: React.FC = () => {
         productName: item.title,
         quantity: item.quantity,
         status: 'No entregado'
-      }))
+      })),
+      totalAmount: localTotal // Agregar el totalAmount aquí
     };
 
     try {

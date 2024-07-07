@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../Css/Header.css'; // Actualiza el nombre del archivo CSS
+import '../Css/Header.css';
 import { AiOutlineUser } from "react-icons/ai";
 import { IoCartOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
@@ -8,15 +8,14 @@ import { useAuth } from '../Javascript/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
-
 function Header() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, userId } = useAuth();
   const { cart } = useCart();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-
+  const [orderCount, setOrderCount] = useState(0);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -31,10 +30,8 @@ function Header() {
   const controlHeader = () => {
     if (typeof window !== 'undefined') {
       if (window.scrollY > lastScrollY) {
-        // Si el desplazamiento es hacia abajo, oculta el header
         setIsVisible(false);
       } else {
-        // Si el desplazamiento es hacia arriba, muestra el header
         setIsVisible(true);
       }
       setLastScrollY(window.scrollY);
@@ -45,21 +42,39 @@ function Header() {
     if (typeof window !== 'undefined') {
       window.addEventListener('scroll', controlHeader);
 
-      // Limpieza
       return () => {
         window.removeEventListener('scroll', controlHeader);
       };
     }
   }, [lastScrollY]);
 
+  useEffect(() => {
+    const fetchOrderCount = async () => {
+      if (isAuthenticated && userId) {
+        try {
+          const response = await fetch(`https://localhost:7271/api/Order/user/${userId}`);
+          if (response.ok) {
+            const orders = await response.json();
+            setOrderCount(orders.length);
+          }
+        } catch (error) {
+          console.error('Error fetching orders:', error);
+        }
+      }
+    };
+
+    fetchOrderCount();
+  }, [isAuthenticated, userId]);
+
   return (
     <>
       <header className={`header ${isVisible ? 'visible' : 'hidden'}`}>
         <div className='header-one-custom'>
           {isAuthenticated ? (
-          <a href="/configuracion" id='carrito'>
-          <AiOutlineUser /> <p>Configuración</p>          
-          </a>
+            <a href="/configuracion" id='configuracion'>
+              <AiOutlineUser /> <p>Configuración</p>
+              {orderCount > 0 && <span className="order-count-custom"><p>{orderCount}</p></span>}
+            </a>
           ) : (
             <a href="/login">Login</a>
           )}

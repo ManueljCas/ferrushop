@@ -4,7 +4,7 @@
   width: 100%;
   z-index: 1000;
   transition: top 0.3s;
-  background-color: white; /* Asegúrate de tener un fondo para que no se superponga al contenido */
+  background-color: white;
 }
 
 .header.hidden {
@@ -150,23 +150,34 @@
   align-items: center;
 }
 
-.cart-count-custom {
+#configuracion {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cart-count-custom, .order-count-custom {
   width: 3px;
   height: 10px;
   position: absolute;
-  top: -5px;
   right: -10px;
   background: red;
   color: white;
   border-radius: 50%;
-  padding: 2px 6px;
+  padding: 3px 6px;
   font-size: 12px;
   opacity: 0;
   transform: scale(0);
   animation: showCount 0.3s forwards;
+  top: -1px;
+  margin-right: -4px;
 }
 
-.cart-count-custom p {
+.cart-count-custom{
+  top: -5px;
+}
+
+.cart-count-custom p, .order-count-custom p {
   margin-top: -4px;
   margin-left: -2px;
 }
