@@ -27,6 +27,8 @@ import PagoCompletadoView from './View/PagoCompletado';
 import ConfiguracionView from './View/ConfiguracionView';
 import TerminosCondiciones from './View/TerminosCondicionesView';
 import EditarPerfilView from './View/EditarPerfilView';
+import PedidosView from './View/PedidosView';
+import PedidoView from './View/PedidoView';
 
 import { AuthProvider } from './Javascript/AuthContext';
 import { CartProvider } from './context/CartContext';
@@ -69,7 +71,8 @@ function App() {
             <Route path="/configuracion" element={<ConfiguracionView />} />
             <Route path="/TerminosCondiciones" element={<TerminosCondiciones/>}/>
             <Route path="/configuracion/editarperfil" element={<EditarPerfilView />} />
-
+            <Route path="/configuracion/pedidos" element={<PedidosView />} />
+            <Route path="/configuracion/pedidos/:orderId" element={<PedidoView />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>

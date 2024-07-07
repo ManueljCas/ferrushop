@@ -5,16 +5,36 @@ import Header from './HeaderView';
 import Footer from './FooterView';
 import '../Css/PasarelaDePago.css';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../Javascript/AuthContext';
 
 const PasarelaDePagoView: React.FC = () => {
   const [orderID, setOrderID] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const { cart, subtotal: storedSubtotal, iva: storedIva, total: storedTotal } = useCart();
+  const { cart, clearCart, total: storedTotal } = useCart();
+  const { userId, userEmail } = useAuth(); // Quitamos userName de aquí
+  const [userName, setUserName] = useState<string>(''); // Nuevo estado para userName
   const [localTotal, setLocalTotal] = useState<number>(0);
   const [localSubtotal, setLocalSubtotal] = useState<number>(0);
   const [localIva, setLocalIva] = useState<number>(0);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserName = async () => {
+      try {
+        const response = await fetch(`https://localhost:7271/api/Usuario/${userId}`);
+        if (!response.ok) {
+          throw new Error(`Solicitud fallida con el código de estado ${response.status}`);
+        }
+        const data = await response.json();
+        setUserName(data.name);
+      } catch (error) {
+        setError('Error al obtener el nombre del usuario');
+      }
+    };
+
+    fetchUserName();
+  }, [userId]);
 
   useEffect(() => {
     const calcularTotales = () => {
@@ -58,19 +78,47 @@ const PasarelaDePagoView: React.FC = () => {
     }
   }, [cart, navigate]);
 
-  const handleApprove = (orderID: string) => {
+  const handleApprove = async (orderID: string) => {
     setOrderID(orderID);
+    await guardarOrden();
     alert('Pago realizado con éxito');
     navigate('/pagocompletado'); // Redirigir al usuario a /pagocompletado
   };
 
+  const guardarOrden = async () => {
+    const orderData = {
+      userId,
+      userName, // Utilizamos el userName del estado
+      userEmail,
+      orderItems: cart.map(item => ({
+        productId: item.productId,
+        productName: item.title,
+        quantity: item.quantity,
+        status: 'No entregado'
+      }))
+    };
+
+    try {
+      const response = await fetch('https://localhost:7271/api/Order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderData)
+      });
+
+      if (response.ok) {
+        clearCart();
+      } else {
+        const errorData = await response.json();
+        setError(`Error al guardar la orden: ${errorData.title}`);
+      }
+    } catch (err) {
+      setError('Error al guardar la orden');
+    }
+  };
+
   const createOrder: PayPalButtonsComponentProps["createOrder"] = (data, actions) => {
-    console.log('Local Total:', localTotal);
-    console.log('Local Subtotal:', localSubtotal);
-    console.log('Local IVA:', localIva);
-    console.log('Stored Subtotal:', storedSubtotal);
-    console.log('Stored IVA:', storedIva);
-    console.log('Stored Total:', storedTotal);
     if (localTotal <= 0) {
       setError('El total debe ser mayor a cero.');
       return Promise.reject(new Error('El total debe ser mayor a cero.'));
@@ -122,14 +170,14 @@ const PasarelaDePagoView: React.FC = () => {
       <div className="pasarela-container">
         <div className="total-carrito">
           <h3>Total del Carrito</h3>
-          <p><span>Subtotal:</span> ${storedSubtotal.toFixed(2)}</p>
-          <p><span>IVA:</span> ${storedIva.toFixed(2)}</p>
+          <p><span>Subtotal:</span> ${localSubtotal.toFixed(2)}</p>
+          <p><span>IVA:</span> ${localIva.toFixed(2)}</p>
           <hr />
           <p>Este es el total a pagar:</p>
-          <p><span>Total:</span> ${storedTotal.toFixed(2)}</p>
+          <p><span>Total:</span> ${localTotal.toFixed(2)}</p>
 
           <div className="paypal-button-container">
-            <PayPalScriptProvider options={{ "clientId": "AXXgxkmyimplFmm_xRQ0_w7I6Nb59kKFWzrfyazZOqOInRUqcAy1-fanv8awb9U2l6UcFgYdq0bdT8AY", currency: "MXN" }}>
+            <PayPalScriptProvider options={{ "clientId": "Ad84GqqpJZlvhCzcYhrwWmeeIdwK3a5Nk1Ap5R7qvqMxw_mnsxYKvjXRSoLPoS8Dy4nghaXumXwa5vnI", currency: "MXN" }}>
               <PayPalButtons
                 createOrder={createOrder}
                 onApprove={onApprove}

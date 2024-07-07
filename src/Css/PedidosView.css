@@ -1,0 +1,70 @@
+.ferrushop-pedido-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.ferrushop-pedido-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.ferrushop-pedido-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.ferrushop-pedido-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    width: 350px; /* Aumentar el ancho de la tarjeta */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ferrushop-pedido-card:hover {
+    transform: translateY(-10px);
+}
+
+.ferrushop-pedido-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.ferrushop-pedido-card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ferrushop-pedido-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.ferrushop-pedido-detalles {
+    display: flex;
+    align-items: center;
+}
+
+.ferrushop-pedido-detalles-text {
+    font-weight: bold;
+    color: #007bff;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

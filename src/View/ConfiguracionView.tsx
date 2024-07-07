@@ -49,7 +49,7 @@ const ConfiguracionView: React.FC = () => {
                     <div className="configuracion-opcion" onClick={() => navigate('/configuracion/editarperfil')}>
                         <div className="configuracion-texto">Editar Perfil</div>
                     </div>
-                    <div className="configuracion-opcion" onClick={() => navigate('/terminos-condiciones')}>
+                    <div className="configuracion-opcion" onClick={() => navigate('/configuracion/pedidos')}>
                         <div className="configuracion-texto">Pedidos</div>
                     </div>
                     <div className="configuracion-opcion" onClick={() => navigate('/TerminosCondiciones')}>
