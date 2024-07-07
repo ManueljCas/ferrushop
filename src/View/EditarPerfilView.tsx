@@ -10,7 +10,7 @@ import { useAuth } from '../Javascript/AuthContext';
 
 const EditarPerfilView: React.FC = () => {
     const navigate = useNavigate();
-    const { userId } = useAuth();
+    const { userId, isAuthenticated } = useAuth();
     const [originalData, setOriginalData] = useState({ name: '', email: '', password: '' });
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -19,6 +19,11 @@ const EditarPerfilView: React.FC = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
 
     useEffect(() => {
+        if (!isAuthenticated) {
+            navigate('/'); // Redirigir si no está autenticado
+            return;
+        }
+
         if (!userId) {
             toast.error('ID de usuario no definido');
             return;
@@ -40,7 +45,7 @@ const EditarPerfilView: React.FC = () => {
         };
 
         fetchUserData();
-    }, [userId]);
+    }, [userId, isAuthenticated, navigate]);
 
     const handleGuardarCambios = async () => {
         if (!name.trim() || !email.trim() || !password.trim()) {

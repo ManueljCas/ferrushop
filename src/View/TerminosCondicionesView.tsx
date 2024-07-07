@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 import Header from './HeaderView';
 import Footer from './FooterView';
 import '../Css/TerminosCondiciones.css';
+import { useAuth } from '../Javascript/AuthContext'; // Asegúrate de importar el contexto de autenticación
 
 const TerminosCondiciones = () => {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth(); // Obtén el estado de autenticación
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({});
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/'); // Redirigir si no está autenticado
+    }
+  }, [isAuthenticated, navigate]);
 
   const toggleSection = (section: string) => {
     setOpenSections((prevState) => ({
@@ -16,9 +24,8 @@ const TerminosCondiciones = () => {
     }));
   };
 
-  // Función para manejar el retroceso
   const handleBack = () => {
-    navigate(-1);  // Retrocede en el historial del navegador
+    navigate(-1); // Retrocede en el historial del navegador
   };
 
   return (

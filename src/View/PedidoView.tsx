@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Header from './HeaderView';
 import Footer from './FooterView';
 import '../Css/PedidoView.css';
+import { useAuth } from '../Javascript/AuthContext'; // Importar el contexto de autenticación
 
 interface OrderItem {
     id: number;
@@ -26,6 +27,7 @@ const PedidoView: React.FC = () => {
     const [order, setOrder] = useState<Order | null>(null);
     const [images, setImages] = useState<Map<number, string>>(new Map());
     const [loading, setLoading] = useState(true); // Estado de carga
+    const { userId } = useAuth(); // Obtener el ID del usuario autenticado
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -33,8 +35,18 @@ const PedidoView: React.FC = () => {
             try {
                 console.log(`Fetching order with ID: ${orderId}`);
                 const response = await fetch(`https://localhost:7271/api/Order/${orderId}`);
+                if (response.status === 404) {
+                    navigate('/configuracion/pedidos'); // Redirigir si no se encuentra el pedido
+                    return;
+                }
                 const data = await response.json();
                 console.log('Order data:', data);
+                
+                if (data.userId !== userId) {
+                    navigate('/configuracion/pedidos'); // Redirigir si el usuario no es el propietario del pedido
+                    return;
+                }
+
                 setOrder(data);
 
                 // Fetch images for each product in the order
@@ -47,6 +59,7 @@ const PedidoView: React.FC = () => {
                 setImages(imageMap);
             } catch (error) {
                 console.error('Error fetching order:', error);
+                navigate('/configuracion/pedidos'); // Redirigir en caso de error
             } finally {
                 setLoading(false); // Finaliza la carga
             }
@@ -56,8 +69,9 @@ const PedidoView: React.FC = () => {
             fetchOrder();
         } else {
             console.error('Order ID is undefined');
+            navigate('/configuracion/pedidos'); // Redirigir si no hay ID de pedido
         }
-    }, [orderId]);
+    }, [orderId, userId, navigate]);
 
     if (loading) {
         return (

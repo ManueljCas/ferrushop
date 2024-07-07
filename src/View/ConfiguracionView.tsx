@@ -14,6 +14,11 @@ const ConfiguracionView: React.FC = () => {
     const [orderCount, setOrderCount] = useState(0);
 
     useEffect(() => {
+        if (!isAuthenticated) {
+            navigate('/'); // Redirigir si no está autenticado
+            return;
+        }
+
         const fetchOrderCount = async () => {
             if (isAuthenticated && userId) {
                 try {
@@ -29,7 +34,7 @@ const ConfiguracionView: React.FC = () => {
         };
 
         fetchOrderCount();
-    }, [isAuthenticated, userId]);
+    }, [isAuthenticated, userId, navigate]);
 
     const handleLogout = () => {
         Swal.fire({
@@ -61,7 +66,7 @@ const ConfiguracionView: React.FC = () => {
 
     return (
         <>
-        <Header/>
+            <Header />
             <div className="configuracion-container">
                 <div className="configuracion-card">
                     <h2>Configuración</h2>
@@ -85,8 +90,7 @@ const ConfiguracionView: React.FC = () => {
                     )}
                 </div>
             </div>
-
-            <Footer/>
+            <Footer />
         </>
     );
 }
