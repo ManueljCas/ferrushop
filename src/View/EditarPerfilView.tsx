@@ -98,7 +98,20 @@ const EditarPerfilView: React.FC = () => {
     };
 
     const handleCancelar = () => {
-        navigate(-1);
+        Swal.fire({
+            title: '¿Estás seguro de que quieres cancelar los cambios?',
+            text: "Los datos editados no se guardarán",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, cancelar',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                navigate(-1); // Navega hacia atrás
+            }
+        });
     };
 
     return (
