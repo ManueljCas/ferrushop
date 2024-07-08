@@ -14,10 +14,15 @@ interface Order {
 const PedidosView: React.FC = () => {
     const [orders, setOrders] = useState<Order[]>([]);
     const [loading, setLoading] = useState(true); // Estado de carga
-    const { userId } = useAuth();
+    const { userId, isAuthenticated } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (!isAuthenticated) {
+            navigate('/'); // Redirigir si no está autenticado
+            return;
+        }
+
         const fetchOrders = async () => {
             try {
                 const response = await fetch(`https://localhost:7271/api/Order/user/${userId}`);
@@ -31,7 +36,7 @@ const PedidosView: React.FC = () => {
         };
 
         fetchOrders();
-    }, [userId]);
+    }, [userId, isAuthenticated, navigate]);
 
     if (loading) {
         return (
@@ -56,7 +61,7 @@ const PedidosView: React.FC = () => {
                 ) : (
                     <>
                         <h1 className="pedido-title">Mis Pedidos</h1>
-                        <button className="pedido-regresar" onClick={() => navigate(-1)}>Regresar</button>
+                        <button className="pedido-regresar" onClick={() => navigate('/')}>Regresar</button>
                         <div className="pedido-list">
                             {orders.map((order) => (
                                 <div key={order.id} className="pedido-card">

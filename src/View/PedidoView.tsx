@@ -27,10 +27,15 @@ const PedidoView: React.FC = () => {
     const [order, setOrder] = useState<Order | null>(null);
     const [images, setImages] = useState<Map<number, string>>(new Map());
     const [loading, setLoading] = useState(true); // Estado de carga
-    const { userId } = useAuth(); // Obtener el ID del usuario autenticado
+    const { userId, userEmail, isAuthenticated } = useAuth(); // Obtener el ID y el correo electrónico del usuario autenticado y estado de autenticación
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (!isAuthenticated) {
+            navigate('/'); // Redirigir si no está autenticado
+            return;
+        }
+
         const fetchOrder = async () => {
             try {
                 console.log(`Fetching order with ID: ${orderId}`);
@@ -41,8 +46,8 @@ const PedidoView: React.FC = () => {
                 }
                 const data = await response.json();
                 console.log('Order data:', data);
-                
-                if (data.userId !== userId) {
+
+                if (data.userEmail !== userEmail) {
                     navigate('/configuracion/pedidos'); // Redirigir si el usuario no es el propietario del pedido
                     return;
                 }
@@ -71,7 +76,7 @@ const PedidoView: React.FC = () => {
             console.error('Order ID is undefined');
             navigate('/configuracion/pedidos'); // Redirigir si no hay ID de pedido
         }
-    }, [orderId, userId, navigate]);
+    }, [orderId, userId, userEmail, isAuthenticated, navigate]);
 
     if (loading) {
         return (
