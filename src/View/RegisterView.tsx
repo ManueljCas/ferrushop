@@ -39,7 +39,7 @@ const Register = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!name.trim() || !email.trim() || !password || !confirmPassword || !captchaToken) {
+    if (!name.trim() || !email.trim() || !password.trim() || !confirmPassword.trim() || !captchaToken) {
       toast.error('Por favor, completa todos los campos y el reCAPTCHA.', {
         position: "top-right",
         autoClose: 5000,
