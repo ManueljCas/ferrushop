@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import '../Css/DescripcionProductos.css'; // Cambia el nombre del archivo CSS para reflejar el cambio de clases
+import '../Css/DescripcionProductos.css'; 
 import Header from './HeaderView';
 import Footer from './FooterView';
 import Grid from '@material-ui/core/Grid';
 import Modal from '@material-ui/core/Modal';
 import { useCart } from '../context/CartContext';
-import { useAuth } from '../Javascript/AuthContext'; // Importar el contexto de autenticación
+import { useAuth } from '../Javascript/AuthContext';
 
 interface Product {
   id: number;
@@ -29,7 +29,7 @@ const ProductoDescripcion: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
   const { addToCart } = useCart();
-  const { userEmail } = useAuth(); // Obtener el estado de autenticación
+  const { userEmail } = useAuth();
 
   const loadImage = (src: string): Promise<void> => {
     return new Promise((resolve) => {
@@ -46,7 +46,6 @@ const ProductoDescripcion: React.FC = () => {
         const response = await axios.get(`https://localhost:7271/api/Products/${id}`);
         setProduct(response.data);
 
-        // Cargar imágenes del producto
         await Promise.all(response.data.images.map((image: { data: string }) => loadImage(`data:image/jpeg;base64,${image.data}`)));
       } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -128,8 +127,7 @@ const ProductoDescripcion: React.FC = () => {
 
   return (
     <div>
-      <Header />
-
+      <Header/>
       <div className="producto-contenedor-detalles">
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} md={8}>
@@ -170,23 +168,24 @@ const ProductoDescripcion: React.FC = () => {
       </div>
 
       <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        className="producto-modal"
-      >
-        <div className="producto-modal-content">
-          <img src={selectedImage} alt="Imagen en grande" className="producto-imagen-grande" />
-        </div>
-      </Modal>
+  open={open}
+  onClose={handleClose}
+  aria-labelledby="simple-modal-title"
+  aria-describedby="simple-modal-description"
+  className="producto-modal"
+>
+  <div className="producto-modal-content">
+    <img src={selectedImage} alt="Imagen en grande" className="producto-imagen-grande" />
+  </div>
+</Modal>
+
 
       <div className="producto-contenedor-descripcion">
         <h1>Descripción</h1>
         <h2>Resumen</h2>
-        <p>{product.fullDescription}</p>
-        <h2>Más detalles</h2>
         <p>{product.details}</p>
+        <h2>Más detalles</h2>
+        <p>{product.fullDescription}</p>
       </div>
 
       <Footer />
