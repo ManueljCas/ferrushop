@@ -3,6 +3,7 @@ import Header from './HeaderView';
 import Footer from './FooterView';
 import '../Css/Faq.css';
 import FAQComponent from '../Components/FaqComponents';
+import Grid from '@material-ui/core/Grid';
 
 const FAQ: React.FC = () => {
     const { renderQuestions } = FAQComponent();
@@ -53,14 +54,14 @@ const FAQ: React.FC = () => {
                     <p>Encuentra respuestas a las preguntas más comunes sobre nuestra ferretería, productos y servicios. Si no encuentras lo que buscas, no dudes en contactarnos.</p>
                 </div>
             </div>
-            <div className="content-container">
-                <div className="faq-content">
+            <Grid container className="content-container" spacing={3}>
+                <Grid item xs={12} md={6} className="faq-content">
                     <h1>Nuestras Preguntas Frecuentes</h1>
                     <div className="question-container">
                         {renderQuestions()}
                     </div>
-                </div>
-                <div className="contact-form-container">
+                </Grid>
+                <Grid item xs={12} md={6} className="contact-form-container">
                     <h1>Contacto</h1>
                     <h2>Por favor ingrese los datos que se solicitan.</h2>
                     <form onSubmit={handleSubmit} className="contact-form">
@@ -75,8 +76,8 @@ const FAQ: React.FC = () => {
                         <button type="submit">Enviar</button>
                     </form>
                     {status && <p>{status}</p>}
-                </div>
-            </div>
+                </Grid>
+            </Grid>
             <Footer />
         </div>
     );
