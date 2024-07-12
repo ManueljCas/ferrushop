@@ -87,75 +87,85 @@ const Producto: React.FC = () => {
   }
 
   return (
-    <div className="contenedor-principal">
+    <div>
       <Header />
-
-      <div className="contenedor-seccion-productos">
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={3} className="filtro-precio">
-            <h1>Filtro</h1>
-            <ul>
-              <h3>Categorías</h3>
-              {['Herramientas de Mano', 'Herramientas Eléctricas', 'Material de Construcción', 'Fijaciones y Sujeciones', 'Pinturas y Acabados'].map((cat, idx) => (
-                <li key={idx}>
-                  <input
-                    type="checkbox"
-                    id={`categoria${idx + 1}`}
-                    value={cat}
-                    onChange={handleChangeCategories}
-                  />
-                  <label htmlFor={`categoria${idx + 1}`}>{cat}</label>
-                </li>
-              ))}
-              <h3>Precios</h3>
-              {['0-50', '50-100', '100-150', '150-200'].map((price, idx) => (
-                <li key={idx}>
-                  <input
-                    type="checkbox"
-                    id={`precio${idx + 1}`}
-                    value={price}
-                    onChange={handleChangePrices}
-                  />
-                  <label htmlFor={`precio${idx + 1}`}>{`$${price.split('-').join(' - $')}`}</label>
-                </li>
-              ))}
-            </ul>
-            <button onClick={applyFilters}>Aplicar</button>
-          </Grid>
-
-          <Grid item xs={12} md={9} className="lista-productos">
-            <Grid container spacing={3}>
-              {filteredProducts.slice(0, visibleCount).map((product) => (
-                <Grid item xs={12} key={product.id} onClick={() => handleProductClick(product.id)}>
-                  <div className="producto-item">
-                    {product.images && product.images[0] && product.images[0].data ? (
-                      <img
-                        src={`data:image/jpeg;base64,${product.images[0].data}`}
-                        alt={`Producto ${product.title}`}
-                        className="producto-imagen"
-                      />
-                    ) : (
-                      <p>No image available</p>
-                    )}
-                    <div className="producto-info">
-                      <h3>{product.title}</h3>
-                      <p>${product.price}</p>
-                      <p>{product.description}</p>
-                    </div>
-                  </div>
-                </Grid>
-              ))}
+      <div className="contenedor-principal">
+        <div className="contenedor-seccion-productos">
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={3} className="filtro-precio">
+              <h1>Filtro</h1>
+              <ul>
+                <h3>Categorías</h3>
+                {['Herramientas de Mano', 'Herramientas Eléctricas', 'Material de Construcción', 'Fijaciones y Sujeciones', 'Pinturas y Acabados'].map((cat, idx) => (
+                  <li key={idx}>
+                    <input
+                      type="checkbox"
+                      id={`categoria${idx + 1}`}
+                      value={cat}
+                      onChange={handleChangeCategories}
+                    />
+                    <label htmlFor={`categoria${idx + 1}`}>{cat}</label>
+                  </li>
+                ))}
+                <h3>Precios</h3>
+                {['0-50', '50-100', '100-150', '150-200'].map((price, idx) => (
+                  <li key={idx}>
+                    <input
+                      type="checkbox"
+                      id={`precio${idx + 1}`}
+                      value={price}
+                      onChange={handleChangePrices}
+                    />
+                    <label htmlFor={`precio${idx + 1}`}>{`$${price.split('-').join(' - $')}`}</label>
+                  </li>
+                ))}
+              </ul>
+              <button onClick={applyFilters}>Aplicar</button>
             </Grid>
-            {visibleCount < filteredProducts.length && (
-              <div className="show-more-container">
-                <button onClick={handleLoadMore} className="show-more-button">Más productos</button>
-              </div>
-            )}
-          </Grid>
-        </Grid>
-      </div>
 
-      <Footer />
+            <Grid item xs={12} md={9} className="lista-productos">
+              {filteredProducts.length === 0 ? (
+                <Grid item xs={12} className="carrito-vacio">
+                  <p>No se encontraron productos</p>
+                  <button className="carrito-agregar-mas" onClick={() => window.location.href = "/producto"}>
+                    Mostrar todos los productos
+                  </button>
+                </Grid>
+              ) : (
+                <Grid container spacing={3}>
+                  {filteredProducts.slice(0, visibleCount).map((product) => (
+                    <Grid item xs={12} key={product.id} onClick={() => handleProductClick(product.id)}>
+                      <div className="producto-item">
+                        {product.images && product.images[0] && product.images[0].data ? (
+                          <img
+                            src={`data:image/jpeg;base64,${product.images[0].data}`}
+                            alt={`Producto ${product.title}`}
+                            className="producto-imagen"
+                          />
+                        ) : (
+                          <p>No image available</p>
+                        )}
+                        <div className="producto-info">
+                          <h3>{product.title}</h3>
+                          <p>${product.price}</p>
+                          <p>{product.description}</p>
+                        </div>
+                      </div>
+                    </Grid>
+                  ))}
+                </Grid>
+              )}
+              {visibleCount < filteredProducts.length && (
+                <div className="show-more-container">
+                  <button onClick={handleLoadMore} className="show-more-button">Mostrar Todo</button>
+                </div>
+              )}
+            </Grid>
+          </Grid>
+        </div>
+
+        <Footer />
+      </div>
     </div>
   );
 };

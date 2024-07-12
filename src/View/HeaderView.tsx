@@ -115,7 +115,7 @@ function Header() {
           </Grid>
         </div>
       </header>
-      <div style={{ paddingTop: '120px' }}></div> 
+      <div className='Espacio-contenedor'></div> 
     </>
   );
 }
