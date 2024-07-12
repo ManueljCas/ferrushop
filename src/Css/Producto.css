@@ -31,7 +31,6 @@
   font-family: 'Arial', sans-serif;
   color: #888;
   margin: 10px;
-  text-align: center;
 }
 
 .filtro-precio input[type="checkbox"] {
@@ -120,6 +119,7 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  margin: 0 auto;
 }
 
 .producto-info h3 {
