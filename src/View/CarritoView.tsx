@@ -4,6 +4,7 @@ import { useAuth } from '../Javascript/AuthContext'; // Importar el contexto de 
 import '../Css/Carrito.css';
 import Header from './HeaderView';
 import Footer from './FooterView';
+import Grid from '@material-ui/core/Grid';
 import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 
 const CarritoView: React.FC = () => {
@@ -56,17 +57,19 @@ const CarritoView: React.FC = () => {
   return (
     <div>
       <Header />
-      <div className="carrito-container">
+      <Grid container className="carrito-container" spacing={3}>
         {cart.length === 0 ? (
-          <div className="carrito-vacio">
-            <p>{userEmail ? 'Tu carrito está vacío' : 'Inicia sesión para agregar un producto'}</p>
-            <button className="carrito-agregar-mas" onClick={() => window.location.href = userEmail ? "/producto" : "/login"}>
-              {userEmail ? 'Agregar un producto' : 'Iniciar sesión'}
-            </button>
-          </div>
+          <Grid container justifyContent="center" alignItems="center" className="carrito-vacio">
+            <Grid item xs={12}>
+              <p>{userEmail ? 'Tu carrito está vacío' : 'Inicia sesión para agregar un producto'}</p>
+              <button className="carrito-agregar-mas" onClick={() => window.location.href = userEmail ? "/producto" : "/login"}>
+                {userEmail ? 'Agregar un producto' : 'Iniciar sesión'}
+              </button>
+            </Grid>
+          </Grid>
         ) : (
           <>
-            <div className="carrito-productos">
+            <Grid item xs={12} md={8} className="carrito-productos">
               <table className="carrito-tabla">
                 <thead>
                   <tr>
@@ -95,18 +98,18 @@ const CarritoView: React.FC = () => {
                 <button className="carrito-agregar-mas" onClick={() => window.location.href = "/producto"}>Agregar más</button>
                 <button className="carrito-eliminar-todo" onClick={handleClearCart}>Eliminar todo</button>
               </div>
-            </div>
-            <div className="carrito-total">
+            </Grid>
+            <Grid item xs={12} md={4} className="carrito-total">
               <div className="carrito-totales">
                 <p><span>Subtotal:</span> ${subtotal.toFixed(2)}</p>
                 <p><span>IVA:</span> ${iva.toFixed(2)}</p>
                 <p><span>Total:</span> ${total.toFixed(2)}</p>
               </div>
               <button className="carrito-pagar" onClick={handlePagar} disabled={cart.length === 0}>Pagar</button>
-            </div>
+            </Grid>
           </>
         )}
-      </div>
+      </Grid>
       <Footer />
     </div>
   );
