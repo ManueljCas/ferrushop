@@ -3,7 +3,7 @@ import Header from './HeaderView';
 import Footer from './FooterView';
 import '../Css/Faq.css';
 import FAQComponent from '../Components/FaqComponents';
-import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 
 const FAQ: React.FC = () => {
     const { renderQuestions } = FAQComponent();
@@ -54,30 +54,32 @@ const FAQ: React.FC = () => {
                     <p>Encuentra respuestas a las preguntas más comunes sobre nuestra ferretería, productos y servicios. Si no encuentras lo que buscas, no dudes en contactarnos.</p>
                 </div>
             </div>
-            <Grid container className="content-container" spacing={3}>
-                <Grid item xs={12} md={6} className="faq-content">
-                    <h1>Nuestras Preguntas Frecuentes</h1>
-                    <div className="question-container">
-                        {renderQuestions()}
+            <Container>
+                <div className="content-container">
+                    <div className="faq-content">
+                        <h1>Nuestras Preguntas Frecuentes</h1>
+                        <div className="question-container">
+                            {renderQuestions()}
+                        </div>
                     </div>
-                </Grid>
-                <Grid item xs={12} md={6} className="contact-form-container">
-                    <h1>Contacto</h1>
-                    <h2>Por favor ingrese los datos que se solicitan.</h2>
-                    <form onSubmit={handleSubmit} className="contact-form">
-                        <div>
-                            <label>Nombre:</label>
-                            <input type="text" placeholder='Agrega tu nombre completo' value={name} onChange={(e) => setName(e.target.value)} required />
-                        </div>
-                        <div>
-                            <label>Mensaje:</label>
-                            <textarea value={message} placeholder='Agrega tu mensaje' onChange={(e) => setMessage(e.target.value)} required />
-                        </div>
-                        <button type="submit">Enviar</button>
-                    </form>
-                    {status && <p>{status}</p>}
-                </Grid>
-            </Grid>
+                    <div className="contact-form-container">
+                        <h1>Contacto</h1>
+                        <h2>Por favor ingrese los datos que se solicitan.</h2>
+                        <form onSubmit={handleSubmit} className="contact-form">
+                            <div>
+                                <label>Nombre:</label>
+                                <input type="text" placeholder='Agrega tu nombre completo' value={name} onChange={(e) => setName(e.target.value)} required />
+                            </div>
+                            <div>
+                                <label>Mensaje:</label>
+                                <textarea value={message} placeholder='Agrega tu mensaje' onChange={(e) => setMessage(e.target.value)} required />
+                            </div>
+                            <button type="submit">Enviar</button>
+                        </form>
+                        {status && <p>{status}</p>}
+                    </div>
+                </div>
+            </Container>
             <Footer />
         </div>
     );
