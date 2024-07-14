@@ -11,21 +11,23 @@ import Confetti from 'react-confetti';
 function PagoCompletadoView() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
+    const [showContent, setShowContent] = useState(false);
+    const [showConfetti, setShowConfetti] = useState(false);
 
     const handleContinueShopping = () => {
         navigate('/');
     };
 
     useEffect(() => {
-        // Simular un tiempo de carga para la pantalla de carga
         const loadContent = async () => {
-            await new Promise((resolve) => setTimeout(resolve, 1000)); // Ajusta el tiempo según tus necesidades
+            await new Promise((resolve) => setTimeout(resolve, 1000));
             setLoading(false);
+            setShowConfetti(true);
 
-            const card = document.querySelector('.contenido-wrapper');
-            if (card) {
-                card.classList.add('fade-in');
-            }
+            // Delay adding the fade-in class to ensure smooth transition
+            setTimeout(() => {
+                setShowContent(true);
+            }, 100);
         };
 
         loadContent();
@@ -43,12 +45,12 @@ function PagoCompletadoView() {
     return (
         <>
             <Header />
-            <Confetti />
+            {showConfetti && <Confetti />}
             <div className="pago-completado-contenedor">
                 <div className="icono-wrapper1">
                     <img src={reloj} alt="Clock Icon" className="icono" />
                 </div>
-                <div className="contenido-wrapper">
+                <div className={`contenido-wrapper ${showContent ? 'fade-in' : ''}`}>
                     <div className="check-icono-wrapper">
                         <img src={check} alt="Check Icon" className="check-icono" />
                     </div>
