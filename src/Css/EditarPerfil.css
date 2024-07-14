@@ -9,7 +9,7 @@
     margin-bottom: 80px;
 }
 
-.editar-perfil-card-custom h2{
+.editar-perfil-card-custom h2 {
     text-align: center;
 }
 
@@ -70,3 +70,10 @@
 .guardar-button-custom:hover, .cancelar-button-custom:hover {
     background-color: #e60073;
 }
+
+@media (max-width: 480px) {
+    .editar-perfil-container-custom {
+        margin:20px;
+    }
+}
+ 
