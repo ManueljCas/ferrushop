@@ -34,32 +34,51 @@ function Contacto() {
       <div className='contact-page'>
         <div className='info-contact-container'>
           <div className='information-about-us'>
-            <h1>Information About us</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis neque ultrices mattis aliquam, malesuada diam est. Malesuada sem tristique amet erat vitae eget dolor lobortis. Accumsan faucibus vitae lobortis quis bibendum quam.</p>
+            <h1>Información Sobre Nosotros</h1>
+            <p>Ferrushop es tu ferretería de confianza en Cancún. Nos dedicamos a ofrecer una amplia gama de productos de alta calidad para tus necesidades de construcción y mejoras del hogar. Nuestro compromiso es brindar el mejor servicio al cliente con precios competitivos y entrega rápida.</p>
             <img src={TresColoresIMG} alt="Tres Colores" className='tres-colores' />
           </div>
 
           <div className='contact-methods'>
-            <h1>Medios de contacto</h1>
-            <p><img src={Azul} alt="Teléfono" /> Tel: 877-67-88-99</p>
-            <p><img src={Rosa} alt="Email" /> E-Mail: shop@store.com</p>
-            <p><img src={Verde} alt="Horario" /> Horario de soporte: 8:00 AM - 10:00 PM</p>
-            <p><img src={Amarillo} alt="Dirección" /> 20 Margaret st, London, Great britain, 3NM98-LK</p>
-            <p><img src={Azul} alt="Entrega gratis" /> Entrega gratis en todos los pedidos</p>
+            <h1>Medios de Contacto</h1>
+
+            <div className='textoconimagen'>
+              <img src={Azul} alt="Teléfono" /> <p>Tel: 998-123-4567</p>
+            </div>
+
+            <div className='textoconimagen'>
+              <img src={Rosa} alt="Email" /> 
+              <p>E-Mail: contacto@ferrushop.com</p>
+            </div>
+
+            <div className='textoconimagen'>
+              <img src={Verde} alt="Horario" />
+              <p>Horario de Soporte: 8:00 AM - 10:00 PM</p>
+            </div>
+
+            <div className='textoconimagen'>
+              <img src={Amarillo} alt="Dirección" />
+              <p>Av. Tulum 123, Cancún, Quintana Roo, México</p>
+            </div>
+
+            <div className='textoconimagen'>
+              <img src={Azul} alt="Entrega gratis" />
+              <p>Entrega gratis en todos los pedidos</p>
+            </div>
           </div>
         </div>
 
         <div className='get-in-touch'>
-          <h1>Get In Touch</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis neque ultrices tristique amet erat vitae eget dolor lobortis quis bibendum quam.</p>
+          <h1>Ponerse en Contacto</h1>
+          <p>Si tienes alguna pregunta o necesitas asistencia, no dudes en ponerte en contacto con nosotros. Nuestro equipo está aquí para ayudarte con cualquier consulta que puedas tener.</p>
           <form className='form-contact'>
             <div className='form-group'>
-              <input type="text" id="name" name="name" placeholder="Your Name" required />
-              <input type="email" id="email" name="email" placeholder="Your E-mail" required />
+              <input type="text" id="name" name="name" placeholder="Tu Nombre" required />
+              <input type="email" id="email" name="email" placeholder="Tu E-mail" required />
             </div>
-            <input type="text" id="subject" name="subject" placeholder="Subject" required />
-            <textarea id="message" name="message" placeholder="Type Your Message" required></textarea>
-            <button type="submit">Send Mail</button>
+            <input type="text" id="subject" name="subject" placeholder="Asunto" required />
+            <textarea id="message" name="message" placeholder="Escribe tu Mensaje" required></textarea>
+            <button type="submit">Enviar Mensaje</button>
           </form>
         </div>
 
