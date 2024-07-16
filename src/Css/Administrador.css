@@ -1,0 +1,45 @@
+.admin-container-custom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  width: 600px;
+  margin: 50px auto;
+}
+
+.admin-title-custom {
+  font-size: 36px;
+  color: #333;
+}
+
+.admin-subtitle-custom {
+  font-size: 24px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.admin-links-custom {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.admin-button-custom {
+  width: 80%;
+  padding: 15px;
+  margin: 10px 0;
+  font-size: 18px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admin-button-custom:hover {
+  background-color: #0056b3;
+}
