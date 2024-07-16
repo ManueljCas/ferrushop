@@ -1,216 +1,330 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import '../Css/Inicio.css';
+import Grid from '@material-ui/core/Grid';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import Header from './HeaderView';
 import Footer from './FooterView';
-import '../Css/Inicio.css';
-import useInicioComponent from '../Components/InicioComponent';
-import NosotrosComponent from '../Components/NosotrosComponent';
-import ProductoImage from '../IMG/Perico.png';
-import Serrucho from '../IMG/Serrucho.png';
-import Desarmador from '../IMG/Desarmador.png';
-import CintaMetica from '../IMG/Desarmador.png';
-import Pinzas from '../IMG/Pinsas.png';
-import FondoSeguirviendo from '../IMG/FondoSeguirviendo.png';
-import Empresas from '../IMG/Empresas.png'
+import promotional from '../IMG/promotional.png';
+import seguirviendo from '../IMG/FondoSeguirviendo.png';
+import Empresa from '../IMG/Empresas.png';
 
-const Inicio = () => {
-    const { currentSlide, images, currentGroup, carrucel2, nextGroup, prevGroup, handleChangeTipoProductos, obtenerProductosSegunTipo } = useInicioComponent();
-    const { renderCards } = NosotrosComponent();
+interface ImageModel {
+    data: ArrayBuffer;
+    preview: string;
+}
+
+interface ProductModel {
+    id: number;
+    title: string;
+    category: string;
+    price: number;
+    description: string;
+    fullDescription: string;
+    details: string;
+    quantity: number;
+    images: ImageModel[];
+}
+
+const InicioView: React.FC = () => {
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [currentGroup, setCurrentGroup] = useState(0);
+    const [tipoProductos, setTipoProductos] = useState<string>('nuevos');
+    const [productos, setProductos] = useState<ProductModel[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchProductos = async () => {
+            try {
+                const response = await fetch('https://localhost:7271/api/Products');
+                const data = await response.json();
+                setProductos(data);
+                setLoading(false); // Cuando los productos se han cargado
+            } catch (error) {
+                console.error('Error fetching products', error);
+            }
+        };
+
+        fetchProductos();
+    }, []);
+
+    const images = [
+        {
+            src: promotional,
+            title: 'Nueva colección de herramientas',
+            subtitle: 'Tendencias en 2024',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
+            buyLink: 'https://example.com/comprar1'
+        },
+        {
+            src: promotional,
+            title: 'Nueva colección de herramientas',
+            subtitle: 'Tendencias en 2024',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
+            buyLink: 'https://example.com/comprar1'
+        },
+        {
+            src: promotional,
+            title: 'Nueva colección de herramientas',
+            subtitle: 'Tendencias en 2024',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
+            buyLink: 'https://example.com/comprar1'
+        }
+    ];
+
+    const nextSlide = () => {
+        setCurrentSlide((prevSlide) => (prevSlide === images.length - 1 ? 0 : prevSlide + 1));
+    };
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            nextSlide();
+        }, 6000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const handleChangeTipoProductos = (tipo: string) => {
+        setTipoProductos(tipo);
+    };
+
+    const obtenerProductosSegunTipo = () => {
+        return productos.filter(producto => producto.category === tipoProductos);
+    };
+
+    const nextGroup = () => {
+        setCurrentGroup((prevGroup) => (prevGroup + 4) % productos.length);
+    };
+
+    const prevGroup = () => {
+        setCurrentGroup((prevGroup) => (prevGroup - 4 + productos.length) % productos.length);
+    };
+
+    if (loading) {
+        return (
+            <div className="producto-loading-screen">
+            <div className="producto-loading-spinner"></div>
+            <p className="producto-loading-text">Cargando...</p>
+            </div>
+        );
+    }
+
     return (
-        <div>
+        <div className='inicio-contenedor-principal'>
             <Header />
-
-            <div className="carousel">
-        {images.map((image, index) => (
-          <img
-            key={index}
-            src={image.src}
-            alt={image.title}
-            className={index === currentSlide ? "active" : ""}
-          />
-        ))}
-        <div className="carousel-content">
-          <h2>{images[currentSlide].title}</h2>
-          <h2>{images[currentSlide].subtitle}</h2>
-          <p>{images[currentSlide].description}</p>
-          <a href={images[currentSlide].buyLink} className="buy-button">Comprar Ahora</a>
-        </div>
-      </div>
-
-            <div className='cards-productos'>
-                <h1>Productos destacados</h1>
-            </div>
-
-            <div className="new-carousel">
-                <div className="new-carousel-inner">
-                    {carrucel2.slice(currentGroup, currentGroup + 4).map((image, index) => (
-                        <div key={index} className="new-carousel-item">
-                            <div className='contenedor-imagenes-carrucel'>
-                                <img src={image.src} alt={image.title} />
-                            </div>
-                            <div className="new-carousel-content">
-                                <h2>{image.title}</h2>
-                                <h2>{image.subtitle}</h2>
-                                <p>{image.description}</p>
-                                <a href={image.buyLink} className="buy-button">Comprar Ahora</a>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-                <div>
-                    <button className="new-carousel-button prev" onClick={prevGroup}>Prev</button>
-                    <button className="new-carousel-button next" onClick={nextGroup}>Next</button>
-                </div>
-            </div>
-
-            <h1>Productos más recientes </h1>
-
-            <div className="secciones-productos">
-                <div className="titulo-seccion" onClick={() => handleChangeTipoProductos('nuevos')}>
-                    <h1>Nuevo</h1>
-                </div>
-                <div className="titulo-seccion" onClick={() => handleChangeTipoProductos('masVendidos')}>
-                    <h1>Más Vendido</h1>
-                </div>
-                <div className="titulo-seccion" onClick={() => handleChangeTipoProductos('destacados')}>
-                    <h1>Destacado</h1>
-                </div>
-                <div className="titulo-seccion" onClick={() => handleChangeTipoProductos('oferta')}>
-                    <h1>Oferta</h1>
-                </div>
-            </div>
-
-            <div className="productos-container">
-                {obtenerProductosSegunTipo().map((producto, index) => (
-                    <div key={index} className="producto">
-                        <img src={producto.src} alt={producto.nombre} />
-                        <div className="producto-info">
-                            <h2>{producto.nombre}</h2>
-                            <p>Precio: ${producto.precio}</p>
-                        </div>
-                    </div>
+            <div className="inicio-carousel">
+                {images.map((image, index) => (
+                    <img
+                        key={index}
+                        src={image.src}
+                        alt={image.title}
+                        className={index === currentSlide ? "inicio-carousel-active" : ""}
+                    />
                 ))}
-            </div>
-
-            <div className='contenedor-carrucel'>
-                <h1>¡Lo mejor que tenemos para ofrecerte!</h1>
-                <div className="card-container">
-                    {renderCards()}
+                <div className="inicio-carousel-content">
+                    <h2>{images[currentSlide].title}</h2>
+                    <h2>{images[currentSlide].subtitle}</h2>
+                    <p>{images[currentSlide].description}</p>
+                    <a href={images[currentSlide].buyLink} className="inicio-buy-button">Comprar Ahora</a>
                 </div>
             </div>
 
-            <div className='contenedor-producto'>
-                <img src={ProductoImage} alt="Producto especial" className="producto-imagen" />
-                <div className="producto-contenido">
-                    <h2>Características únicas de los últimos y Productos de tendencia</h2>
-                    <ul>
-                        <li><span style={{color: 'blue'}}>Llave inglesa resistente</span> hecha de aleación de acero al carbono</li>
-                        <li><span style={{color: 'red'}}>Mango antideslizante</span> cubierto con goma para mejor agarre</li>
-                        <li><span style={{color: 'green'}}>Tamaño ajustable</span> para encajar en varias tuercas y tornillos</li>
-                    </ul>
-                    <a href="./" className="buy-button">Comprar Ahora</a>
-                    <p className="price">$19.99</p>
-                </div>
+            <div className='inicio-cards-productos'>
+                <h1>Productos nuevos</h1>
             </div>
 
-            {/* Sección de Productos de tendencia */}
-            <div className='trend-products'>
-                <h1>Productos de tendencia</h1>
-                <div className='trend-products-container'>
-                    {[1, 2, 3, 4].map((item, index) => (
-                        <div key={index} className='trend-product'>
-                            <div className="trend-product-image-wrapper">
-                                <img src={Serrucho} alt={`Trend Product ${item}`} className="trend-product-image" />
+            <div className="inicio-new-carousel">
+                <Grid container spacing={3}>
+                    {productos.slice(currentGroup, currentGroup + 4).map((producto, index) => (
+                        <Grid item xs={12} sm={6} md={3} key={index}>
+                            <div className="inicio-new-carousel-item">
+                                <div className='inicio-contenedor-imagenes-carrucel'>
+                                    {producto.images[0]?.data && (
+                                        <img src={`data:image/png;base64,${producto.images[0]?.data}`} alt={producto.title} className='inicio-contenedor-imagenes-carrucel-img'/>
+                                    )}
+                                </div>
+                                <div className="inicio-new-carousel-content">
+                                    <h2>{producto.title}</h2>
+                                    <p>{producto.description}</p>
+                                    <a href={`./producto/${producto.id}`} className="inicio-buy-button">Comprar Ahora</a>
+                                </div>
                             </div>
-                            <div className="producto-info">
-                                <h2 className="product-name">Cantilever Chair</h2>
-                                <p className="product-price">
-                                    $26.00 <span className="price-old">$42.00</span>
-                                </p>
-                            </div>
-                        </div>
+                        </Grid>
                     ))}
+                </Grid>
+                <div>
+                    <button className="inicio-new-carousel-button prev" onClick={prevGroup}><AiOutlineArrowLeft /></button>
+                    <button className="inicio-new-carousel-button next" onClick={nextGroup}><AiOutlineArrowRight /></button>
                 </div>
             </div>
 
-            <div className='contenedor-descuento'>
-                <h1>Artículo con descuento</h1>
-                <div className='navegacion-productos'>
-                    <a href='#producto1' className='activo'>Producto 1</a>
-                    <a href='#producto2'>Producto 2</a>
-                    <a href='#producto3'>Producto 3</a>
-                </div>
-                <div className='producto-descuento'>
-                    <div className='info-descuento'>
-                        <h2>20% de descuento en este producto</h2>
-                        <h3>Desarmador</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu eget feugiat habitasse nec, bibendum condimentum.</p>
-                        <ul>
-                            <li>✔ Material expose like metals</li>
-                            <li>✔ Clear lines and geometric figures</li>
-                            <li>✔ Simple neutral colours</li>
-                            <li>✔ Material expose like metals</li>
-                        </ul>
-                        <a href="./" className="buy-button">Comprar Ahora</a>
-                        </div>
-                    <div className='imagen-descuento'>
-                        <img src={Desarmador} alt="Desarmador" />
+            <div className='inicio-productos-recientes'>
+                <h1>Productos más recientes</h1>
+            </div>
+
+            <Grid container spacing={3} className="inicio-secciones-productos">
+                <Grid item xs={3} onClick={() => handleChangeTipoProductos('nuevos')}>
+                    <div className="inicio-titulo-seccion">
+                        <h1>Nuevo</h1>
                     </div>
-                </div>
-            </div>
+                </Grid>
+                <Grid item xs={3} onClick={() => handleChangeTipoProductos('masVendidos')}>
+                    <div className="inicio-titulo-seccion">
+                        <h1>Más Vendido</h1>
+                    </div>
+                </Grid>
+                <Grid item xs={3} onClick={() => handleChangeTipoProductos('destacados')}>
+                    <div className="inicio-titulo-seccion">
+                        <h1>Destacado</h1>
+                    </div>
+                </Grid>
+                <Grid item xs={3} onClick={() => handleChangeTipoProductos('oferta')}>
+                    <div className="inicio-titulo-seccion">
+                        <h1>Oferta</h1>
+                    </div>
+                </Grid>
+            </Grid>
 
-            {/* Nueva Sección de Categorías Principales */}
-            <div className='categorias-principales'>
-                <h1>Categorías principales</h1>
-                <div className='categorias-container'>
-                    {[1, 2, 3, 4].map((item, index) => (
-                        <div key={index} className='categoria-item'>
-                            <div className='categoria-imagen-wrapper'>
-                                <img src={CintaMetica} alt={`Categoría ${item}`} className='categoria-imagen' />
-                                <div className="categoria-info">
-                                <h2 className="categoria-nombre">Mini LCW Chair</h2>
-                                <p className="categoria-precio">$56.00</p>
-                            </div>
-                            </div>
-                            
-                        </div>
-                    ))}
-                </div>
-                <div className='categorias-paginacion'>
-                    <span className='paginacion-activa'></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-
-            <div className='lista-productos'>
-                <h1>Categorías principales</h1>
-                <div className='lista-productos-container'>
-                    {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
-                        <div key={index} className='lista-producto-item'>
-                            <div className="lista-producto-imagen-wrapper">
-                                <img src={Pinzas} alt={`Lista Producto ${item}`} className="lista-producto-imagen" />
-                            </div>
-                            <div className="producto-info">
-                                <h2 className="product-name">Product Name</h2>
-                                <p className="product-price">
-                                    $20.00 <span className="price-old">$30.00</span>
-                                </p>
+            <Grid container spacing={3} className="inicio-productos-container">
+                {obtenerProductosSegunTipo().map((producto, index) => (
+                    <Grid item xs={12} sm={6} md={3} key={index}>
+                        <div className="inicio-producto">
+                            {producto.images[0]?.data && (
+                                <img src={`data:image/png;base64,${producto.images[0]?.data}`} alt={producto.title} className='inicio-producto-imagen-inicio' />
+                            )}
+                            <div className="inicio-producto-info">
+                                <h2>{producto.title}</h2>
+                                <p>Precio: ${producto.price}</p>
+                                <a href={`./producto/${producto.id}`} className="inicio-buy-button">Comprar Ahora</a>
                             </div>
                         </div>
+                    </Grid>
+                ))}
+            </Grid>
+
+            <div className='inicio-contenedor-producto'>
+                <Grid container spacing={3} alignItems="center">
+                    <Grid item xs={12} md={6}>
+                        <img src="https://example.com/special-product.jpg" alt="Producto especial" className="inicio-producto-imagen-inicio-dos" />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <div className="inicio-producto-contenido">
+                            <h2>Características únicas de los últimos y Productos de tendencia</h2>
+                            <ul>
+                                <li><span style={{ color: 'blue' }}>Llave inglesa resistente</span> hecha de aleación de acero al carbono</li>
+                                <li><span style={{ color: 'red' }}>Mango antideslizante</span> cubierto con goma para mejor agarre</li>
+                                <li><span style={{ color: 'green' }}>Tamaño ajustable</span> para encajar en varias tuercas y tornillos</li>
+                            </ul>
+                            <a href="./" className="inicio-buy-button">Comprar Ahora</a>
+                            <p className="inicio-price">$19.99</p>
+                        </div>
+                    </Grid>
+                </Grid>
+            </div>
+
+            <div className='inicio-trend-products'>
+                <h1>Productos de tendencia</h1>
+                <Grid container spacing={3} className='inicio-trend-products-container'>
+                    {productos.slice(0, 4).map((producto, index) => (
+                        <Grid item xs={12} sm={6} md={2} key={index}>
+                            <div className='inicio-trend-product'>
+                                <div className="inicio-trend-product-image-wrapper">
+                                    {producto.images[0]?.data && (
+                                        <img src={`data:image/png;base64,${producto.images[0]?.data}`} alt={`Trend Product ${producto.title}`} className="inicio-trend-product-image" />
+                                    )}
+                                </div>
+                                <div className="inicio-producto-info-dos">
+                                    <h2 className="inicio-product-name">{producto.title}</h2>
+                                    <p className="inicio-product-price">
+                                        ${producto.price} <span className="inicio-price-old">$42.00</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </Grid>
                     ))}
+                </Grid>
+            </div>
+
+            <div className='inicio-contenedor-descuento'>
+                <h1>¡Artículo con descuento!</h1>
+                <div className='inicio-producto-descuento'>
+                    <Grid container spacing={3} justifyContent="center" alignItems="center">
+                        <Grid item xs={12} sm={6} md={4}>
+                            <div className='inicio-info-descuento'>
+                                <h2>20% de descuento en este producto</h2>
+                                <h3>Desarmador</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu eget feugiat habitasse nec, bibendum condimentum.</p>
+                                <ul>
+                                    <li>✔ Material expose like metals</li>
+                                    <li>✔ Clear lines and geometric figures</li>
+                                    <li>✔ Simple neutral colours</li>
+                                    <li>✔ Material expose like metals</li>
+                                </ul>
+                                <a href="./" className="inicio-buy-button">Comprar Ahora</a>
+                            </div>
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={3}>
+                            <div className='inicio-imagen-descuento'>
+                                <img src="https://example.com/desarmador.jpg" alt="Desarmador" />
+                            </div>
+                        </Grid>
+                    </Grid>
                 </div>
             </div>
 
-            <div className='contenedor-fondo'>
-                <img src={FondoSeguirviendo} alt="FondoSeguirViendo" className="fondo-imagen" />
-                <div className='fondo-texto'>
-                    <h1>¿Aún no te has decidido?</h1>
-                    <button className='fondo-boton'>Seguir viendo</button>
+            <div className='inicio-categorias-principales'>
+                <h1>Categorías principales</h1>
+                <Grid container spacing={3} className='inicio-categorias-container'>
+                    {productos.slice(0, 4).map((producto, index) => (
+                        <Grid item xs={12} sm={6} md={2} key={index}>
+                            <div className='inicio-categoria-item'>
+                                <div className='inicio-categoria-imagen-wrapper'>
+                                    {producto.images[0]?.data && (
+                                        <img src={`data:image/png;base64,${producto.images[0]?.data}`} alt={`Categoría ${producto.title}`} className='inicio-categoria-imagen' />
+                                    )}
+                                    <div className="inicio-categoria-info">
+                                        <h2 className="inicio-categoria-nombre">{producto.title}</h2>
+                                        <p className="inicio-categoria-cantidad">22 Productos</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </Grid>
+                    ))}
+                </Grid>
+            </div>
+
+            <div className='inicio-productos-recomendados'>
+                <h1>Productos recomendados</h1>
+                <Grid container spacing={10} className='inicio-productos-recomendados-container'>
+                    {productos.slice(0, 4).map((producto, index) => (
+                        <Grid item xs={12} sm={6} md={2} key={index}>
+                            <div className='inicio-producto-recomendado'>
+                                <div className='inicio-producto-recomendado-imagen-wrapper'>
+                                    {producto.images[0]?.data && (
+                                        <img src={`data:image/png;base64,${producto.images[0]?.data}`} alt={`Recomendado ${producto.title}`} className='inicio-producto-recomendado-imagen' />
+                                    )}
+                                </div>
+                                <div className="inicio-producto-info">
+                                    <h2 className="inicio-product-name">{producto.title}</h2>
+                                    <p className="inicio-product-price">
+                                        ${producto.price} <span className="inicio-price-old">$42.00</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </Grid>
+                    ))}
+                </Grid>
+            </div>
+
+            <div className="inicio-contenedor-fondo">
+                <img src={seguirviendo} alt="Seguir viendo" className="inicio-fondo-imagen" />
+                <div className="inicio-fondo-texto">
+                    <h1>Seguir viendo</h1>
+                    <a href="/producto" className="inicio-buy-button">Haz click aquí</a>
                 </div>
             </div>
 
-            <div className='Contenedor-empresas'>
-            <img src={Empresas} alt="FondoSeguirViendo" className="Empresa" />
+            <div className="inicio-contenedor-empresas">
+                <img src={Empresa} alt="Empresas colaboradoras" className="inicio-imagen-empresas" />
             </div>
 
             <Footer />
@@ -218,4 +332,4 @@ const Inicio = () => {
     );
 };
 
-export default Inicio;
+export default InicioView;

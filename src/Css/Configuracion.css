@@ -1,0 +1,77 @@
+.configuracion-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    margin: 50px;
+}
+
+.configuracion-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+    text-align: left;
+}
+
+.configuracion-card h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+.configuracion-opcion {
+    padding: 15px 20px;
+    margin: 10px 0;
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+}
+
+.configuracion-opcion:hover {
+    background-color: #f0f0f0;
+}
+
+.configuracion-texto {
+    flex-grow: 1;
+    font-size: 18px;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.order-count {
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 0.5px 6px;
+    font-size: 12px;
+    position: absolute;
+    top: -12px;
+    left: 60px; /* Ajusta este valor según sea necesario para que se vea encima del texto */
+}
+
+.configuracion-boton-logout {
+    background-color: #ff007f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.configuracion-boton-logout:hover {
+    background-color: #e60073;
+}

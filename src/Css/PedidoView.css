@@ -1,0 +1,68 @@
+.fshop-pedido-detalles {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.fshop-pedido-detalles h1, .fshop-pedido-detalles h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.fshop-pedido-detalles p {
+    margin: 5px 0;
+    text-align: center;
+}
+
+.fshop-pedido-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.fshop-pedido-item-card {
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+.fshop-pedido-item-image {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.fshop-pedido-item-details {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.fshop-pedido-back-button {
+    margin-top: 20px;
+    padding: 10px 0;
+    width: 100%; /* Ocupa todo el ancho de la tarjeta */
+    background-color: #ff69b4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1em;
+}
+
+.fshop-pedido-back-button:hover {
+    background-color: #bd226f;
+    text-align: center;
+}

@@ -5,17 +5,13 @@
 }
 
 .footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
 .footer-section {
-  flex: 1;
-  margin-right: 20px;
+  margin-bottom: 20px;
 }
 
 .footer-section h2 {
@@ -50,10 +46,12 @@
   margin-top: 20px;
 }
 
-@media screen and (max-width: 768px){
-  .footer-content{
+@media screen and (max-width: 768px) {
+  .footer-content {
     text-align: center;
-    align-items: center;
-    flex-direction: column;
+  }
+
+  .footer-section {
+    margin-bottom: 20px;
   }
 }

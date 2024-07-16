@@ -1,161 +1,205 @@
 /* src/Css/Producto.css */
 
 .contenedor-seccion-productos {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 20px;
-  }
-  
-  .filtro-precio {
-    flex: 1;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-right: 1px solid #ddd;
-    max-width: 200px;
-  }
-  
-  .filtro-precio h2 {
-    font-size: 18px;
-    margin-bottom: 20px;
-    font-family: 'Arial', sans-serif;
-    color: #151875;
-    border-bottom: 2px solid #151875;
-    display: inline-block;
-    padding-bottom: 5px;
-  }
-  
-  .filtro-precio ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .filtro-precio li {
-    margin-bottom: 10px;
-    font-family: 'Arial', sans-serif;
-    color: #888;
-  }
-  
-  .filtro-precio input[type="checkbox"] {
-    display: none;
-  }
-  
-  .filtro-precio input[type="checkbox"] + label {
-    position: relative;
-    padding-left: 30px;
-    cursor: pointer;
-    color: #888;
-    font-size: 14px;
-  }
-  
-  .filtro-precio input[type="checkbox"] + label:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #FB2E86;
-    background-color: #fff;
-    border-radius: 3px;
-  }
-  
-  .filtro-precio input[type="checkbox"]:checked + label:before {
-    background-color: #FB2E86;
-  }
-  
-  .filtro-precio input[type="checkbox"]:checked + label:after {
-    content: '✔';
-    position: absolute;
-    left: 4px;
-    top: -2px;
-    color: #fff;
-    font-size: 16px;
-  }
-  
-  .filtro-precio button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #FB2E86;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .filtro-precio button:hover {
-    background-color: #c81261;
-  }
-  
-  .lista-productos {
-    flex: 3;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-  }
-  
+  padding: 20px;
+}
+
+.filtro-precio {
+  background-color: #f9f9f9;
+  border-right: 1px solid #ddd;
+  align-items: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.filtro-precio h1 {
+  font-size: 18px;
+  font-family: 'Arial', sans-serif;
+  color: #151875;
+  border-bottom: 2px solid #151875;
+  text-align: center;
+}
+
+.filtro-precio ul {
+  list-style: none;
+  padding: 0;
+}
+
+.filtro-precio li {
+  margin-bottom: 10px;
+  font-family: 'Arial', sans-serif;
+  color: #888;
+  margin: 10px;
+}
+
+.filtro-precio input[type="checkbox"] {
+  display: none;
+}
+
+.filtro-precio input[type="checkbox"] + label {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  color: #888;
+  font-size: 14px;
+}
+
+.filtro-precio input[type="checkbox"] + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #FB2E86;
+  background-color: #fff;
+  border-radius: 3px;
+}
+
+.filtro-precio input[type="checkbox"]:checked + label:before {
+  background-color: #FB2E86;
+}
+
+.filtro-precio input[type="checkbox"]:checked + label:after {
+  content: '✔';
+  position: absolute;
+  left: 4px;
+  top: -2px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.filtro-precio button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #FB2E86;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.filtro-precio button:hover {
+  background-color: #c81261;
+}
+
+.lista-productos {
+  padding: 20px;
+}
+
+.producto-item {
+  cursor: pointer;
+  display: flex;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.producto-item:hover {
+  transform: scale(0.99);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+.producto-imagen {
+  width: 100px;
+  height: auto;
+  margin-right: 20px;
+  object-fit: cover;
+}
+
+.producto-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.producto-info h3 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #151875;
+}
+
+.producto-info p {
+  margin: 5px 0;
+  color: #888;
+}
+
+.producto-iconos {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.producto-iconos span {
+  cursor: pointer;
+  font-size: 20px;
+  color: #151875;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
   .producto-item {
-    display: flex;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
+
   .producto-imagen {
     width: 100%;
-    height: auto;
-    max-width: 300px;
+    max-width: 100%;
+    margin: 0 0 10px 0;
   }
-  
-  .producto-info {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .producto-info h3 {
-    margin-top: 0;
-    font-size: 18px;
-    color: #151875;
-  }
-  
-  .producto-info p {
-    margin: 5px 0;
-    color: #888;
-  }
-  
-  /* Responsivo */
-  @media (max-width: 768px) {
-    .producto-imagen{
-        align-items: none;
-        width: 350px;
-        max-width: 350px;
-        margin: 0;
-        padding: 0;
-    }
 
-    .producto-item{
-        margin: 0;
-        padding: 0;
-        flex-direction: column;
-    }
-    
-    .contenedor-seccion-productos {
-      flex-direction: column;
-    }
-  
-    .filtro-precio {
-      max-width: 100%;
-      border-right: none;
-      border-bottom: 1px solid #ddd;
-      margin-bottom: 20px;
-    }
-  
-    .lista-productos {
-      flex-direction: column;
-    }
+  .producto-info {
+    align-items: center;
   }
-  
+
+  .contenedor-seccion-productos {
+    padding: 10px;
+    margin: 0;
+  }
+
+  .filtro-precio {
+    max-width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+  }
+
+  .lista-productos {
+    padding: 0;
+  }
+}
+
+/* Estilo para el contenedor del botón de mostrar más */
+.show-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Estilo para el botón de mostrar más */
+.show-more-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #FB2E86;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.show-more-button:hover {
+  background-color: #db1269;
+}
+
