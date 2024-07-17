@@ -6,42 +6,98 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-const Register = () => {
+interface GoogleData {
+  name: string;
+  email: string;
+  idToken: string;
+}
+
+const Register: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const [isPageLoading, setIsPageLoading] = useState(true);
   const navigate = useNavigate();
 
-  const loadImage = (src: string): Promise<void> => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => resolve();
-      img.onerror = () => resolve();
-    });
-  };
-
   useEffect(() => {
-    const loadContent = async () => {
-      await Promise.all([
-        loadImage('../IMG/Ferreteria.jpg'),
-      ]);
-      setIsPageLoading(false);
+    const initializeGoogleSignIn = () => {
+      if (window.google) {
+        window.google.accounts.id.initialize({
+          client_id: '136405474817-3coi3o0eaf3q35daj451u2klms4c6c8o.apps.googleusercontent.com',
+          callback: handleGoogleSignIn,
+        });
+        window.google.accounts.id.renderButton(
+          document.getElementById('googleSignInButton') as HTMLElement,
+          { theme: 'outline', size: 'large' }
+        );
+      } else {
+        console.error('Google API script not loaded');
+      }
     };
 
-    loadContent();
+    if (typeof window.google !== 'undefined') {
+      initializeGoogleSignIn();
+    } else {
+      window.addEventListener('load', initializeGoogleSignIn);
+    }
+
+    return () => {
+      window.removeEventListener('load', initializeGoogleSignIn);
+    };
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleGoogleSignIn = async (response: google.accounts.id.CredentialResponse) => {
+    const idToken = response.credential;
+    const userInfo = JSON.parse(atob(idToken.split('.')[1]));
+    const email = userInfo.email;
+    const name = userInfo.name;
 
-    if (!name.trim() || !email.trim() || !password.trim() || !confirmPassword.trim() || !captchaToken) {
+    // Verificar si el usuario ya existe
+    try {
+      const userExistsResponse = await fetch(`https://localhost:7271/api/usuario/exists?email=${email}`);
+
+      if (userExistsResponse.status === 409) {
+        toast.info('Usuario ya registrado. Redirigiendo al login...', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        navigate('/login');
+        return;
+      }
+
+      // Si el usuario no existe, procede con el registro
+      const googleData: GoogleData = {
+        name: name,
+        email: email,
+        idToken: idToken,
+      };
+      handleSubmit(undefined, googleData);
+    } catch (error) {
+      toast.error('Error en la verificación del usuario', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+
+  const handleSubmit = async (e?: React.FormEvent<HTMLFormElement>, googleData?: GoogleData) => {
+    if (e) e.preventDefault();
+
+    if (!googleData && (!name.trim() || !email.trim() || !password.trim() || !confirmPassword.trim() || !captchaToken)) {
       toast.error('Por favor, completa todos los campos y el reCAPTCHA.', {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -52,9 +108,9 @@ const Register = () => {
       return;
     }
 
-    if (password !== confirmPassword) {
+    if (!googleData && password !== confirmPassword) {
       toast.error('Las contraseñas no coinciden.', {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -65,18 +121,20 @@ const Register = () => {
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      toast.error('Por favor, ingresa un correo electrónico válido.', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      return;
+    if (!googleData) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        toast.error('Por favor, ingresa un correo electrónico válido.', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        return;
+      }
     }
 
     setLoading(true);
@@ -85,8 +143,8 @@ const Register = () => {
       const userExistsResponse = await fetch(`https://localhost:7271/api/usuario/exists?email=${email}`);
 
       if (userExistsResponse.status === 409) {
-        toast.error('El usuario ya existe', {
-          position: "top-right",
+        toast.info('Usuario ya registrado. Redirigiendo al login...', {
+          position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -94,21 +152,27 @@ const Register = () => {
           draggable: true,
           progress: undefined,
         });
-        setLoading(false); 
+        navigate('/login');
+        setLoading(false);
         return;
       }
 
       const response = await fetch('https://localhost:7271/api/usuario', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, password, captchaToken })
+        body: JSON.stringify({
+          name: googleData ? googleData.name : name,
+          email: googleData ? googleData.email : email,
+          password: googleData ? 'defaultPassword' : password,
+          captchaToken: googleData ? 'googleCaptchaToken' : captchaToken,
+        }),
       });
 
       if (response.ok) {
         toast.success('Usuario creado', {
-          position: "top-right",
+          position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -116,10 +180,10 @@ const Register = () => {
           draggable: true,
           progress: undefined,
         });
-        navigate('/login'); // Redirigir al login después del registro exitoso
+        navigate('/login');
       } else {
         toast.error('Error en el registro', {
-          position: "top-right",
+          position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -130,7 +194,7 @@ const Register = () => {
       }
     } catch (error) {
       toast.error('Error en la conexión', {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -146,15 +210,6 @@ const Register = () => {
   const onCaptchaChange = (token: string | null) => {
     setCaptchaToken(token);
   };
-
-  if (isPageLoading) {
-    return (
-      <div className="producto-loading-screen">
-        <div className="producto-loading-spinner"></div>
-        <p className="producto-loading-text">Cargando...</p>
-      </div>
-    );
-  }
 
   return (
     <div className='bodyy'>
@@ -200,7 +255,7 @@ const Register = () => {
               <div className="form-group">
                 <input 
                   type="password" 
-                  id="confirmPassword" 
+                  id="confirmPassword"
                   name="confirmPassword"
                   placeholder="Confirmar Contraseña"
                   value={confirmPassword}
@@ -217,11 +272,11 @@ const Register = () => {
               {loading ? (
                 <div className="loading-container">
                   <CircularProgress />
-                </div>              
-                ) : (
+                </div>
+              ) : (
                 <>
-                  <h3>¿Olvidaste tu contraseña? Haz clic <a href="/recuperarContrasena">aquí</a></h3>
                   <button type="submit" className="login-button">Registrarse</button>
+                  <div id="googleSignInButton" className='hola'></div>
                   <h3>¿Ya tienes cuenta? Haz clic <a href="/login">aquí</a></h3>
                 </>
               )}

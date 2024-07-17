@@ -322,9 +322,12 @@
 }
 
 .inicio-contenedor-descuento {
-  text-align: center;
   padding: 40px 20px;
   background-color: #f9f9f9;
+}
+
+.inicio-contenedor-descuento h1 {
+  text-align: center;
 }
 
 .inicio-contenedor-descuento h1 {
@@ -367,7 +370,6 @@
 .inicio-info-descuento {
   max-width: 500px;
   margin-right: 20px;
-  text-align: center;
   flex: 1;
 }
 
@@ -450,6 +452,7 @@
 }
 
 .inicio-categoria-imagen {
+  border-radius: 5px;
   width: 100px;
   height: auto;
 }
@@ -672,4 +675,201 @@ a {
   margin-top: 20px;
   font-size: 18px;
   color: #333;
+}
+
+.inicio-trend-product-link {
+  text-decoration: none; 
+}
+
+.inicio-trend-product {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inicio-trend-product:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.inicio-product-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inicio-product-hover:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .inicio-carousel {
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+  }
+
+  .inicio-carousel img {
+      width: 100%;
+      height: auto;
+      display: none;
+  }
+
+  .inicio-carousel-content {
+      position: static;
+      transform: none;
+      text-align: center;
+      background-image: url('../IMG/fondo-promocion.png');
+      background-size: cover;
+      background-position: center;
+      padding: 10px;
+      color: #fff;
+      margin: 0px auto;
+  }
+
+  .inicio-carousel-content h1 {
+    font-size: 35px;
+    color: #151875;
+    margin: 30px 50px;
+  }
+
+  .inicio-carousel-content h2 {
+      font-size: 25px;
+      color: #151875;
+      margin: 30px 50px;
+  }
+
+  .inicio-carousel-content p {
+    margin: 40px 0;
+    font-size: 25px;
+    color: #151875;
+    text-align: justify;
+  }
+
+  .inicio-carousel-content .inicio-buy-button {
+    font-size: 20px;
+      padding: 10px 20px;
+  }
+
+  
+}
+
+@media (max-width: 600px) {
+  .inicio-trend-products-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    width: 100%; /* Asegurando que el contenedor tome el ancho completo */
+  }
+
+  .inicio-trend-product {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+
+  .inicio-trend-product-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .inicio-trend-product-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .inicio-producto-info-dos {
+    text-align: center;
+  }
+
+  .inicio-product-name {
+    font-size: 1.2em;
+  }
+
+  .inicio-product-price {
+    font-size: 1em;
+  }
+}
+
+
+
+
+@media (max-width: 600px) {
+    .inicio-categorias-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    .inicio-categoria-info {
+        text-align: center;
+    }
+
+    .inicio-categoria-nombre {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 600px) {
+  .inicio-productos-recomendados-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .inicio-producto-recomendado {
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 20px;
+  }
+
+  .inicio-producto-recomendado-imagen-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .inicio-producto-recomendado-imagen {
+      width: 100%;
+      height: auto;
+  }
+
+  .inicio-producto-info {
+      text-align: center;
+  }
+
+  .inicio-product-name {
+      font-size: 1.2em;
+  }
+}
+
+@media (max-width: 768px) {
+  .inicio-contenedor-fondo {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .inicio-fondo-imagen {
+    width: 100%;
+    height: 200px; /* Ajusta la altura según sea necesario */
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .inicio-fondo-texto {
+    margin-top: 10px;
+    color: #000;
+  }
+
+  .inicio-buy-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #ff1493;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+  }
 }

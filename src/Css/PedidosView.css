@@ -114,3 +114,13 @@
         opacity: 1;
     }
 }
+
+.Google-maps{
+    width: 100%;
+    border-radius: 5px;
+}
+
+.Google-maps h3 {
+    text-align: center;
+    margin: 20px;
+}

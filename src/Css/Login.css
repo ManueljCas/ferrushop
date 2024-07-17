@@ -42,7 +42,7 @@
     flex-direction: column;
 }
 
-.login-form h2, h3 {
+.login-form h2, .login-form h3 {
     text-align: center;
 }
 
@@ -105,3 +105,11 @@
     align-items: center;
     height: 100%;
 }
+
+
+#googleSignInButton {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 15px;
+  }

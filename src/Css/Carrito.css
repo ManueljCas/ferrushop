@@ -127,7 +127,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 40vh; /* Altura completa */
 }
 
 .carrito-vacio p {

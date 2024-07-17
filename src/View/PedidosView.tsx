@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../Javascript/AuthContext';
 import Header from './HeaderView';
@@ -16,6 +16,7 @@ const PedidosView: React.FC = () => {
     const [loading, setLoading] = useState(true); // Estado de carga
     const { userId, isAuthenticated } = useAuth();
     const navigate = useNavigate();
+    const mapRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (!isAuthenticated) {
@@ -37,6 +38,21 @@ const PedidosView: React.FC = () => {
 
         fetchOrders();
     }, [userId, isAuthenticated, navigate]);
+
+    useEffect(() => {
+        if (!loading && mapRef.current && window.google) {
+            const map = new google.maps.Map(mapRef.current, {
+                center: { lat: 21.161908, lng: -86.851528 },
+                zoom: 15,
+            });
+
+            new google.maps.Marker({
+                position: { lat: 21.161908, lng: -86.851528 },
+                map: map,
+                title: "Universidad Tecnológica de Cancún",
+            });
+        }
+    }, [loading]);
 
     if (loading) {
         return (
@@ -76,6 +92,11 @@ const PedidosView: React.FC = () => {
                                     </Link>
                                 </div>
                             ))}
+                        </div>
+
+                        <div className='Google-maps'>
+                            <h3>También puedes buscar tu pedido aquí.</h3>
+                            <div ref={mapRef} style={{ width: '100%', height: '400px' }}></div>
                         </div>
                     </>
                 )}

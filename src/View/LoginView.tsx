@@ -13,29 +13,94 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const [isPageLoading, setIsPageLoading] = useState(true);
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const loadImage = (src: string): Promise<void> => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => resolve();
-      img.onerror = () => resolve();
-    });
-  };
-
   useEffect(() => {
-    const loadContent = async () => {
-      await Promise.all([
-        loadImage('../IMG/Ferreteria.jpg'),
-      ]);
-      setIsPageLoading(false);
+    const initializeGoogleSignIn = () => {
+      const googleButton = document.getElementById('googleSignInButton');
+      if (window.google && googleButton) {
+        console.log("Google API loaded, initializing...");
+        window.google.accounts.id.initialize({
+          client_id: '136405474817-3coi3o0eaf3q35daj451u2klms4c6c8o.apps.googleusercontent.com',
+          callback: handleGoogleSignIn,
+        });
+        window.google.accounts.id.renderButton(
+          googleButton,
+          { theme: 'outline', size: 'large' }
+        );
+        console.log("Google Sign-In button rendered.");
+      } else {
+        console.error('Google API script not loaded or button container not found');
+      }
     };
 
-    loadContent();
+    if (typeof window.google !== 'undefined') {
+      initializeGoogleSignIn();
+    } else {
+      window.addEventListener('load', initializeGoogleSignIn);
+    }
+
+    return () => {
+      window.removeEventListener('load', initializeGoogleSignIn);
+    };
   }, []);
+
+  const handleGoogleSignIn = async (response: google.accounts.id.CredentialResponse) => {
+    const idToken = response.credential;
+    console.log("Google Sign-In callback, token received:", idToken);
+
+    try {
+      const userProfileResponse = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${idToken}`);
+      const userProfile = await userProfileResponse.json();
+
+      const userEmail = userProfile.email;
+
+      const googleLoginResponse = await fetch('https://localhost:7271/api/usuario/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: userEmail, password: 'defaultPassword', captchaToken: idToken })
+      });
+
+      if (googleLoginResponse.ok) {
+        const data = await googleLoginResponse.json();
+        toast.success('Inicio de sesión con Google exitoso', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        login(userEmail, data.userId);
+        navigate('/');
+      } else {
+        const errorData = await googleLoginResponse.json();
+        toast.error(errorData.message || 'Error en el inicio de sesión con Google', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch (error) {
+      toast.error('Error en la conexión con Google', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -75,7 +140,7 @@ const Login: React.FC = () => {
           draggable: true,
           progress: undefined,
         });
-        login(email, data.userId); // Asegúrate de pasar el userId aquí
+        login(email, data.userId);
         navigate('/');
       } else {
         const errorData = await response.json();
@@ -107,15 +172,6 @@ const Login: React.FC = () => {
   const onCaptchaChange = (token: string | null) => {
     setCaptchaToken(token);
   };
-
-  if (isPageLoading) {
-    return (
-      <div className="producto-loading-screen">
-        <div className="producto-loading-spinner"></div>
-        <p className="producto-loading-text">Cargando...</p>
-      </div>
-    );
-  }
 
   return (
     <div className='bodyy'>
@@ -159,8 +215,8 @@ const Login: React.FC = () => {
                 </div>
               ) : (
                 <>
-                  <h3>¿Haz olvidado tu contraseña? Haz clic <a href="/recuperarContrasena">aquí</a></h3>
                   <button type="submit" className="login-button">Iniciar Sesión</button>
+                  <div id="googleSignInButton" className='google-button'></div>
                   <h3>¿No tienes una cuenta? Haz clic <a href="/registro">aquí</a></h3>
                 </>
               )}
