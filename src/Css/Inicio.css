@@ -150,6 +150,7 @@
 
 .inicio-new-carousel-button.next {
   right: 10px;
+  margin: -10px;
 }
 
 .inicio-productos-recientes {
@@ -611,9 +612,6 @@ body {
   padding: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-}
 
 p {
   margin: 0;
@@ -704,6 +702,7 @@ a {
       width: 100%;
       height: auto;
       overflow: hidden;
+      margin: 0 auto;
   }
 
   .inicio-carousel img {
@@ -737,7 +736,7 @@ a {
   }
 
   .inicio-carousel-content p {
-    margin: 40px 0;
+    margin: 10px 62px 10px 40px;
     font-size: 25px;
     color: #151875;
     text-align: justify;
@@ -795,6 +794,10 @@ a {
 
 
 @media (max-width: 600px) {
+  .inicio-contenedor-producto{
+    flex-direction: column;
+  }
+
     .inicio-categorias-container {
         display: flex;
         flex-direction: column;
@@ -872,4 +875,37 @@ a {
     text-decoration: none;
     border-radius: 5px;
   }
+
+  .inicio-producto-contenido{
+    margin: 0 30px;
+    text-align: center;
+  }
+  
+  .inicio-contenedor-descuento{
+    text-align: center;
+  }
+
+  .inicio-buy-button{
+    margin: 10px;
+  }
 }
+
+@media(max-width: 1200px){
+  .inicio-trend-products-container {
+    gap: 50px;
+  }
+
+  .inicio-productos-recomendados-container{
+    gap: 50px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .inicio-categorias-container {
+      gap: 40px;
+      justify-content: center;
+  }
+}
+
+
+

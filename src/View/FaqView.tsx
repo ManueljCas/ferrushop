@@ -7,9 +7,6 @@ import Container from '@material-ui/core/Container';
 
 const FAQ: React.FC = () => {
     const { renderQuestions } = FAQComponent();
-    const [name, setName] = useState('');
-    const [message, setMessage] = useState('');
-    const [status, setStatus] = useState('');
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -19,22 +16,6 @@ const FAQ: React.FC = () => {
         return () => clearTimeout(timeout);
     }, []);
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        const response = await fetch('/send-email', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name, message }),
-        });
-        const result = await response.json();
-        if (result.success) {
-            setStatus('Mensaje enviado exitosamente!');
-        } else {
-            setStatus('Hubo un problema enviando tu mensaje. Por favor, intenta de nuevo.');
-        }
-    };
 
     if (loading) {
         return (
@@ -61,22 +42,6 @@ const FAQ: React.FC = () => {
                         <div className="question-container">
                             {renderQuestions()}
                         </div>
-                    </div>
-                    <div className="contact-form-container">
-                        <h1>Contacto</h1>
-                        <h2>Por favor ingrese los datos que se solicitan.</h2>
-                        <form onSubmit={handleSubmit} className="contact-form">
-                            <div>
-                                <label>Nombre:</label>
-                                <input type="text" placeholder='Agrega tu nombre completo' value={name} onChange={(e) => setName(e.target.value)} required />
-                            </div>
-                            <div>
-                                <label>Mensaje:</label>
-                                <textarea value={message} placeholder='Agrega tu mensaje' onChange={(e) => setMessage(e.target.value)} required />
-                            </div>
-                            <button type="submit">Enviar</button>
-                        </form>
-                        {status && <p>{status}</p>}
                     </div>
                 </div>
             </Container>

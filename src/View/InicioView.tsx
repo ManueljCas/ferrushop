@@ -71,7 +71,7 @@ const InicioView: React.FC = () => {
             title: 'Desarmador',
             subtitle: 'Precisión y comodidad',
             description: 'Desarmador de precisión con mango ergonómico, adecuado para una amplia variedad de tornillos.',
-            buyLink: ''
+            buyLink: 'producto/1007'
         }
     ];    
 
@@ -141,8 +141,8 @@ const InicioView: React.FC = () => {
                         )}
                     </div>
                     <div className="inicio-new-carousel-content">
-                        <h2>{producto.title.length > 25 ? producto.title.slice(0, 25) + '...' : producto.title}</h2>
-                        <p>{producto.description.length > 40 ? producto.description.slice(0, 40) + '...' : producto.description}</p>
+                        <h2>{producto.title.length > 20 ? producto.title.slice(0, 20) + '...' : producto.title}</h2>
+                        <p>{producto.description.length > 30 ? producto.description.slice(0, 30) + '...' : producto.description}</p>
                         <a href={`./producto/${producto.id}`} className="inicio-buy-button">Comprar Ahora</a>
                     </div>
                 </div>
@@ -161,11 +161,7 @@ const InicioView: React.FC = () => {
 
 
             <div className='inicio-contenedor-producto'>
-    <Grid container spacing={3} alignItems="center">
-        <Grid item xs={12} md={6}>
             <img src={Taladro} alt="Taladro de Percusión" className="inicio-producto-imagen-inicio-dos" />
-        </Grid>
-        <Grid item xs={12} md={6}>
             <div className="inicio-producto-contenido">
                 <h2>Características únicas de los últimos y Productos de tendencia</h2>
                 <ul>
@@ -173,12 +169,10 @@ const InicioView: React.FC = () => {
                     <li><span style={{ color: 'red' }}>Mango ergonómico</span> para un mejor control y comodidad</li>
                     <li><span style={{ color: 'green' }}>Velocidad variable</span> para diferentes aplicaciones</li>
                 </ul>
-                <a href="./" className="inicio-buy-button">Comprar Ahora</a>
-                <p className="inicio-price">$625</p>
+                <a href="producto/1005" className="inicio-buy-button">Comprar Ahora</a>
+                <p className="inicio-price">$1500</p>
             </div>
-        </Grid>
-    </Grid>
-</div>
+            </div>
 
 
 <div className='inicio-trend-products'>
@@ -207,11 +201,9 @@ const InicioView: React.FC = () => {
         </div>
 
 
-            <div className='inicio-contenedor-descuento'>
+    <div className='inicio-contenedor-descuento'>
     <h1>¡Artículo con descuento!</h1>
     <div className='inicio-producto-descuento'>
-        <Grid container spacing={3} justifyContent="center" alignItems="center">
-            <Grid item xs={12} sm={6} md={4}>
                 <div className='inicio-info-descuento'>
                     <h2>20% de descuento en este producto</h2>
                     <h3>Sierra Circular Bosch GKS 190 Professional</h3>
@@ -221,14 +213,12 @@ const InicioView: React.FC = () => {
                         <li>✔ Diseño ergonómico para un uso cómodo</li>
                         <li>✔ Compatible con una variedad de hojas de sierra</li>
                     </ul>
-                    <a href="./" className="inicio-buy-button">Comprar Ahora</a>
+                    <a href="producto/1006" className="inicio-buy-button">Comprar Ahora</a>
                 </div>
-            </Grid>
             <Grid item xs={12} sm={6} md={3}>
                 <div className='inicio-imagen-descuento'>
                     <img src={Sierra} alt="Sierra Circular Bosch GKS 190" />
                 </div>
-            </Grid>
         </Grid>
     </div>
 </div>
@@ -263,7 +253,7 @@ const InicioView: React.FC = () => {
 
 <div className='inicio-productos-recomendados'>
     <h1>Productos recomendados</h1>
-    <Grid container spacing={10} className='inicio-productos-recomendados-container'>
+    <Grid container spacing={3} className='inicio-productos-recomendados-container'>
         {productos.slice(0, 4).map((producto, index) => (
             <Grid item xs={12} sm={6} md={2} key={index}>
                 <Link to={`/producto/${producto.id}`} className='inicio-product-link'>

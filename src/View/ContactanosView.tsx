@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Header from './HeaderView';
 import Footer from './FooterView';
 import '../Css/Contactanos.css';
-import ContactanosIMG from '../IMG/Group 124.png';
 import TresColoresIMG from '../IMG/Trescolores.png';
 import Azul from '../IMG/Azul.png';
 import Amarillo from '../IMG/Amarillo.png';
@@ -68,23 +67,7 @@ function Contacto() {
           </div>
         </div>
 
-        <div className='get-in-touch'>
-          <h1>Ponerse en Contacto</h1>
-          <p>Si tienes alguna pregunta o necesitas asistencia, no dudes en ponerte en contacto con nosotros. Nuestro equipo está aquí para ayudarte con cualquier consulta que puedas tener.</p>
-          <form className='form-contact'>
-            <div className='form-group'>
-              <input type="text" id="name" name="name" placeholder="Tu Nombre" required />
-              <input type="email" id="email" name="email" placeholder="Tu E-mail" required />
-            </div>
-            <input type="text" id="subject" name="subject" placeholder="Asunto" required />
-            <textarea id="message" name="message" placeholder="Escribe tu Mensaje" required></textarea>
-            <button type="submit">Enviar Mensaje</button>
-          </form>
-        </div>
-
-        <div className='Contactanos'>
-          <img className="Contactanos-img" src={ContactanosIMG} alt="Contactanos" />
-        </div>
+       
       </div>
       <Footer />
     </div>

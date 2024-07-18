@@ -5,10 +5,18 @@ import '../Css/Nosotros.css';
 import NosotrosIMG from '../IMG/Nosotros.png';
 import NosotrosComponent from '../Components/NosotrosComponent';
 import Grid from '@material-ui/core/Grid';
+import { useNavigate } from 'react-router-dom';
 
 const Nosotros = () => {
+  const navigate = useNavigate();
+
   const { renderCards, currentTestimonial, testimonials } = NosotrosComponent();
   const [loading, setLoading] = useState(true);
+
+  const hola = () => {
+    navigate('/contacto');
+  };
+
 
   const loadImage = (src: string): Promise<void> => {
     return new Promise((resolve) => {
@@ -50,7 +58,7 @@ const Nosotros = () => {
         <Grid item xs={12} md={6} className="nosotros-text">
           <h1>Descubre nuestra ferretería en línea! Calidad y servicio desde hace décadas.</h1>
           <p>Construyendo desde el pasado, forjando el futuro. Nuestra ferretería es un símbolo de calidad y confianza. Explora nuestro comercio electrónico para descubrir herramientas que impulsan tu creatividad y proyectos hacia adelante.</p>
-          <button className="contact-button">Contactanos</button>
+          <button className="contact-button" onClick={hola}>Contactanos</button>
         </Grid>
       </Grid>
       <div className='contenedor-carrucel'>

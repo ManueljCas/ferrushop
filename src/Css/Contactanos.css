@@ -16,7 +16,12 @@
 }
 
 .information-about-us, .contact-methods {
-  width: 45%;
+  width: 50%;
+  margin: 80px;
+}
+
+.information-about-us {
+  margin-top: 80px;
 }
 
 .information-about-us h1, .contact-methods h1, .get-in-touch h1 {
