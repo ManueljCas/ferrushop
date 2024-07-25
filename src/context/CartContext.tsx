@@ -129,7 +129,6 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
     const iva = subtotal * 0.14;
     const total = subtotal + iva;
-    console.log('Calculando Totales - Subtotal:', subtotal, 'IVA:', iva, 'Total:', total);
     setSubtotal(subtotal);
     setIva(iva);
     setTotal(total);

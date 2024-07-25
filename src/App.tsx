@@ -37,7 +37,6 @@ function App() {
   useEffect(() => {
     axios.get(urlFerrushop)
       .then(() => {
-        console.log("Conectado A .NET");
       })
       .catch(error => {
         console.error('Error fetching data:', error);

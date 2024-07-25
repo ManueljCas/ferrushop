@@ -153,6 +153,7 @@
   .information-about-us, .contact-methods {
     width: 100%;
     margin-bottom: 20px;
+    margin: 0 auto;
   }
 
   .get-in-touch {
@@ -169,6 +170,7 @@
 }
 
 @media (max-width: 480px) {
+
   .Contactanos {
     display: none;
   }

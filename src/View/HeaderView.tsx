@@ -76,7 +76,12 @@ function Header() {
               {orderCount > 0 && <span className="order-count-custom"><p>{orderCount}</p></span>}
             </a>
           ) : (
-            <a href="/login">Login</a>
+            <div>
+            <a href="/login">Iniciar sesión</a>
+            <a href="/registro">Registrarse</a>
+            </div>
+            
+
           )}
           <a href="/carrito" id='carrito'>
             <IoCartOutline />

@@ -1,4 +1,4 @@
-.bodyy {
+.bodyy, .contededor-login {
     background-image: url('../IMG/Ferreteria.jpg');
     background-size: cover;
     background-position: center;
@@ -11,7 +11,7 @@
     margin: 0;
 }
 
-.bodyy::before {
+.bodyy::before, .contededor-login {
     content: '';
     position: absolute;
     top: 0;
@@ -22,7 +22,7 @@
     z-index: 1;
 }
 
-.bodyy > * {
+.bodyy > * , .contededor-login > *{
     position: relative;
     z-index: 2;
 }

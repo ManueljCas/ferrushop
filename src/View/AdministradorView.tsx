@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import '../Css/Administrador.css';
-import '../Css/AgregarProducto.css';
-import '../Css/AdministrarProductos.css';
+import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { useAuth } from '../Javascript/AuthContext';
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 interface ImageModel {
     data: ArrayBuffer;
@@ -23,6 +26,11 @@ interface ProductModel {
     images: ImageModel[];
 }
 
+interface ProductActivity {
+    actionType: 'added' | 'deleted';
+    timestamp: string;
+}
+
 const categories = [
     'Herramientas de Mano',
     'Herramientas Eléctricas',
@@ -33,6 +41,7 @@ const categories = [
 
 const Dashboard: React.FC = () => {
     const navigate = useNavigate();
+    const { logout, userRole } = useAuth();
     const [view, setView] = useState<'default' | 'add' | 'manage'>('default');
     const [product, setProduct] = useState<ProductModel>({
         id: 0,
@@ -51,6 +60,41 @@ const Dashboard: React.FC = () => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [confirmInput, setConfirmInput] = useState('');
     const [productIdToDelete, setProductIdToDelete] = useState<number | null>(null);
+    const [addedProducts, setAddedProducts] = useState<number>(0);
+    const [deletedProducts, setDeletedProducts] = useState<number>(0);
+    const [lastAddedDate, setLastAddedDate] = useState<string>('N/A');
+    const [lastDeletedDate, setLastDeletedDate] = useState<string>('N/A');
+
+    useEffect(() => {
+        if (userRole !== 'admin') {
+            navigate('/U29tZUNvbnRlbnQz');
+        }
+    }, [userRole, navigate]);
+
+    useEffect(() => {
+        const fetchProductActivities = async () => {
+            try {
+                const response = await fetch('https://localhost:7271/api/ProductActivity');
+                if (response.ok) {
+                    const data: ProductActivity[] = await response.json();
+                    const added = data.filter(activity => activity.actionType === 'added').length;
+                    const deleted = data.filter(activity => activity.actionType === 'deleted').length;
+                    const lastAdded = data.filter(activity => activity.actionType === 'added').map(activity => activity.timestamp).pop() || 'N/A';
+                    const lastDeleted = data.filter(activity => activity.actionType === 'deleted').map(activity => activity.timestamp).pop() || 'N/A';
+                    setAddedProducts(added);
+                    setDeletedProducts(deleted);
+                    setLastAddedDate(lastAdded);
+                    setLastDeletedDate(lastDeleted);
+                } else {
+                    console.error('Error fetching product activities:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error fetching product activities:', error);
+            }
+        };
+
+        fetchProductActivities();
+    }, []);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -76,10 +120,24 @@ const Dashboard: React.FC = () => {
         };
     }, [product.images]);
 
+    const addProductActivity = async (actionType: 'added' | 'deleted') => {
+        await fetch('https://localhost:7271/api/ProductActivity', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                actionType,
+                timestamp: new Date().toISOString(),
+            }),
+        });
+    };
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setProduct(prev => ({ ...prev, [name]: value }));
     };
+    
 
     const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
@@ -173,6 +231,10 @@ const Dashboard: React.FC = () => {
                     images: []
                 });
                 setView('default');
+                setAddedProducts(prev => prev + 1);
+                setLastAddedDate(new Date().toISOString());
+                await addProductActivity('added');
+                window.location.reload();
             } else {
                 const errorText = await response.text();
                 console.error('Error al agregar el producto:', errorText);
@@ -184,10 +246,6 @@ const Dashboard: React.FC = () => {
         } finally {
             setLoading(false);
         }
-    };
-
-    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(e.target.value);
     };
 
     const handleDelete = async () => {
@@ -207,6 +265,9 @@ const Dashboard: React.FC = () => {
                 setShowDeleteModal(false);
                 setConfirmInput('');
                 setProductIdToDelete(null);
+                setDeletedProducts(prev => prev + 1);
+                setLastDeletedDate(new Date().toISOString());
+                await addProductActivity('deleted');
             } else {
                 toast.error('Error al eliminar el producto');
             }
@@ -214,6 +275,59 @@ const Dashboard: React.FC = () => {
             console.error('Error:', error);
             toast.error('Error al eliminar el producto');
         }
+    };
+
+    const addedProductsData = {
+        labels: ['Productos Agregados'],
+        datasets: [
+            {
+                label: 'Productos Agregados',
+                data: [addedProducts],
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                barThickness: 50,
+            },
+        ],
+    };
+
+    const deletedProductsData = {
+        labels: ['Productos Eliminados'],
+        datasets: [
+            {
+                label: 'Productos Eliminados',
+                data: [deletedProducts],
+                backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+                barThickness: 50,
+            },
+        ],
+    };
+
+    const calculateMax = (count: number) => {
+        return Math.ceil((count + 1) / 10) * 10;
+    };
+
+    const chartOptions = (maxValue: number) => ({
+        responsive: true,
+        plugins: {
+            legend: { display: false },
+            title: { display: false }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: maxValue,
+                ticks: {
+                    stepSize: maxValue / 10,
+                }
+            }
+        }
+    });
+
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(e.target.value);
     };
 
     const openDeleteModal = (id: number) => {
@@ -227,20 +341,51 @@ const Dashboard: React.FC = () => {
         setProductIdToDelete(null);
     };
 
-    const filteredProducts = products.filter(product =>
+    const handleLogout = () => {
+        Swal.fire({
+            title: '¿Estás seguro de que quieres cerrar sesión?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, cerrar sesión',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                logout();
+                toast.success('Has cerrado sesión', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    className: 'logout-toast',
+                });
+                navigate('/U29tZUNvbnRlbnQz');
+                window.location.reload();
+            }
+        });
+    };
+
+    const filteredProducts = products.filter(product => 
         product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.id.toString().includes(searchTerm)
     );
+
+    const gridClass = filteredProducts.length >= 3 ? "product-view-grid three-columns" : "product-view-grid";
 
     return (
         <div className="admin-container">
             <ToastContainer />
             <div className="sidebar">
-                <h1 className="sidebar-title">Ferrushop</h1>
+                <h1 className="sidebar-title">Admin Ferrushop</h1>
                 <ul>
                     <li><button onClick={() => setView('add')}>Agregar productos</button></li>
                     <li><button onClick={() => setView('manage')}>Ver productos</button></li>
-                    <li><button onClick={() => navigate('/U29tZUNvbnRlbnQz')}>Salir</button></li>
+                    <li><button onClick={() => setView('default')}>Graficas</button></li>
+                    <li><button onClick={handleLogout}>Salir</button></li>
                 </ul>
             </div>
             <div className="main-content">
@@ -248,7 +393,31 @@ const Dashboard: React.FC = () => {
                 <div className="content">
                     {view === 'default' && (
                         <div>
-                            <h1 className="admin-title-custom">Ferrushop</h1>
+                            <h1 className="admin-title-custom">Actividad en Ferrushop</h1>
+                            <div className="dashboard-container">
+                                <div className="chart-card">
+                                    <h2 className="chart-title">Productos Agregados</h2>
+                                    <p className="chart-number">{addedProducts}</p>
+                                    <div className="chart-container">
+                                        <Bar data={addedProductsData} options={chartOptions(calculateMax(addedProducts))} />
+                                    </div>
+                                    <div className="chart-legend">
+                                        <span>Última Modificación</span>
+                                        <span className="chart-increase">{lastAddedDate === 'N/A' ? 'N/A' : new Date(lastAddedDate).toLocaleDateString()}</span>
+                                    </div>
+                                </div>
+                                <div className="chart-card">
+                                    <h2 className="chart-title">Productos Eliminados</h2>
+                                    <p className="chart-number">{deletedProducts}</p>
+                                    <div className="chart-container">
+                                        <Bar data={deletedProductsData} options={chartOptions(calculateMax(deletedProducts))} />
+                                    </div>
+                                    <div className="chart-legend">
+                                        <span>Última Modificación</span>
+                                        <span className="chart-decrease">{lastDeletedDate === 'N/A' ? 'N/A' : new Date(lastDeletedDate).toLocaleDateString()}</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     )}
     
@@ -321,38 +490,38 @@ const Dashboard: React.FC = () => {
                         </div>
                     )}
     
-                    <div className="dashboard-content">
-                        {view === 'manage' && (
-                            <div>
-                                <div className="product-view-search-container">
-                                    <input
-                                        type="text"
-                                        placeholder="Buscar por ID o nombre"
-                                        value={searchTerm}
-                                        onChange={handleSearchChange}
-                                        className="product-view-search"
-                                    />
-                                </div>
-                                <div className="product-view-grid">
-                                    {filteredProducts.map(product => (
-                                        <div className="product-view-card" key={product.id}>
-                                            <div className="product-view-image">
-                                                <img src={product.images.length > 0 ? `data:image/png;base64,${product.images[0].data}` : 'placeholder-image-url'} alt={product.title} />
-                                            </div>
-                                            <div>
-                                                <h3 className="product-view-title">{product.title}</h3>
-                                                <p className="product-view-price">Precio: ${product.price}</p>
-                                                <p className="product-view-stock">A la mano: {product.quantity} Piezas</p>
-                                                <button className="product-view-delete-button" onClick={() => openDeleteModal(product.id)}>
-                                                    Eliminar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
+                    {view === 'manage' && (
+                        <div> 
+                            <h1 className='nada'>.</h1>
+                            <h1 className='titulo-verproductos'>Productos en Ferrushop</h1>
+                            <div className="product-view-search-container">
+                                <input
+                                    type="text"
+                                    placeholder="Buscar por ID o nombre"
+                                    value={searchTerm}
+                                    onChange={handleSearchChange}
+                                    className="product-view-search"
+                                />
                             </div>
-                        )}
-                    </div>
+                            <div className={gridClass}>
+                                {filteredProducts.map(product => (
+                                    <div className="product-view-card" key={product.id}>
+                                        <div className="product-view-image">
+                                            <img src={product.images.length > 0 ? `data:image/png;base64,${product.images[0].data}` : 'placeholder-image-url'} alt={product.title} />
+                                        </div>
+                                        <div className='descripcion-delosproductos'>
+                                            <h3 className="product-view-title">{product.title}</h3>
+                                            <p className="product-view-price">Precio: ${product.price}</p>
+                                            <p className="product-view-stock">A la mano: {product.quantity} Piezas</p>
+                                            <button className="product-view-delete-button" onClick={() => openDeleteModal(product.id)}>
+                                                Eliminar
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
     
                     {showDeleteModal && (
                         <div className="modal">
@@ -374,5 +543,6 @@ const Dashboard: React.FC = () => {
             </div>
         </div>
     );
-}
-    export default Dashboard;
+}    
+
+export default Dashboard;

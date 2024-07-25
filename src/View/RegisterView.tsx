@@ -212,7 +212,7 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className='bodyy'>
+    <div className='contededor-login'>
       <Grid container justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
         <Grid item xs={11} sm={8} md={6} lg={4}>
           <div className="login-container">

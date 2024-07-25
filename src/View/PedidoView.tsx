@@ -27,7 +27,7 @@ const PedidoView: React.FC = () => {
     const [order, setOrder] = useState<Order | null>(null);
     const [images, setImages] = useState<Map<number, string>>(new Map());
     const [loading, setLoading] = useState(true); // Estado de carga
-    const { userId, userEmail, isAuthenticated } = useAuth(); // Obtener el ID y el correo electrónico del usuario autenticado y estado de autenticación
+    const { userEmail, isAuthenticated } = useAuth(); // Obtener el correo electrónico del usuario autenticado y estado de autenticación
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -76,7 +76,7 @@ const PedidoView: React.FC = () => {
             console.error('Order ID is undefined');
             navigate('/configuracion/pedidos'); // Redirigir si no hay ID de pedido
         }
-    }, [orderId, userId, userEmail, isAuthenticated, navigate]);
+    }, [orderId, userEmail, isAuthenticated, navigate]);
 
     if (loading) {
         return (
@@ -95,19 +95,34 @@ const PedidoView: React.FC = () => {
         <div>
             <Header />
             <div className="fshop-pedido-detalles">
-                <h1>Detalles del Pedido #{order.id}</h1>
-                <p><strong>Usuario:</strong> {order.userName}</p>
-                <p><strong>Email:</strong> {order.userEmail}</p>
-                <p><strong>Fecha del Pedido:</strong> {new Date(order.orderDate).toLocaleDateString()}</p>
-                <h2>Items del Pedido</h2>
+                <div className="fshop-pedido-header">
+                    <h1 className="fshop-pedido-mesa"><strong>ID:</strong> {order.id}</h1>
+                    {order.orderItems.map((item) => (
+                    <span className="fshop-pedido-estado" key={item.id}><strong>Estado:</strong> {item.status}</span>
+                    ))}
+                </div>
+                <h1>Detalles del usuario</h1>
+
+                    <div className="fshop-pedido-items">
+                    <div className="fshop-pedido-item-card">
+                    <p><strong>Usuario:</strong> {order.userName}</p>
+                    <p><strong>Email:</strong> {order.userEmail}</p>
+                    <p><strong>Fecha del Pedido:</strong> {new Date(order.orderDate).toLocaleDateString()}</p>
+                    </div>
+                    </div>
+                    
+                <h1>Detalles de los productos</h1>
+
+
                 <div className="fshop-pedido-items">
                     {order.orderItems.map((item) => (
                         <div className="fshop-pedido-item-card" key={item.id}>
                             <img src={images.get(item.productId)} alt={item.productName} className="fshop-pedido-item-image" />
                             <div className="fshop-pedido-item-details">
-                                <p><strong>{item.productName}</strong></p>
-                                <p><strong>Cantidad:</strong> {item.quantity}</p>
-                                <p><strong>Estado:</strong> {item.status}</p>
+                                <p><strong>Nombre del producto:</strong></p>
+                                <p>{item.productName}</p>
+                                <p><strong>Cantidad:</strong></p>
+                                <p> {item.quantity}</p>
                             </div>
                         </div>
                     ))}
@@ -115,7 +130,9 @@ const PedidoView: React.FC = () => {
                 <button className="fshop-pedido-back-button" onClick={() => navigate(-1)}>Regresar</button>
             </div>
             <Footer />
-        </div>
+            </div>
+
+
     );
 };
 

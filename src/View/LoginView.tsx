@@ -75,7 +75,7 @@ const Login: React.FC = () => {
           draggable: true,
           progress: undefined,
         });
-        login(userEmail, data.userId);
+        login(userEmail, data.userId, 'usuario'); // Inicia sesión con rol de usuario
         navigate('/');
       } else {
         const errorData = await googleLoginResponse.json();
@@ -140,7 +140,7 @@ const Login: React.FC = () => {
           draggable: true,
           progress: undefined,
         });
-        login(email, data.userId);
+        login(email, data.userId, 'usuario'); // Inicia sesión con rol de usuario
         navigate('/');
       } else {
         const errorData = await response.json();
@@ -174,7 +174,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className='bodyy'>
+    <div className='contededor-login'>
       <Grid container justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
         <Grid item xs={11} sm={8} md={6} lg={4}>
           <div className="login-container">

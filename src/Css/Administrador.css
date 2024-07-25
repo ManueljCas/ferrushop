@@ -72,13 +72,19 @@
 }
 
 .product-view-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
   padding: 20px;
   max-width: 100%;
   margin: 0 auto;
   max-height: 80vh;
+}
+
+.product-view-grid.three-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .product-view-card {
@@ -89,9 +95,16 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   justify-content: space-between;
   margin: 10px;
+  text-align: center;
+  min-height: 300px;
+  transition: transform 0.3s ease; /* Añadir transición para la animación */
+}
+
+.product-view-card:hover {
+  transform: scale(1.05); /* Escalar ligeramente al pasar el cursor */
 }
 
 .product-view-image img {
@@ -105,13 +118,11 @@
   font-weight: bold;
   margin-top: 10px;
   width: 100%;
-  text-align: left;
 }
 
 .product-view-price, .product-view-stock {
   font-size: 14px;
   margin-top: 5px;
-  text-align: left;
 }
 
 .product-view-delete-button {
@@ -122,7 +133,7 @@
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px;
-  align-self: start;
+  width: 100%;
 }
 
 .product-view-delete-button:hover {
@@ -140,4 +151,76 @@
     margin-bottom: 20px;
     padding: 10px;
   }
+}
+
+.dashboard-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+  gap: 20px;
+}
+
+.chart-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.chart-number {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.chart-increase {
+  color: #4CAF50;
+}
+
+.chart-decrease {
+  color: #FF5722;
+}
+
+.chart-legend {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 14px;
+  margin-top: auto;
+  color: #777;
+}
+
+.admin-title-custom {
+  text-align: center;
+}
+
+.titulo-verproductos {
+  text-align: center;
+  margin: 20px;
+}
+
+.descripcion-delosproductos {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  align-items: center;
+  justify-content: center;
+}
+
+.nada {
+  color: #00000000;
 }
