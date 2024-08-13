@@ -38,7 +38,7 @@ const FAQ: React.FC = () => {
             <Container>
                 <div className="content-container">
                     <div className="faq-content">
-                        <h1>Nuestras Preguntas Frecuentes</h1>
+                        <h1>Nuestras Preguntas Frecuentes.</h1>
                         <div className="question-container">
                             {renderQuestions()}
                         </div>
